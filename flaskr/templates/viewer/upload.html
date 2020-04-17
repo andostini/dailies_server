@@ -1,0 +1,52 @@
+
+{% extends 'viewer/viewer.html' %}
+
+{% block header %}
+
+
+
+{% endblock %}
+
+{% block content %}
+
+<!-- CREATE NEW PROJECT WINDOW -->
+<div class="col-6" >
+  <div class="card">
+    <div class="card-header">
+      <h3 class="h5">File Upload</h3>
+    </div>
+    <div class="card-body">
+      <form class="form-inline" method="post" action="/viewer/{{ project['id'] }}/upload/files" enctype="multipart/form-data">
+        <div class="form-group" style="display:block; width: 100%">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" required name="files" id="files" multiple>
+            <label for="files" class="custom-file-label">Choose File</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Upload</button>
+      </form>
+      <p class="text-muted">Upload Proxies and Stills with this form. Proxies will be assigned to a clip in the library by their filename (always exlcuding extension). If a proxy doesn't find a match in a the library, it will be added as a clip to the library with empty metadata. You can then use our meta editor or upload a metafile later. Stills will be assigned to clips by their filename. You can add multiple stills to one clip, if you name you still "clipname_X", replacing X with a number (hint: use timecodestamp for X in Silverstack to have stills automatically listed chronologically).<br>Duplicate filenames will be overwritten</p>
+    </div>
+  </div>
+</div>
+<div class="col-6" >
+  <div class="card">
+    <div class="card-header">
+      <h3 class="h5">Meta Upload</h3>
+    </div>
+    <div class="card-body">
+      <form class="form-inline" method="post" action="/viewer/{{ project['id'] }}/upload/meta" enctype="multipart/form-data">
+        <div class="form-group" style="display:block; width: 100%">
+          <div class="custom-file">
+            <input type="metafile" class="custom-file-input" required name="metafile" id="metafile">
+            <label for="metafile" class="custom-file-label">Choose File</label>
+            <button type="submit" class="btn btn-primary mb-2">Upload</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

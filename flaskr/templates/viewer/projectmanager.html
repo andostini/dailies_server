@@ -1,0 +1,146 @@
+
+{% extends 'viewer/viewer.html' %}
+
+{% block header %}
+
+
+
+{% endblock %}
+
+{% block content %}
+
+<!-- CREATE NEW PROJECT WINDOW -->
+  <div class="col-12" >
+    <button type="button" class="btn btn-primary" onclick="document.getElementById('newProject').style.display='block'">New Project</button>
+  </div>
+  <div class="col-12" id="newProject" style="display:none">
+    <div class="card">
+      <div class="card-header">
+        Create New Project
+      </div>
+      <div class="card-body">
+        <form action="/viewer/projectmanager" method="post">
+        <div class="form-group">
+          <h4>Project Settings</h4>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Project Name:</label>
+            <div class="col-sm-2">
+              <input type="text" name="name" class="form-control" required>
+            </div>
+            <label class="col-sm-2 col-form-label">Viewer Password:</label>
+            <div class="col-sm-2">
+              <input type="text" name="password" class="form-control" required>
+            </div>
+            <label class="col-sm-2 col-form-label" required>Project ID:</label>
+            <div class="col-sm-2">
+              <input type="text" readonly name="id" class="form-control-plaintext" value="New Project">
+            </div>
+          </div>
+          <hr>
+          <h4>Live Stream Settings</h4>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Camera A:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="cameraA" placeholder="URL only">
+            </div>
+            <label class="col-sm-2 col-form-label">Camera B:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="cameraB" placeholder="URL only">
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Camera C:</label>
+            <div class="col-sm-4">
+              <input type="text"   class="form-control" name="cameraC" placeholder="URL only">
+            </div>
+            <label class="col-sm-2 col-form-label">Camera D:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="cameraD" placeholder="URL only">
+            </div>
+          </div>
+        </div>
+        <span class="text-muted">Add a live stream by just entering the video stream link, not the embedd code. The providor, e.g. Youtube will be detected automatically<br>Currently supported: Youtube, Dacast</span>
+
+        <div class="row">
+          <button type="button" class="btn btn-secondary"  onclick="document.getElementById('newProject').style.display='none'">Close</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ITERATE TO SHOW CURRENT PROJECTS -->
+
+  {% for project in projects %}
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header" onclick="showSettings(this)">
+        {{ project['name']}}
+        
+        <span style="float: right"><a href="/viewer/{{ project['id']}}">View</a></span>&nbsp;
+      </div>
+      <div class="card-body" style="display:none">
+        <form action="/viewer/projectmanager" method="post">
+        <div class="form-group">
+          <h4>Project Settings</h4>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Project Name:</label>
+            <div class="col-sm-2">
+              <input type="text" name="name" class="form-control" required  value="{{ project['name']}}">
+            </div>
+            <label class="col-sm-2 col-form-label">Viewer Password:</label>
+            <div class="col-sm-2">
+              <input type="text" name="password" class="form-control" required value="{{ project['password']}}">
+            </div>
+            <label class="col-sm-2 col-form-label" required>Project ID:</label>
+            <div class="col-sm-2">
+              <input type="text" readonly name="id" class="form-control-plaintext" value="{{ project['id']}}">
+            </div>
+          </div>
+          <hr>
+          <h4>Live Stream Settings</h4>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Camera A:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="cameraA" placeholder="URL only" value="{{ project['cameraA']}}">
+            </div>
+            <label class="col-sm-2 col-form-label">Camera B:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="cameraB" placeholder="URL only" value="{{ project['cameraB']}}">
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Camera C:</label>
+            <div class="col-sm-4">
+              <input type="text"   class="form-control" name="cameraC" placeholder="URL only" value="{{ project['cameraC']}}">
+            </div>
+            <label class="col-sm-2 col-form-label">Camera D:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="cameraD" placeholder="URL only" value="{{ project['cameraD']}}">
+            </div>
+          </div>
+        </div>
+        <span class="text-muted">Add a live stream by just entering the video stream link, not the embedd code. The providor, e.g. Youtube will be detected automatically<br>Currently supported: Youtube, Dacast</span>
+        <div class="row align-middle ">
+          <label class="col-sm-2 col-form-label text-danger">Delete Project</label>
+          <div class="col-sm-1">
+            <input type="checkbox" class="form-control" name="DELETE" value="True">
+          </div>
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-secondary">Close</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+    {% endfor %}
+
+
+      <script type="text/javascript" src="../static/js/projectmanager.js"></script>
+
+{% endblock %}

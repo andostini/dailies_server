@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS project;
+
+CREATE TABLE projects (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  password TEXT NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  cameraA TEXT,
+  cameraB TEXT,
+  cameraC TEXT,
+  cameraD TEXT
+);

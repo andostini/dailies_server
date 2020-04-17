@@ -1,0 +1,5 @@
+#Ignore Project Folder
+flaskr/static/projects/project-*
+
+.idea/
+venv/
