@@ -19,6 +19,20 @@ function CovideoPlayer_tabbing(camera) {
   }
 }
 
+function toggle_filterList() {
+  display = document.getElementById('filterList').style.display;
+  if (display == "block") {
+    document.getElementById('filterList').style.display = "none";
+    document.getElementById('filterList_icon').classList.remove('fa-caret-down');
+    document.getElementById('filterList_icon').classList.add('fa-caret-right');
+  }
+  else {
+    document.getElementById('filterList').style.display = "block";
+    document.getElementById('filterList_icon').classList.remove('fa-caret-right');
+    document.getElementById('filterList_icon').classList.add('fa-caret-down');
+  }
+}
+
 function play(entry) {
   var carouselHTML = "";
   var extendedMetaHTML = "";
@@ -36,7 +50,6 @@ function play(entry) {
         <img src="../static/projects/project-' + projectId + '/stills/' + entry['stills'][i] + '" class="d-block w-100"> \
       </div>  ';
     }
-
   }
 
 
@@ -113,8 +126,8 @@ function play(entry) {
       <table class="table table-sm">  \
         ' + extendedMetaHTML + ' \
       </table> ';
-
     document.getElementById('Playback').innerHTML = html;
+    CovideoPlayer_tabbing('Playback')
 }
 
 function get_CovideoLibrary() {

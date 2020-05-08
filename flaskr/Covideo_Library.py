@@ -1,4 +1,5 @@
 import json
+from moviepy.editor import *
 
 class Covideo_Library:
     def __init__(self, projectId):
@@ -39,6 +40,10 @@ class Covideo_Library:
         Library_File = open('flaskr/static/projects/project-' + self.projectId + '/.Covideo_library.json', 'w')
         Library_File.write(json.dumps(self.Library))
         Library_File.close()
+
+    def createThumb(self, filename, ext):
+        clip = VideoFileClip('flaskr/static/projects/project-' + self.projectId + '/video/' + filename + '.' + ext)
+        clip.save_frame('flaskr/static/projects/project-' + self.projectId + '/thumbs/' + filename + '.jpg', t=0)
 
     def searchEntry(self, clipname):
         for entry in self.Library:

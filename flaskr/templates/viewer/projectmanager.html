@@ -41,25 +41,27 @@
           <div class="row">
             <label class="col-sm-2 col-form-label">Camera A:</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" name="cameraA" placeholder="URL only">
+              <input type="text" class="form-control" name="cameraA">
             </div>
             <label class="col-sm-2 col-form-label">Camera B:</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" name="cameraB" placeholder="URL only">
+              <input type="text" class="form-control" name="cameraB">
             </div>
           </div>
           <div class="row">
             <label class="col-sm-2 col-form-label">Camera C:</label>
             <div class="col-sm-4">
-              <input type="text"   class="form-control" name="cameraC" placeholder="URL only">
+              <input type="text"   class="form-control" name="cameraC">
             </div>
             <label class="col-sm-2 col-form-label">Camera D:</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" name="cameraD" placeholder="URL only">
+              <input type="text" class="form-control" name="cameraD">
             </div>
           </div>
         </div>
-        <span class="text-muted">Add a live stream by just entering the video stream link, not the embedd code. The providor, e.g. Youtube will be detected automatically<br>Currently supported: Youtube, Dacast</span>
+        <span class="text-muted">
+          Add a live streams other then the default inhouse streaming by just entering the stream service and the URL / ID the following way: service:url. E.g. enter "youtube:https://www.youtube.com/embed/F4pcX_GMmuM". For Dacast please enter an ID instead of a URL<br>Currently supported: Youtube, Dacast (only one per page)
+        </span>
 
         <div class="row">
           <button type="button" class="btn btn-secondary"  onclick="document.getElementById('newProject').style.display='none'">Close</button>
@@ -77,7 +79,7 @@
     <div class="card">
       <div class="card-header" onclick="showSettings(this)">
         {{ project['name']}}
-        
+
         <span style="float: right"><a href="/viewer/{{ project['id']}}">View</a></span>&nbsp;
       </div>
       <div class="card-body" style="display:none">

@@ -3,6 +3,8 @@
 
 {% block header %}
 <script type="text/javascript" src="../static/js/player.js"></script>
+		<link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet">
+		<script src="https://vjs.zencdn.net/7.5.5/video.js"></script>
 
 
 
@@ -11,24 +13,24 @@
 {% block content %}
 
 
-<div class="col-md-6 col-sm-12 playback">
+<div class="col-md-6 col-sm-12 playback  order-last order-md-first">
   <div class="card">
     <div class="card-header">
       <h3 class="h5" style="float: left">Project Library</h3>
       <div style="float: right" class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-primary">
+        <label class="btn btn-secondary">
           <input onclick="makeProjectLibrary('scene', 'asc')" type="radio" name="view" id="Toggle_list-view" autocomplete="off" checked=""><i class="fas fa-bars"></i>
         </label>
-        <label class="btn btn-primary">
+        <label class="btn btn-secondary">
           <input onclick="makeProjectLibrary('scene', 'asc')"type="radio" name="view" id="Toggle_list-thumbnail-view" autocomplete="off"><i class="fas fa-list"></i>
         </label>
-        <label class="btn btn-primary active">
+        <label class="btn btn-secondary active">
           <input onclick="makeProjectLibrary('scene', 'asc')" type="radio" name="view" id="Toggle_thumbnail-view" autocomplete="off"><i class="fas fa-th"></i>
         </label>
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <div class="spinner-grow text-primary m-5" role="status" id="libloader">
+      <div class="spinner-grow text-secondary m-5" role="status" id="libloader">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
@@ -54,34 +56,58 @@
       <div class="row row-cols-2 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 p-3" id="thumbnail-view">
       </div>
       <hr>
-      <h4 class="h6">Filter</h4>
-      <div class="form form-inline p-1">
-          <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Scene" id="filterByScene">
-          <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Shot" id="filterByShot">
-          <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Take" id="filterByTake">
-          <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Clipname" id="filterByClipname">
-          <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Cam" id="filterByCamera">
-          <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Reel" id="filterByReel">
+
+
+
+      <span onclick="toggle_filterList()"><i id="filterList_icon" class="fas fa-caret-right"></i><h4 style="display:inline"class="h6"> Filter</h4></span>
+      <div style="display: none" id="filterList">
+        <div class="form form-inline p-1">
+            <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Scene" id="filterByScene">
+            <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Shot" id="filterByShot">
+            <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Take" id="filterByTake">
+            <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Clipname" id="filterByClipname">
+            <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Cam" id="filterByCamera">
+            <input onkeyup="makeProjectLibrary('scene', 'asc')" type="text" class="covideo form-control form-control-sm" placeholder="Reel" id="filterByReel">
+        </div>
+
+        <div class="form-group" style="padding: 10px;">
+          <div class="custom-control custom-switch" style="display: inline">
+            <input onchange="makeProjectLibrary('scene', 'asc')" type="checkbox" class="custom-control-input" id="filterBy_" checked="">
+            <label class="custom-control-label" for="filterBy_">No Label</label>
+          </div>
+          <div class="custom-control custom-switch" style="display: inline">
+            <input onchange="makeProjectLibrary('scene', 'asc')" type="checkbox" class="custom-control-input" id="filterBy_waste_clip" checked="">
+            <label class="custom-control-label" for="filterBy_waste_clip">waste_clip</label>
+          </div>
+          <div class="custom-control custom-switch" style="display: inline">
+            <input onchange="makeProjectLibrary('scene', 'asc')" type="checkbox" class="custom-control-input" id="filterBy_normal_take" checked="">
+            <label class="custom-control-label" for="filterBy_normal_take">normal_take</label>
+          </div>
+          <div class="custom-control custom-switch" style="display: inline">
+            <input onchange="makeProjectLibrary('scene', 'asc')" type="checkbox" class="custom-control-input" id="filterBy_good_take" checked="">
+            <label class="custom-control-label" for="filterBy_good_take">good_take</label>
+          </div>
+          <div class="custom-control custom-switch" style="display: inline">
+            <input onchange="makeProjectLibrary('scene', 'asc')" type="checkbox" class="custom-control-input" id="filterBy_fav_take" checked="">
+            <label class="custom-control-label" for="filterBy_fav_take">fav_take</label>
+          </div>
+
+        </div>
       </div>
-      <div class="form form-inline p-1">
-        <ul>
-          <li><input onchange="makeProjectLibrary('scene', 'asc')" checked class="form-check-input" type="checkbox" id="filterBy_">No Label</li>
-          <li><input onchange="makeProjectLibrary('scene', 'asc')" checked class="form-check-input" type="checkbox" id="filterBy_waste_clip">Waste Clip</li>
-          <li><input onchange="makeProjectLibrary('scene', 'asc')"  checked class="form-check-input" type="checkbox" id="filterBy_normal_take">Normal Take</li>
-          <li><input onchange="makeProjectLibrary('scene', 'asc')" checked class="form-check-input" type="checkbox" id="filterBy_good_take">Good Take</li>
-          <li><input onchange="makeProjectLibrary('scene', 'asc')" checked class="form-check-input" type="checkbox" id="filterBy_fav_take">Fav Take</li>
-        </ul>
-      </div>
+
+
+
+
       {% if session['username'] == 'dit'%}
-      <a class="nav-link btn btn-primary" href="/viewer/{{ project['id'] }}/upload">Upload</a>
-      <a class="nav-link btn btn-primary" href="/viewer/{{ project['id'] }}/meta">Meta Editor </a>
+      <br><a class="btn btn-link" href="/viewer/{{ project['id'] }}/upload"><i id="filterList_icon" class="fas fa-caret-right"></i> Upload</a><br>
+      <a class="btn btn-link" href="/viewer/{{ project['id'] }}/meta"><i id="filterList_icon" class="fas fa-caret-right"></i> Meta Editor</a>
       {% endif %}
     </div>
   </div>
 </div>
 
 
-<div class="col-md-6 liveview">
+<div class="col-md-6 liveview order-first order-md-last">
   <div class="card">
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
@@ -133,6 +159,12 @@
 <script type="text/javascript">
   var projectId = {{ project['id'] }};
   get_CovideoLibrary({{ project['id'] }});
-  CovideoPlayer_tabbing('Playback')
+  CovideoPlayer_tabbing('cameraA');
+
+  var liveStreamA = videojs('#liveStreamA');
+  var liveStreamB = videojs('#liveStreamB');
+  var liveStreamC = videojs('#liveStreamC');
+  var liveStreamD = videojs('#liveStreamD');
+
 </script>
 {% endblock %}

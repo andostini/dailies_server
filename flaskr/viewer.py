@@ -55,14 +55,19 @@ def project(projectId):
 
             project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
 
-            liveStreams =[  project['cameraA'],project['cameraB'],project['cameraC'],project['cameraD']]
+            liveStreams =[project['cameraA'],project['cameraB'],project['cameraC'],project['cameraD']]
             for i, stream in enumerate(liveStreams):
-                if stream.startswith('https://www.you'):
-                    liveStreams[i] = '<div class="youtube-player"><iframe width="100%" height="auto" src="' + stream + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
-                elif stream.startswith('https://player.daca'):
-                    liveStreams[i] = '<div class="dacast-player"><script src="' + stream + '" id="149736_c_522223" width="100%" height="auto" class="dacast-video"></script></div>'
+                if (stream != "" and ":" in stream):
+                    service = stream.split(':',1)[0]
+                    url = stream.split(':',1)[1]
+                    if service == "youtube":
+                        liveStreams[i] = '<div class="youtube-player"><iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+                    elif service == "dacast":
+                        liveStreams[i] = '<div class="dacast-player"><script src="' + url + '" id="149736_c_522223" width="100%" height="auto" class="dacast-video"></script></div>'
                 else:
-                    liveStreams[i] = "No stream has been configured for here"
+                    letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
+                    liveStreams[i] = '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="auto"><source src="https://stream.franconia-film.de/hls/' + projectId + '-camera' + letters[i] + '.m3u8" type="application/x-mpegURL" /></video>'
+                    #liveStreams[i] = ''
 
             if project != None:
                 session['current_project'] = projectId
@@ -133,6 +138,7 @@ def upload_files(projectId):
 
             if lib.searchEntry(filename) == None:
                 lib.addEntry({'clipname':filename})
+                lib.createThumb(filename, ext)
                 success.append(file.filename + ' has been added to the project library')
             else:
                 success.append(file.filename + ' has been uploaded')
@@ -144,7 +150,7 @@ def upload_files(projectId):
             file.save(os.path.join('flaskr/static/projects/project-' + projectId + '/stills', clipname))
             success.append(file.filename + ' has been added as still')
         else:
-            error.append(file.filename + ' is not of accpeted file format')
+            error.append(file.filename + ' is not of accpeted file extension')
     return render_template('viewer/upload.html', error=error, success=success, project = project)
 
 
