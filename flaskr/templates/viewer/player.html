@@ -14,18 +14,18 @@
 
 
 <div class="col-md-6 col-sm-12 playback  order-last order-md-first">
-  <div class="card">
-    <div class="card-header">
+  <div class="p-4">
+    <div class="">
       <h3 class="h5" style="float: left">Project Library</h3>
       <div style="float: right" class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label class="btn btn-secondary active">
+					<input onclick="makeProjectLibrary('scene', 'asc')" type="radio" name="view" id="Toggle_thumbnail-view" autocomplete="off"  checked=""><i class="fas fa-th"></i>
+				</label>
         <label class="btn btn-secondary">
-          <input onclick="makeProjectLibrary('scene', 'asc')" type="radio" name="view" id="Toggle_list-view" autocomplete="off" checked=""><i class="fas fa-bars"></i>
+          <input onclick="makeProjectLibrary('scene', 'asc')" type="radio" name="view" id="Toggle_list-view" autocomplete="off"><i class="fas fa-bars"></i>
         </label>
         <label class="btn btn-secondary">
-          <input onclick="makeProjectLibrary('scene', 'asc')"type="radio" name="view" id="Toggle_list-thumbnail-view" autocomplete="off"><i class="fas fa-list"></i>
-        </label>
-        <label class="btn btn-secondary active">
-          <input onclick="makeProjectLibrary('scene', 'asc')" type="radio" name="view" id="Toggle_thumbnail-view" autocomplete="off"><i class="fas fa-th"></i>
+          <input onclick="makeProjectLibrary('scene', 'asc')" type="radio" name="view" id="Toggle_list-thumbnail-view" autocomplete="off"><i class="fas fa-list"></i>
         </label>
       </div>
     </div>
@@ -34,7 +34,7 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <div class="card-body p-0">
+    <div class="pt-5">
 
       <div class="table-responsive-sm" id="list-view">
         <table class="table table-sm table-hover">

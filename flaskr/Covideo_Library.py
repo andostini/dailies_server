@@ -18,9 +18,6 @@ class Covideo_Library:
         for key in keys:
             if key not in entry:
                 entry[key] = ""
-
-
-
         self.Library.append(
             {
                 "clipname" : entry['clipname'],
@@ -39,6 +36,15 @@ class Covideo_Library:
         )
         Library_File = open('flaskr/static/projects/project-' + self.projectId + '/.Covideo_library.json', 'w')
         Library_File.write(json.dumps(self.Library))
+        Library_File.close()
+
+    def deleteEntry(self, killentry):
+        lib = self.Library
+        lib[:] = [entry for entry in lib if entry['clipname'] != killentry['clipname']]
+
+
+        Library_File = open('flaskr/static/projects/project-' + self.projectId + '/.Covideo_library.json', 'w')
+        Library_File.write(json.dumps(lib))
         Library_File.close()
 
     def createThumb(self, filename, ext):

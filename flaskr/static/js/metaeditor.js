@@ -30,6 +30,7 @@ function makeMetaEditorItem(entry){
           ' + optionsHtml + ' \
       </td> \
       <td><textarea class="form-control form-control-sm covideo" name="cameraMeta" rows="1">' + JSON.stringify(entry['cameraMeta']) + '</textarea></td> \
+      <td style="vertical-align: middle"><button onclick="deleteEntry(\'' + entry['clipname'] + '\')" type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button></td> \
     </tr> \
   ';
   document.getElementById('metaeditor').innerHTML += HTML;
@@ -97,4 +98,19 @@ function addEntry() {
   xhttp.open("POST", "../../api/addEntry/" + projectId, true);
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(newEntry));
+}
+
+function deleteEntry(clipname) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('responseText').innerText = this.responseText;
+      getmetaeditor()
+    }
+  }
+  xhttp.open("POST", "../../api/deleteEntry/" + projectId, true);
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify({
+    'clipname': clipname
+  }));
 }

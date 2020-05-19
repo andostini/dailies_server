@@ -35,7 +35,12 @@ function toggle_filterList() {
 
 function play(entry) {
   var carouselHTML = "";
+  var carousel = "";
   var extendedMetaHTML = "";
+
+  if (entry['stills'].length == 0) {
+    carousel = "disabled";
+  }
 
   for (i=0; i < entry['stills'].length; i++) {
     if (i == 0) {
@@ -69,10 +74,10 @@ function play(entry) {
           <a class="nav-link active" id="video-tab" data-toggle="tab" href="#video" role="tab" aria-controls="video" aria-selected="true">Video</a> \
         </li> \
         <li class="nav-item"> \
-          <a class="nav-link" id="stills-tab" data-toggle="tab" href="#stills" role="tab" aria-controls="stills" aria-selected="false">Stills</a> \
+          <a class="nav-link ' + carousel + '" id="stills-tab" data-toggle="tab" href="#stills" role="tab" aria-controls="stills" aria-selected="false">Stills</a> \
         </li> \
       </ul> \
-      <div class="tab-content" id="myTabContent"> \
+      <div class="tab-content pt-1" id="myTabContent"> \
         <div class="tab-pane fade show active" id="video" role="tabpanel" aria-labelledby="video-tab"> \
           <div id="playback_video_tag"> \
             <video style="width: 100%" controls> \
@@ -145,7 +150,7 @@ function get_CovideoLibrary() {
   xhttp.send();
   document.getElementById('libloader').style.display="none";
   //call function recursivly after 5minutes
-  setTimeout(function(){ getmedialibrary(); }, 300000);
+  setTimeout(function(){getmedialibrary(); }, 300000);
 }
 
 function makeListItem(entry, thumb) {
@@ -342,7 +347,6 @@ function makeProjectLibrary(key, direction) {
 function makeThumbnailItem(entry) {
   col = document.createElement('div');
   col.classList.add('p-2');
-  col.style.marginBottom = "15px";
   col.addEventListener('click', function() {
     play(entry);
   });
@@ -359,6 +363,6 @@ function makeThumbnailItem(entry) {
   }
   col.innerHTML= '<div class="' + entry['label'] + ' thumbnail" style="width: 100%; background-image: URL(' + entry['thumbnail'] + ')"></div> \
     <span><span class="camera' + entry['camera'] + '">' + entry['camera'] + '</span> / ' + entry['scene'] + ' - ' + entry['shot'] + ' - ' + entry['take'] + '</span> \
-    <span style="font-size: 10px; font-style:italic;">' + entry['clipname'] + '</span>';
+    <span style="font-size: 10px; font-style:italic;">' + entry['clipname'] + '</span><br><span style="font-size: 12px">' + badges + '</span>';
   return col;
 }

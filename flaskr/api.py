@@ -65,14 +65,19 @@ def addEntry(projectId):
     newEntry = request.json
     lib = Covideo_Library.Covideo_Library(projectId)
 
-    for key in newEntry:
-        print(key + ":" + newEntry[key])
-
     if lib.searchEntry(newEntry['clipname']) != None:
         return "Duplicate clipname. Clip has not been added to the library"
 
     lib.addEntry(newEntry)
-
-
-
     return 'Received'
+
+@bp.route('/deleteEntry/<projectId>', methods=['POST'])
+def deleteEntry(projectId):
+    killEntry = request.json
+    lib = Covideo_Library.Covideo_Library(projectId)
+
+    if lib.searchEntry(killEntry['clipname']) == None:
+        return "A clip with this name does not exist in your library"
+
+    lib.deleteEntry(killEntry)
+    return 'Deleted'

@@ -11,6 +11,11 @@ The server application is meant to be run with [tiangolo/meinheld-gunicorn-flask
 - UI changes such as minimizable filter list and minor enhancements
 
 ### v0.2
+- Minor UI changes
+- Clips can now be deleted from the Project library
+- DaCast Bug Fix
+- Fixed photo galleries for no Stills available
+- Implemented Landing page and contact form
 
 
 ### v0.1

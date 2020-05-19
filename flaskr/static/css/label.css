@@ -4,7 +4,7 @@
 }
 
 .thumbnail.waste_clip {
-  border: 1px solid #E74C3C;
+  border: 1.5px solid #E74C3C;
 }
 
 .normal_take {
@@ -13,7 +13,7 @@
 }
 
 .thumbnail.normal_take {
-  border: 1px solid #F39C12;
+  border: 1.5px solid #F39C12;
 }
 
 .good_take {
@@ -22,7 +22,7 @@
 }
 
 .thumbnail.good_take {
-  border: 1px solid #00bc8c;
+  border: 1.5px solid #00bc8c;
 }
 
 .fav_take {
@@ -31,7 +31,7 @@
 }
 
 .thumbnail.fav_take {
-  border: 1px solid #3498DB;
+  border: 1.5px solid #3498DB;
 }
 
 .cameraA {

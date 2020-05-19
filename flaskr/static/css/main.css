@@ -1,6 +1,4 @@
-* {
-  
-}
+
 
 .a:hover {
   cursor: pointer;
@@ -34,11 +32,13 @@
   padding-top: 56%;
   background-size:cover;
   padding-left: 5px;
+  box-shadow: #222 0px 0px 15px;
+  border-radius: 2px;
 }
 
 .thumbnail-list {
-  width: 160px;
-  height: 90px;
+  width: 120px;
+  height: 68px;
   background-size:cover;
 }
 

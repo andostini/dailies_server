@@ -27,7 +27,7 @@ def viewer():
         return redirect(url_for('viewer.project', projectId = session['current_project']))
 
     # Error Page
-    return 'Type in Project URL'
+    return redirect(url_for('index'))
 
 @bp.route('/<projectId>', methods=('GET', 'POST'))
 def project(projectId):
@@ -63,7 +63,7 @@ def project(projectId):
                     if service == "youtube":
                         liveStreams[i] = '<div class="youtube-player"><iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
                     elif service == "dacast":
-                        liveStreams[i] = '<div class="dacast-player"><script src="' + url + '" id="149736_c_522223" width="100%" height="auto" class="dacast-video"></script></div>'
+                        liveStreams[i] = '<div class="dacast-player"><script src="https://player.dacast.com/js/player.js?contentId=' + url + '" id="' + url + '" width="100%" height="auto" class="dacast-video"></script></div>'
                 else:
                     letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
                     liveStreams[i] = '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="auto"><source src="https://stream.franconia-film.de/hls/' + projectId + '-camera' + letters[i] + '.m3u8" type="application/x-mpegURL" /></video>'

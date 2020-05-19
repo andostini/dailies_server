@@ -20,7 +20,8 @@ def login(projectId):
     ).fetchone()
 
     if project == None:
-        return 'Project does not exist'
+        error.append('A project with this ID does not exist. Please ask your DIT or post production manager for the project ID and project password.')
+        return render_template('website/index.html', error=error, success=success)
     else:
         if request.method == "POST":
             username = request.form['username']

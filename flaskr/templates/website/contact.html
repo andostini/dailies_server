@@ -1,0 +1,47 @@
+
+{% extends 'website/base.html' %}
+
+{% block header %}
+
+
+
+{% endblock %}
+
+{% block content %}
+<main role="main" class="inner cover">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <form action="/contact" method="post">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" class="form-control" required>
+            </div>
+            <div class="col-12 mb-2">
+              <label for="email">E-Mail</label>
+              <input type="mail" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="col-12 mb-2">
+              <label for="message">Your Message</label>
+              <textarea class="form-control" id="message" name="message" required rows="6"></textarea>
+            </div>
+            <div class="col-12 mt-2 mb-2 text-right">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <p>At this stage, Covideo is still in development and running in beta stage during which functionality, availability and security cannot be guaranteed. You like or concept and want to know more? Have a small project during which you would like to give us a shot and try out our software? Get in touch and tell us more about yourself and your project(s).</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}

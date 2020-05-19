@@ -3,3 +3,4 @@ flaskr/static/projects/project-*
 
 .idea/
 venv/
+instance/
