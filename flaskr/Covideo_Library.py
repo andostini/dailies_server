@@ -14,9 +14,11 @@ class Covideo_Library:
 
     def addEntry(self, entry):
         #Add empty string value for not defined keys
-        keys = ['clipname','reel','scene', 'shot', 'take', 'comment', 'label', 'camera']
+        keys = ['clipname','reel','scene', 'shot', 'take', 'comment', 'label', 'camera', 'cameraMeta']
         for key in keys:
             if key not in entry:
+                entry[key] = ""
+            elif entry[key] == None:
                 entry[key] = ""
         self.Library.append(
             {
@@ -28,7 +30,7 @@ class Covideo_Library:
                 "comment" : entry['comment'],
                 "label" : entry['label'],
                 "camera" : entry['camera'],
-                "cameraMeta" : {},
+                "cameraMeta" : entry['cameraMeta'],
                 "playbackfile": "",
                 "thumbnail": "",
                 "stills": []
@@ -60,9 +62,10 @@ class Covideo_Library:
 
     def setMeta(self, clipname, key, value):
         entry = self.searchEntry(clipname)
+        if value == None:
+            value = ""
         if entry != None:
             entry[key] = value
-
             Library_File = open('flaskr/static/projects/project-' + self.projectId + '/.Covideo_library.json', 'w')
             Library_File.write(json.dumps(self.Library))
             Library_File.close()

@@ -33,6 +33,20 @@ function toggle_filterList() {
   }
 }
 
+function toggle_extendedMeta() {
+  display = document.getElementById('extendedMeta').style.display;
+  if (display == "block") {
+    document.getElementById('extendedMeta').style.display = "none";
+    document.getElementById('extendedMeta_icon').classList.remove('fa-caret-down');
+    document.getElementById('extendedMeta_icon').classList.add('fa-caret-right');
+  }
+  else {
+    document.getElementById('extendedMeta').style.display = "block";
+    document.getElementById('extendedMeta_icon').classList.remove('fa-caret-right');
+    document.getElementById('extendedMeta_icon').classList.add('fa-caret-down');
+  }
+}
+
 function play(entry) {
   var carouselHTML = "";
   var carousel = "";
@@ -57,15 +71,25 @@ function play(entry) {
     }
   }
 
-
+  try {
+    entry['cameraMeta'] = JSON.parse(entry['cameraMeta']);
+  }
+  catch(err) {
+    
+  }
   var keys = Object.keys(entry['cameraMeta']);
 
   for (const key of keys) {
-    extendedMetaHTML = extendedMetaHTML + ' \
-            <tr> \
-              <th>' + key + '</th> \
-              <td>' + entry['cameraMeta'][key] + '</td> \
-            </tr>'
+    extendedMetaHTML = extendedMetaHTML + '<tr><th class="pt-4" colspan="2"><h5>' + key + '</h5></th></tr>';
+
+    var subkeys = Object.keys(entry['cameraMeta'][key]);
+    for (const subkey of subkeys) {
+      extendedMetaHTML = extendedMetaHTML + ' \
+              <tr> \
+                <td>' + subkey + '</td> \
+                <td>' + entry['cameraMeta'][key][subkey] + '</td> \
+              </tr>'
+    }
   }
 
   var html = '<span class="text-muted display-4"><span class="camera' + entry['camera'] + '">' + entry['camera'] + '</span> / ' + entry['scene'] + ' - ' + entry['shot'] + ' - ' + entry['take'] + '</span><span style="float:right" class="badge badge-pill badge-primary ' + entry['label'] + '">' + entry['label'] + '</span><br> \
@@ -127,10 +151,10 @@ function play(entry) {
           <td>' + entry['comment'] + '</td> \
         </tr> \
       </table> \
-      <h4>Extended Metadata</h4> \
-      <table class="table table-sm">  \
+      <h4 onclick="toggle_extendedMeta()"><i id="extendedMeta_icon" class="fas fa-caret-right"></i>Extended Metadata</h4> \
+      <div class="table-responsive-sm" id="extendedMeta" style="display: none"><table class="table table-sm">  \
         ' + extendedMetaHTML + ' \
-      </table> ';
+      </table></div>';
     document.getElementById('Playback').innerHTML = html;
     CovideoPlayer_tabbing('Playback')
 }

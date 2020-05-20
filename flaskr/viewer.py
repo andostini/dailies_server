@@ -3,6 +3,7 @@ import os
 from shutil import rmtree
 from markupsafe import escape
 from pprint import pprint
+import json
 
 
 from flask import (
@@ -14,6 +15,7 @@ from werkzeug.utils import secure_filename
 from flaskr.db import get_db
 
 from . import Covideo_Library
+from . import silverstack
 
 bp = Blueprint('viewer', __name__, url_prefix='/viewer')
 
@@ -51,8 +53,6 @@ def project(projectId):
             error = []
             success = []
             db = get_db()
-
-
             project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
 
             liveStreams =[project['cameraA'],project['cameraB'],project['cameraC'],project['cameraD']]
@@ -90,10 +90,6 @@ def upload(projectId):
 
         if username == 'dit':
             allowed = True
-        else:
-            projects = session['projects'].split(';')
-            if projectId in projects:
-                allowed = True
 
         if allowed:
             error = []
@@ -107,10 +103,10 @@ def upload(projectId):
             else:
                 return 'Project not found'
         else:
-            return redirect(url_for('login.login', projectId = projectId))
+            return redirect(url_for('viewer.project', projectId = projectId))
 
     else:
-        return redirect(url_for('login.login', projectId = projectId))
+        return redirect(url_for('viewer.project', projectId = projectId))
 
 
 @bp.route('/<projectId>/upload/files', methods=('GET','POST'))
@@ -124,6 +120,7 @@ def upload_files(projectId):
 
     video_ext = {'mov', 'mp4'}
     still_ext = {'jpeg', 'jpg', 'png'}
+    meta_ext = {'xml'}
     lib = Covideo_Library.Covideo_Library(projectId)
 
 
@@ -149,82 +146,131 @@ def upload_files(projectId):
             clipname = secure_filename(file.filename)
             file.save(os.path.join('flaskr/static/projects/project-' + projectId + '/stills', clipname))
             success.append(file.filename + ' has been added as still')
+
+        elif ext in meta_ext:
+            labelMapping = {
+                'waste_clip' : project['mapWaste_clip'],
+                'normal_take' : project['mapNormal_take'],
+                'good_take' : project['mapGood_take'],
+                'fav_take' : project['mapFav_take']
+            }
+            metaData = silverstack.silverstack(file, labelMapping).getMetaObject() #also checks validaty and returns false if XML does not contain usable XML
+            if metaData:
+
+                for clip in metaData:
+                    if lib.searchEntry(clip['clipname']) == None:
+                        lib.addEntry(clip)
+                    else:
+                        lib.setMeta(clip['clipname'], 'reel', clip['reel'])
+                        lib.setMeta(clip['clipname'], 'scene', clip['scene'])
+                        lib.setMeta(clip['clipname'], 'shot', clip['shot'])
+                        lib.setMeta(clip['clipname'], 'take', clip['take'])
+                        lib.setMeta(clip['clipname'], 'comment', clip['comment'])
+                        lib.setMeta(clip['clipname'], 'label', clip['label'])
+                        lib.setMeta(clip['clipname'], 'camera', clip['camera'])
+                        lib.setMeta(clip['clipname'], 'cameraMeta', clip['cameraMeta'])
+                success.append('Metadata from ' + file.filename + ' was applied to your library')
+            else:
+                error.append(file.filename + ' was not correctly parsed by our software.')
         else:
             error.append(file.filename + ' is not of accpeted file extension')
     return render_template('viewer/upload.html', error=error, success=success, project = project)
 
 
 
-
-@bp.route('/<projectId>/upload/meta', methods=('GET','POST'))
-def upload_meta(projectId):
-    return "oaky"
-
 @bp.route('/projectmanager', methods=('GET', 'POST'))
 def projectmanager():
-    error = []
-    success = []
-    db = get_db()
-    if request.method == 'POST':
-        name=request.form['name']
-        password=request.form['password']
-        id=request.form['id']
-        cameraA=request.form['cameraA']
-        cameraB=request.form['cameraB']
-        cameraC=request.form['cameraC']
-        cameraD=request.form['cameraD']
+    if 'username' in session:
+        username = session['username']
+        allowed = False
 
-        if id == "New Project":
-            cursor = db.cursor()
-            cursor.execute(
-                'INSERT INTO projects (name, password, cameraA, cameraB, cameraC, cameraD) VALUES (?, ?, ?, ?, ?, ?)',
-                (name, password, cameraA, cameraB, cameraC, cameraD)
-            ).fetchone()
-            db.commit()
-            newID = cursor.lastrowid
-            os.mkdir('flaskr/static/projects/project-' + str(newID))
-            os.mkdir('flaskr/static/projects/project-' + str(newID) + '/video')
-            os.mkdir('flaskr/static/projects/project-' + str(newID) + '/thumbs')
-            os.mkdir('flaskr/static/projects/project-' + str(newID) + '/stills')
-            new_Covideo_library = open('flaskr/static/projects/project-' + str(newID) + '/.Covideo_library.json', 'w')
-            init_Covideo_library =  open('flaskr/static/json/Covideo_library_init.json', 'r')
-            new_Covideo_library.write(init_Covideo_library.read())
+        if username == 'dit':
+            allowed = True
 
-            init_Covideo_library.close()
-            new_Covideo_library.close()
+        if allowed:
+            error = []
+            success = []
+            db = get_db()
+            if request.method == 'POST':
+                name=request.form['name']
+                password=request.form['password']
+                id=request.form['id']
+                mapWaste_clip=request.form['waste_clip']
+                mapNormal_take=request.form['normal_take']
+                mapGood_take=request.form['good_take']
+                mapFav_take=request.form['fav_take']
+                cameraA=request.form['cameraA']
+                cameraB=request.form['cameraB']
+                cameraC=request.form['cameraC']
+                cameraD=request.form['cameraD']
+
+                if id == "New Project":
+                    cursor = db.cursor()
+                    cursor.execute(
+                        'INSERT INTO projects (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD)
+                    ).fetchone()
+                    db.commit()
+                    newID = cursor.lastrowid
+                    os.mkdir('flaskr/static/projects/project-' + str(newID))
+                    os.mkdir('flaskr/static/projects/project-' + str(newID) + '/video')
+                    os.mkdir('flaskr/static/projects/project-' + str(newID) + '/thumbs')
+                    os.mkdir('flaskr/static/projects/project-' + str(newID) + '/stills')
+                    new_Covideo_library = open('flaskr/static/projects/project-' + str(newID) + '/.Covideo_library.json', 'w')
+                    init_Covideo_library =  open('flaskr/static/json/Covideo_library_init.json', 'r')
+                    new_Covideo_library.write(init_Covideo_library.read())
+
+                    init_Covideo_library.close()
+                    new_Covideo_library.close()
 
 
 
-            success.append('Project created')
-        elif "DELETE" in request.form:
-            db.execute(
-                'DELETE FROM projects WHERE id = ?', (id,)
-            )
-            db.commit()
-            rmtree('flaskr/static/projects/project-' + id)
-            success.append('Project was deleted')
+                    success.append('Project created')
+                elif "DELETE" in request.form:
+                    db.execute(
+                        'DELETE FROM projects WHERE id = ?', (id,)
+                    )
+                    db.commit()
+                    rmtree('flaskr/static/projects/project-' + id)
+                    success.append('Project was deleted')
+
+                else:
+                    db.execute(
+                        'UPDATE projects SET name = ?, password = ?, mapWaste_clip = ?,mapNormal_take = ?, mapGood_take = ?, mapFav_take = ?, cameraA = ?, cameraB = ?, cameraC = ?, cameraD = ? WHERE id=?',
+                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, id)
+                    )
+                    db.commit()
+                    success.append('Project updated')
+
+            projects = db.execute('SELECT * FROM projects ORDER BY created DESC').fetchall()
+            return render_template('viewer/projectmanager.html', success=success, error=error, projects=projects, session = session)
 
         else:
-            db.execute(
-                'UPDATE projects SET name = ?, password = ?, cameraA = ?, cameraB = ?, cameraC = ?, cameraD = ? WHERE id=?',
-                (name, password, cameraA, cameraB, cameraC, cameraD, id)
-            )
-            db.commit()
-            success.append('Project updated')
+            return redirect(url_for('viewer.project', projectId = session['current_project']))
 
-    projects = db.execute('SELECT * FROM projects ORDER BY created DESC').fetchall()
-    return render_template('viewer/projectmanager.html', success=success, error=error, projects=projects, session = session)
-
+    else:
+        return redirect(url_for('viewer.project', projectId = session['current_project']))
 
 @bp.route('<projectId>/meta', methods=('GET', 'POST'))
 def meta(projectId):
-    error = []
-    success = []
 
-    db = get_db()
-    project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
+    if 'username' in session:
+        username = session['username']
+        allowed = False
 
-    if session['username'] == 'dit':
-        return render_template('viewer/metaeditor.html', project=project, success=success, error=error, session = session)
+        if username == 'dit':
+            allowed = True
+
+        if allowed:
+            error = []
+            success = []
+
+            db = get_db()
+            project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
+
+            return render_template('viewer/metaeditor.html', project=project, success=success, error=error, session = session)
+        else:
+            return redirect(url_for('viewer.project', projectId = session['current_project']))
+
     else:
-        return redirect(url_for('login.login', projectId = projectId))
+        return redirect(url_for('viewer.project', projectId = session['current_project']))

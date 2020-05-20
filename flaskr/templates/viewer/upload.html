@@ -25,25 +25,65 @@
         </div>
         <button type="submit" class="btn btn-primary mb-2">Upload</button>
       </form>
-      <p class="text-muted">Upload Proxies and Stills with this form. Proxies will be assigned to a clip in the library by their filename (always exlcuding extension). If a proxy doesn't find a match in a the library, it will be added as a clip to the library with empty metadata. You can then use our meta editor or upload a metafile later. Stills will be assigned to clips by their filename. You can add multiple stills to one clip, if you name you still "clipname_X", replacing X with a number (hint: use timecodestamp for X in Silverstack to have stills automatically listed chronologically).<br>Duplicate filenames will be overwritten</p>
+      <p class="text-muted">Upload all your files here. We will handle them according to their file extension. See "File Handling Guideline" on this page to see, how we handle each file. <br>Accepted files: .mov, .mp4, .jpg, jpeg, .png, .xml</p>
     </div>
   </div>
 </div>
 <div class="col-6" >
-  <div class="card">
-    <div class="card-header">
-      <h3 class="h5">Meta Upload</h3>
-    </div>
-    <div class="card-body">
-      <form class="form-inline" method="post" action="/viewer/{{ project['id'] }}/upload/meta" enctype="multipart/form-data">
-        <div class="form-group" style="display:block; width: 100%">
-          <div class="custom-file">
-            <input type="metafile" class="custom-file-input" required name="metafile" id="metafile">
-            <label for="metafile" class="custom-file-label">Choose File</label>
-            <button type="submit" class="btn btn-primary mb-2">Upload</button>
-          </div>
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Video Files (.mov, .mp4)
+          </button>
+        </h2>
+      </div>
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <p>We recommend to upload video proxy files as h.264 720p for an efficient cost / price ratio as well as to mind slower client connections for one of your clients. Your video file will be offered as you upload it. No downconversion or transcoding will be performed on our servers.</p>
+          <p>From the filename we will generate a clipname, not taking into account the file's extension. If a file is called A001C005.mp4 the clipname will be A001C005. The video file will then by synced to your library via the clipname. If the clipname does not exist, it will be added to the library</p>
+
         </div>
-      </form>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Image Files (.jpg, .jpeg, .png)
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          <p>In order to upload stills files and autosync them to your library, your still has to be named clipname_randomextension.jpg. This gives us the possibilty to upload multiple stills to one clip. Unfortunately clipname.jpg will not be recognized. The random extension can be anyhing, like a simple '1' or 'A'.</p>
+          <p>Best practice: If you create your stills in Silverstack, simply set your stills naming scheme to Clip Name_Timecode. This way you can easily upload multiple stills and in the viewer they will be ordered according to their timecode.</p>
+          <figure class="figure">
+            <img src="/static/img/namingscheme_silverstack.png" class="figure-img img-fluid rounded" alt="Best practice: how to export stills in Silverstack 7">
+            <figcaption class="figure-caption text-right">Best practice: how to export stills in Silverstack 7</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            XML Files
+          </button>
+        </h2>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+          <p>As of this version we support to upload meta data acquired in Silverstack 7. Simply export your entire library or single bins or folder as "Pomfort Meta XML". Important: All metadata in our library will be overwritten by the XML File. New clips will be added to the library.</p>
+          <p>A special note about labels: we currently support four labels: waste_clip, normal_take, good_take, fav_take. In order to map your silverstack labels to one of our labels, please go to your project manager.</p>
+          <figure class="figure">
+            <img src="/static/img/export_silverstack.png" class="figure-img img-fluid rounded" alt="How to correctly export XML files in Silverstack">
+            <figcaption class="figure-caption text-right">How to correctly export XML files in Silverstack</figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
   </div>
 </div>

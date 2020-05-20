@@ -71,7 +71,7 @@ def create_app(test_config=None):
             msg.html = "First Name: " + escape(request.form['firstName']) + "<br>"\
                 "Last Name: " + escape(request.form['lastName'])  + "<br>"\
                 "E-Mail: " + escape(request.form['email'])  + "<br>"\
-                "Message: " + escape(request.form['message']) 
+                "Message: " + escape(request.form['message'])
 
             mail.send(msg)
             success.append("Thank you. Your message has been received")

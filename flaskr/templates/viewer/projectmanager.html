@@ -37,27 +37,49 @@
             </div>
           </div>
           <hr>
+          <h4>Label Mapping</h4>
+            <div class="row">
+              <label class="col-sm-2 col-form-label">waste_clip:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="waste_clip">
+              </div>
+              <label class="col-sm-2 col-form-label">normal_take:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="normal_take">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-2 col-form-label">good_take:</label>
+              <div class="col-sm-4">
+                <input type="text"   class="form-control" name="good_take">
+              </div>
+              <label class="col-sm-2 col-form-label">fav_take:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="fav_take">
+              </div>
+            </div>
+          <hr>
           <h4>Live Stream Settings</h4>
-          <div class="row">
-            <label class="col-sm-2 col-form-label">Camera A:</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="cameraA">
+            <div class="row">
+              <label class="col-sm-2 col-form-label">Camera A:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="cameraA">
+              </div>
+              <label class="col-sm-2 col-form-label">Camera B:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="cameraB">
+              </div>
             </div>
-            <label class="col-sm-2 col-form-label">Camera B:</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="cameraB">
+            <div class="row">
+              <label class="col-sm-2 col-form-label">Camera C:</label>
+              <div class="col-sm-4">
+                <input type="text"   class="form-control" name="cameraC">
+              </div>
+              <label class="col-sm-2 col-form-label">Camera D:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="cameraD">
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <label class="col-sm-2 col-form-label">Camera C:</label>
-            <div class="col-sm-4">
-              <input type="text"   class="form-control" name="cameraC">
-            </div>
-            <label class="col-sm-2 col-form-label">Camera D:</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="cameraD">
-            </div>
-          </div>
         </div>
         <span class="text-muted">
           Add a live streams other then the default inhouse streaming by just entering the stream service and the URL / ID the following way: service:url. E.g. enter "youtube:https://www.youtube.com/embed/F4pcX_GMmuM". For Dacast please enter an ID instead of a URL<br>Currently supported: Youtube, Dacast (only one per page)
@@ -100,6 +122,29 @@
               <input type="text" readonly name="id" class="form-control-plaintext" value="{{ project['id']}}">
             </div>
           </div>
+          <hr>
+          <h4>Label Mapping</h4>
+            <div class="row">
+              <label class="col-sm-2 col-form-label">waste_clip:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="waste_clip"value="{{ project['mapWaste_clip']}}">
+              </div>
+              <label class="col-sm-2 col-form-label">normal_take:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="normal_take"value="{{ project['mapNormal_take']}}">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-2 col-form-label">good_take:</label>
+              <div class="col-sm-4">
+                <input type="text"   class="form-control" name="good_take"value="{{ project['mapGood_take']}}">
+              </div>
+              <label class="col-sm-2 col-form-label">fav_take:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="fav_take" value="{{ project['mapFav_take']}}">
+              </div>
+            </div>
+            <span class="text-muted">As soon as you import a XML File created by silverstack, this mapping will be used to map your Silverstack labels to our label system.</span>
           <hr>
           <h4>Live Stream Settings</h4>
           <div class="row">
