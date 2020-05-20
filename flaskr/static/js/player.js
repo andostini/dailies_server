@@ -75,7 +75,7 @@ function play(entry) {
     entry['cameraMeta'] = JSON.parse(entry['cameraMeta']);
   }
   catch(err) {
-    
+    extendedMetaHTML = 'Could not parse Extended Meta. See <a href="https://www.w3schools.com/js/js_json_syntax.asp" target="_blank" >here</a> for help'
   }
   var keys = Object.keys(entry['cameraMeta']);
 

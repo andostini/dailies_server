@@ -41,6 +41,15 @@
   background-size:cover;
 }
 
+#dropzone {
+  border-style: dashed;
+  background-color: inherit;
+}
+
+.dz-image {
+
+  background-color: inherit;
+}
 
 
 

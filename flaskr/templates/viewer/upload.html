@@ -2,8 +2,15 @@
 {% extends 'viewer/viewer.html' %}
 
 {% block header %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dropzone.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/dropzone.js') }}"></script>
 
-
+  <script type="text/javascript">
+    Dropzone.options.dropzone = {
+      timeout: 100000,
+      dictDefaultMessage: "Drop files here"
+    }
+  </script>
 
 {% endblock %}
 
@@ -16,14 +23,7 @@
       <h3 class="h5">File Upload</h3>
     </div>
     <div class="card-body">
-      <form class="form-inline" method="post" action="/viewer/{{ project['id'] }}/upload/files" enctype="multipart/form-data">
-        <div class="form-group" style="display:block; width: 100%">
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" required name="files" id="files" multiple>
-            <label for="files" class="custom-file-label">Choose File</label>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary mb-2">Upload</button>
+      <form class="dropzone" action="/viewer/{{ project['id'] }}/upload/files" id="dropzone">
       </form>
       <p class="text-muted">Upload all your files here. We will handle them according to their file extension. See "File Handling Guideline" on this page to see, how we handle each file. <br>Accepted files: .mov, .mp4, .jpg, jpeg, .png, .xml</p>
     </div>
@@ -58,7 +58,8 @@
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body">
           <p>In order to upload stills files and autosync them to your library, your still has to be named clipname_randomextension.jpg. This gives us the possibilty to upload multiple stills to one clip. Unfortunately clipname.jpg will not be recognized. The random extension can be anyhing, like a simple '1' or 'A'.</p>
-          <p>Best practice: If you create your stills in Silverstack, simply set your stills naming scheme to Clip Name_Timecode. This way you can easily upload multiple stills and in the viewer they will be ordered according to their timecode.</p>
+          <p>Best practice: If you create your stills in Silverstack, simply set your stills naming scheme to Clip Name_Frame Index. This way you can easily upload multiple stills and in the viewer they will be ordered according to their timecode.</p>
+          <p>The images uploaded will not be offered to your client as you upload them. We will neither perform downconversion nor any type of transformation. Choose your format an resolution wisely, so clients can view stills also from slower connections.</p>
           <figure class="figure">
             <img src="/static/img/namingscheme_silverstack.png" class="figure-img img-fluid rounded" alt="Best practice: how to export stills in Silverstack 7">
             <figcaption class="figure-caption text-right">Best practice: how to export stills in Silverstack 7</figcaption>

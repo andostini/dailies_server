@@ -116,7 +116,7 @@ def upload_files(projectId):
     db = get_db()
     project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
 
-    files = request.files.getlist('files')
+    files = request.files.getlist('file')
 
     video_ext = {'mov', 'mp4'}
     still_ext = {'jpeg', 'jpg', 'png'}

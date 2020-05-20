@@ -7,6 +7,7 @@ from datetime import timedelta
 from markupsafe import escape
 from flaskr.db import get_db
 from flask_mail import Message, Mail
+from flask_socketio import SocketIO
 
 
 def create_app(test_config=None):
@@ -22,6 +23,7 @@ def create_app(test_config=None):
         MAIL_USERNAME=os.environ['MAIL_USERNAME'],
         MAIL_PASSWORD=os.environ['MAIL_PASSWORD']
     )
+    socketio = SocketIO(app)
     mail = Mail(app)
     if test_config is None:
         # load the instance config, if it exists, when not testing

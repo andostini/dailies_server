@@ -13,6 +13,7 @@ to send EMails from the contact form.
 - Import Metadata from Silverstack 7 via XML file upload. Labels can be mapped in the Project Manager
 - Added Footer App
 - Bugfix: DIT log in required for project manager, uploader and meta editor
+- integrated Dropzone.js to prevent client side timeout at file upload
 
 ### v0.2
 - Minor UI changes
