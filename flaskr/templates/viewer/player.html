@@ -90,7 +90,23 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="row row-cols-2 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 p-3" id="thumbnail-view">
+			<div class="" id="thumbnail-view">
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th style="display: none">#</th>
+							<th ondblclick="makeProjectLibrary('scene', 'desc')" onclick="makeProjectLibrary('scene', 'asc')" colspan="3">Scene</th>
+							<th ondblclick="makeProjectLibrary('clipname', 'desc')" onclick="makeProjectLibrary('clipname', 'asc')">Clipname</th>
+							<th ondblclick="makeProjectLibrary('camera', 'desc')" onclick="makeProjectLibrary('camera', 'asc')">Cam</th>
+							<th ondblclick="makeProjectLibrary('reel', 'desc')" onclick="makeProjectLibrary('reel', 'asc')">Reel</th>
+							<th>Res.</th>
+							<th onrightclick="makeProjectLibrary('label', 'desc')" onclick="makeProjectLibrary('label', 'asc')">Label</th>
+						</tr>
+					</thead>
+					<tbody id="playbackList">
+					</tbody>
+				</table>
+				<div id="thumbnail-container" class="row row-cols-2 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 p-0"></div>
 			</div>
 			<hr>
 
@@ -160,7 +176,7 @@
 
 <script type="text/javascript">
 	var projectId = {{ project['id'] }};
-	get_CovideoLibrary({{ project['id'] }});
+	get_CovideoLibrary(projectId);
 	CovideoPlayer_tabbing('cameraA');
 
 	var liveStreamA = videojs('#liveStreamA');

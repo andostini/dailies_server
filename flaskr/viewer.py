@@ -106,7 +106,7 @@ def upload(projectId):
             return redirect(url_for('viewer.project', projectId = projectId))
 
     else:
-        return redirect(url_for('viewer.project', projectId = projectId))
+        return redirect(url_for('index'))
 
 
 @bp.route('/<projectId>/upload/files', methods=('GET','POST'))
@@ -139,6 +139,7 @@ def upload_files(projectId):
                 success.append(file.filename + ' has been added to the project library')
             else:
                 success.append(file.filename + ' has been uploaded')
+                lib.createThumb(filename, ext)
 
 
 
@@ -175,7 +176,6 @@ def upload_files(projectId):
         else:
             error.append(file.filename + ' is not of accpeted file extension')
     return render_template('viewer/upload.html', error=error, success=success, project = project)
-
 
 
 @bp.route('/projectmanager', methods=('GET', 'POST'))
@@ -249,7 +249,7 @@ def projectmanager():
             return redirect(url_for('viewer.project', projectId = session['current_project']))
 
     else:
-        return redirect(url_for('viewer.project', projectId = session['current_project']))
+        return redirect(url_for('index'))
 
 @bp.route('<projectId>/meta', methods=('GET', 'POST'))
 def meta(projectId):
@@ -273,4 +273,4 @@ def meta(projectId):
             return redirect(url_for('viewer.project', projectId = session['current_project']))
 
     else:
-        return redirect(url_for('viewer.project', projectId = session['current_project']))
+        return redirect(url_for('index'))

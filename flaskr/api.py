@@ -28,17 +28,22 @@ def get_CovideoLibrary(projectId):
                 if entry['clipname'] == os.path.splitext(playbackfile)[0]:
                     entry['playbackfile'] = playbackfile
 
+            for index, stillfile in enumerate(stillfiles):
+                if entry['clipname'] == stillfile.rsplit('_', 1)[0]:
+                    entry['stills'].append(stillfile)
+
             for thumbnail in thumbnails:
                 if entry['clipname'] == os.path.splitext(thumbnail)[0]:
                     entry['thumbnail'] = thumbnail
-            if entry['thumbnail'] == "":
+
+            if entry['thumbnail'] == "" and len(entry['stills']) > 0:
+                entry['thumbnail'] = url_for('static', filename="/projects/project-" + projectId + '/stills/' + entry['stills'][0]);
+            elif entry['thumbnail'] == "":
                 entry['thumbnail'] = url_for('static', filename="/img/no-thumb.png");
             else:
                 entry['thumbnail'] = url_for('static', filename="/projects/project-" + projectId + '/thumbs/' + entry['thumbnail']);
 
-            for index, stillfile in enumerate(stillfiles):
-                if entry['clipname'] == stillfile.rsplit('_', 1)[0]:
-                    entry['stills'].append(stillfile)
+
 
         return json.dumps(lib)
     else:

@@ -168,13 +168,14 @@ function get_CovideoLibrary() {
     if (this.readyState == 4 && this.status == 200) {
       Covideo_Library = JSON.parse(this.responseText);
       makeProjectLibrary('scene', 'asc');
+      //call function recursivly after 5minutes
+      setTimeout(function(){get_CovideoLibrary(); }, 20000);
     }
   }
   xhttp.open("POST", "../api/get_CovideoLibrary/" + projectId, true);
   xhttp.send();
   document.getElementById('libloader').style.display="none";
-  //call function recursivly after 5minutes
-  setTimeout(function(){getmedialibrary(); }, 300000);
+
 }
 
 function makeListItem(entry, thumb) {
@@ -355,9 +356,9 @@ function makeProjectLibrary(key, direction) {
   // CREATE THUMBNAIL VIEW
 
   else if (document.getElementById('Toggle_thumbnail-view').checked) {
-    var row  = document.getElementById('thumbnail-view');
+    var row  = document.getElementById('thumbnail-container');
     row.innerHTML = "";
-    row.style.display="";
+    document.getElementById('thumbnail-view').style.display="";
     var col;
     for (i=0;i<lib.length; i++) {
       if (lib[i]['clipname'] != '__init') {

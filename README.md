@@ -14,6 +14,9 @@ to send EMails from the contact form.
 - Added Footer App
 - Bugfix: DIT log in required for project manager, uploader and meta editor
 - integrated Dropzone.js to prevent client side timeout at file upload
+- added sort buttons for thumbnail view
+- adds first still as thumbnail if no thumbnail is generated
+- autoreload project library every two minutes
 
 ### v0.2
 - Minor UI changes
