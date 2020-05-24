@@ -5,6 +5,7 @@ click==7.1.1
 decorator==4.4.2
 Flask==1.1.2
 Flask-Mail==0.9.1
+Flask-SocketIO==4.3.0
 idna==2.9
 imageio==2.8.0
 imageio-ffmpeg==0.4.1

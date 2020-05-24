@@ -3,6 +3,8 @@ flaskr/static/projects/project-*
 
 .idea/
 venv/
+env/
 instance/
 Pipfile
 env/
+flaskr/__pycache__
