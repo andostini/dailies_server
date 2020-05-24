@@ -115,5 +115,5 @@ def create_app(test_config=None):
 
 
 
-    socketio.init_app(app)
+    socketio.init_app(app, logger=True, engineio_logger=True)
     return app
