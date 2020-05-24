@@ -1,0 +1,11 @@
+#chatContainer {
+
+}
+
+#chatContainer textarea, #chatMsg {
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  border-bottom: 2px solid #444;
+  width: 100%
+}

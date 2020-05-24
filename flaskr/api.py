@@ -43,8 +43,6 @@ def get_CovideoLibrary(projectId):
             else:
                 entry['thumbnail'] = url_for('static', filename="/projects/project-" + projectId + '/thumbs/' + entry['thumbnail']);
 
-
-
         return json.dumps(lib)
     else:
         return 'Bad Request'

@@ -43,7 +43,7 @@
                       </li>
                     </ul>
                   </div>
-                  <div style="font-weight: light; text-align: right">
+                  <div onclick="console.log(socket);" style="font-weight: light; text-align: right">
                     You are logged in as <strong>{{ session['username']}}</strong>
                     {% if project is defined %}
                       <br> {{ project['name'] }}

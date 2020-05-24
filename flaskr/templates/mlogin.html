@@ -25,7 +25,7 @@
     <!-- Custom styles for this template -->
   </head>
   <body class="text-center">
-    <form class="form-signin" action="/login/{{ project['id'] }}" method="post">
+    <form class="form-signin" action="/login/" method="post">
       {% for x in success %}
       <div class="alert alert-dismissible alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -39,16 +39,18 @@
         </div>
       {% endfor %}
       <h1 class="h3 mb-3 font-weight-normal">Remote Set App</h1>
-      <h2 class="h5 mb-3 text-muted font-weight-normal">Please sign in for <br> {{project['name']}}</h2>
+      <h2 class="h5 mb-3 text-muted font-weight-normal">Sign in</h2>
       <label for="inputUsername" class="sr-only">Username</label>
-      <input type="hidden" name="username" required value="viewer">
-      
+      <select class="form-control custom-select" id="inputUsername" name="username" required autofocus>
+
+          <option value="dit">DIT</option>
+      </select>
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
       <div class="invalid-feedback" style="display:block"></div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">This login is for project managers only.</p>
       <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
-      <input type="hidden" value="{{ project['id']}}">
     </form>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

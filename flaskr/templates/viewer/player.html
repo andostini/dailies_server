@@ -5,8 +5,10 @@
 <script type="text/javascript" src="../static/js/player.js"></script>
 <link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet">
 <script src="https://vjs.zencdn.net/7.5.5/video.js"></script>
-
-
+<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript" src="/static/js/chat.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
 
 {% endblock %}
 
@@ -133,16 +135,16 @@
 					<a class="nav-link toggleCam" onclick="CovideoPlayer_tabbing('Playback');this.classList.add('active')">View Playback</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active toggleCam cameraA" onclick="CovideoPlayer_tabbing('cameraA');this.classList.add('active')">Camera A</a>
+					<a class="nav-link active toggleCam cameraA" onclick="CovideoPlayer_tabbing('cameraA');this.classList.add('active')">Live A</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link toggleCam" onclick="CovideoPlayer_tabbing('cameraB');this.classList.add('active')">Camera B</a>
+					<a class="nav-link toggleCam" onclick="CovideoPlayer_tabbing('cameraB');this.classList.add('active')">Live B</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link toggleCam" onclick="CovideoPlayer_tabbing('cameraC');this.classList.add('active')">Camera C</a>
+					<a class="nav-link toggleCam" onclick="CovideoPlayer_tabbing('cameraC');this.classList.add('active')">Live C</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link toggleCam" onclick="CovideoPlayer_tabbing('cameraD');this.classList.add('active')">Camera D</a>
+					<a class="nav-link toggleCam" onclick="CovideoPlayer_tabbing('cameraD');this.classList.add('active')">Live D</a>
 				</li>
 			</ul>
 		</div>
@@ -173,16 +175,31 @@
 </div>
 
 
+<div class="col-md-6 chat">
+	<div class="card">
+		<div class="card-header"><h2 class="h5">Chat</h2></div>
+		<div class="card-body" id="chatContainer">
+
+		</div>
+	</div>
+</div>
+
 
 <script type="text/javascript">
 	var projectId = {{ project['id'] }};
 	get_CovideoLibrary(projectId);
 	CovideoPlayer_tabbing('cameraA');
+	let room = projectId
+	chat = new CovideoChat(room);
+	chat.get();
 
 	var liveStreamA = videojs('#liveStreamA');
 	var liveStreamB = videojs('#liveStreamB');
 	var liveStreamC = videojs('#liveStreamC');
 	var liveStreamD = videojs('#liveStreamD');
 
+
 </script>
+
+
 {% endblock %}

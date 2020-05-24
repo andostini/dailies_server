@@ -5,3 +5,4 @@ flaskr/static/projects/project-*
 venv/
 instance/
 Pipfile
+env/

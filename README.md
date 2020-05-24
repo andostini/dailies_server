@@ -17,6 +17,7 @@ to send EMails from the contact form.
 - added sort buttons for thumbnail view
 - adds first still as thumbnail if no thumbnail is generated
 - autoreload project library every two minutes
+- seperate DIT / Admin login
 
 ### v0.2
 - Minor UI changes
