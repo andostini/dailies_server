@@ -7,4 +7,5 @@ env/
 instance/
 Pipfile
 env/
-flaskr/__pycache__
+flaskr/__pycache__/
+__pycache__/

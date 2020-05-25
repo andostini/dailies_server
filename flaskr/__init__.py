@@ -7,8 +7,6 @@ from datetime import timedelta
 from markupsafe import escape
 from flaskr.db import get_db
 from flask_mail import Message, Mail
-from flask_socketio import SocketIO, emit
-socketio = SocketIO()
 
 
 def create_app(test_config=None):
@@ -103,8 +101,6 @@ def create_app(test_config=None):
     app.register_blueprint(api.bp)
 
 
-    from . import chat
-    app.register_blueprint(chat.bp)
 
     @app.route('/logout')
     def logout():
@@ -115,5 +111,4 @@ def create_app(test_config=None):
 
 
 
-    socketio.init_app(app, logger=True, engineio_logger=True)
     return app
