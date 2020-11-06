@@ -10,6 +10,9 @@ to send EMails from the contact form.
 ## Version History
 
 ### v0.3
+- Update Notification for DITs
+- Fixed Bug: Youtube and Inhouse Stream now possible on one page
+- Show stream settings to DIT
 - Import Metadata from Silverstack 7 via XML file upload. Labels can be mapped in the Project Manager
 - Added Footer App
 - Bugfix: DIT log in required for project manager, uploader and meta editor

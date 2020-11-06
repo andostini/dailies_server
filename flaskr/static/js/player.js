@@ -1,5 +1,8 @@
 var Covideo_Library = [];
 
+
+
+
 function CovideoPlayer_tabbing(camera) {
   var tabs = document.getElementsByClassName('CovideoPlayerTab');
   var tab;

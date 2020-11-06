@@ -9,6 +9,8 @@ from flaskr.db import get_db
 from flask_mail import Message, Mail
 
 
+
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)

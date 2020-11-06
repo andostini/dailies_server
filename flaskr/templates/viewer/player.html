@@ -2,11 +2,7 @@
 {% extends 'viewer/viewer.html' %}
 
 {% block header %}
-<script type="text/javascript" src="../static/js/player.js"></script>
 <link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet">
-<script src="https://vjs.zencdn.net/7.5.5/video.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 
 {% endblock %}
 
@@ -15,6 +11,11 @@
 
 <div class="col-md-6 col-sm-12 playback  order-last order-md-first">
 	<div class="p-4">
+		{% if updateNotification%}
+		<div class="alert alert-dismissible alert-warning">
+			<p class="mb-0"><strong>Update Notification: </strong>Since your last visit, Covideo Dailies has been updated to a newer version. See changes <a href="https://github.com/andostini/dailies_server/blob/master/README.md" target="_blank">here</a>.</p>
+		</div>
+		{% endif %}
 		<div class="">
 			<h3 class="h5" style="float: left">Project Library</h3>
 			<div style="float: right" class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -149,22 +150,51 @@
 		<div class="card-body CovideoPlayerTab" id="cameraA">
 			<h5 class="card-title">Live View</h5>
 			<h6 class="card-subtitle">Camera A</h6>
-			{{ liveStreams[0]|safe }}
+			{{ liveStreams[0].embedd|safe }}
+			{% if session['username'] == 'dit'%}
+				<h7>Stream Settings:</h7><br>
+				Service: &emsp; {{ liveStreams[0].service }}<br>
+				URL: &emsp; {{ liveStreams[0].url }}<br>
+				Stream Key: &emsp; {{ liveStreams[0].streamKey }}<br>
+
+			{% endif %}
+
 		</div>
 		<div class="card-body CovideoPlayerTab" id="cameraB" style="display: none">
 			<h5 class="card-title">Live View</h5>
 			<h6 class="card-subtitle">Camera B</h6>
-			{{ liveStreams[1]|safe }}
+			{{ liveStreams[1].embedd|safe }}
+			{% if session['username'] == 'dit'%}
+				<h7>Stream Settings:</h7><br>
+				Service: &emsp; {{ liveStreams[1].service }}<br>
+				URL: &emsp; {{ liveStreams[1].url }}<br>
+				Stream Key: &emsp; {{ liveStreams[1].streamKey }}<br>
+
+			{% endif %}
 		</div>
 		<div class="card-body CovideoPlayerTab" id="cameraC" style="display: none">
 			<h5 class="card-title">Live View</h5>
 			<h6 class="card-subtitle">Camera C</h6>
-			{{ liveStreams[2]|safe }}
+			{{ liveStreams[2].embedd|safe }}
+			{% if session['username'] == 'dit'%}
+				<h7>Stream Settings:</h7><br>
+				Service: &emsp; {{ liveStreams[2].service }}<br>
+				URL: &emsp; {{ liveStreams[2].url }}<br>
+				Stream Key: &emsp; {{ liveStreams[2].streamKey }}<br>
+
+			{% endif %}
 		</div>
 		<div class="card-body  CovideoPlayerTab" id="cameraD" style="display: none">
 			<h5 class="card-title">Live View</h5>
 			<h6 class="card-subtitle">Camera D</h6>
-			{{ liveStreams[3]|safe }}
+			{{ liveStreams[3].embedd|safe }}
+			{% if session['username'] == 'dit'%}
+				<h7>Stream Settings:</h7><br>
+				Service: &emsp; {{ liveStreams[3].service }}<br>
+				URL: &emsp; {{ liveStreams[3].url }}<br>
+				Stream Key: &emsp; {{ liveStreams[3].streamKey }}<br>
+
+			{% endif %}
 		</div>
 		<div class="card-body CovideoPlayerTab" id="Playback" style="display: none">
 			<p>Please select a clip from the Project Libraray</p>
@@ -173,22 +203,20 @@
 </div>
 
 
-
 <script type="text/javascript">
 	var projectId = {{ project['id'] }};
+</script>
+<script src="https://vjs.zencdn.net/7.5.5/video.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript" src="../static/js/player.js"></script>
+
+
+<script type="text/javascript">
 	get_CovideoLibrary(projectId);
 	CovideoPlayer_tabbing('cameraA');
-	let room = projectId
-	chat = new CovideoChat(room);
-	chat.get();
-
-	var liveStreamA = videojs('#liveStreamA');
-	var liveStreamB = videojs('#liveStreamB');
-	var liveStreamC = videojs('#liveStreamC');
-	var liveStreamD = videojs('#liveStreamD');
-
-
 </script>
 
+<script type="text/javascript" src="../static/js/live.js"></script>
 
 {% endblock %}

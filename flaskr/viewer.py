@@ -5,6 +5,8 @@ from markupsafe import escape
 from pprint import pprint
 import json
 
+VERSION = 0.26
+
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -16,6 +18,7 @@ from flaskr.db import get_db
 
 from . import Covideo_Library
 from . import silverstack
+
 
 bp = Blueprint('viewer', __name__, url_prefix='/viewer')
 
@@ -39,11 +42,18 @@ def project(projectId):
     if 'username' in session:
         username = session['username']
         allowed = False
-
-
+        updateNotification = False
 
         if username == 'dit':
             allowed = True
+            if 'version' in session and VERSION > session["version"]:
+                updateNotification = True
+
+                session["version"] = VERSION
+
+            elif "version" not in session:
+                updateNotification = True
+                session["version"] = VERSION
         else:
             projects = session['projects'].split(';')
             if projectId in projects:
@@ -61,17 +71,32 @@ def project(projectId):
                     service = stream.split(':',1)[0]
                     url = stream.split(':',1)[1]
                     if service == "youtube":
-                        liveStreams[i] = '<div class="youtube-player"><iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+                        liveStreams[i] = {
+                            "embedd": '<div class="youtube-player"><iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+                            "url": url,
+                            "service": "Youtube",
+                            "streamKey": " - "
+                        }
                     elif service == "dacast":
-                        liveStreams[i] = '<div class="dacast-player"><script src="https://player.dacast.com/js/player.js?contentId=' + url + '" id="' + url + '" width="100%" height="auto" class="dacast-video"></script></div>'
+                        liveStreams[i] = {
+                            "embedd": '<div class="dacast-player"><script src="https://player.dacast.com/js/player.js?contentId=' + url + '" id="' + url + '" width="100%" height="auto" class="dacast-video"></script></div>',
+                            "url": url,
+                            "service": Dacast,
+                            "streamKey": " - "
+                        }
+
                 else:
                     letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
-                    liveStreams[i] = '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="auto"><source src="https://stream.franconia-film.de/hls/' + projectId + '-camera' + letters[i] + '.m3u8" type="application/x-mpegURL" /></video>'
-                    #liveStreams[i] = ''
+                    liveStreams[i] =  {
+                        "embedd": '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="auto"></video>',
+                        "url": "https://stream.franconia-film.de:32774/live/",
+                        "service": "Inhouse",
+                        "streamKey": projectId + "-camera" + letters[i]
+                    }
 
             if project != None:
                 session['current_project'] = projectId
-                return render_template('viewer/player.html', error=error, success=success, project = project, liveStreams = liveStreams)
+                return render_template('viewer/player.html', error=error, success=success, project = project, liveStreams = liveStreams, updateNotification = updateNotification)
             else:
                 return 'Project not found'
         else:
