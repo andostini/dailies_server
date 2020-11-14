@@ -59,16 +59,16 @@ class silverstack:
                                 "EndTC" : clip.find('Timecode').find('EndTC').text
                             },
                             'Settings' : {
-                                "ASA" : clip.find('Settings').find('ASA').text,
-                                "Whitepoint" : clip.find('Settings').find('Whitepoint').text,
-                                "Tint" : clip.find('Settings').find('Tint').text,
-                                "FStop" : clip.find('Settings').find('FStop').text,
-                                "TStop" : clip.find('Settings').find('TStop').text,
-                                "Shutter" : clip.find('Settings').find('Shutter').text,
-                                "SensorFPS" : clip.find('Settings').find('SensorFPS').text,
-                                "IntFilter" : clip.find('Settings').find('Filter').text,
-                                "Lens" : clip.find('Settings').find('Lens').text,
-                                "DistanceToObject" : clip.find('Settings').find('DistanceToObject').text
+                                "ASA" : clip.find('CameraSettings').find('EI_ISO_ASA').text,
+                                "Whitepoint" : clip.find('CameraSettings').find('WhiteBalance').text,
+                                "Tint" : clip.find('CameraSettings').find('Tint').text,
+                                "FStop" : clip.find('CameraSettings').find('FStop').text,
+                                "TStop" : clip.find('CameraSettings').find('TStop').text,
+                                "Shutter" : clip.find('CameraSettings').find('Shutter').text,
+                                "SensorFPS" : clip.find('CameraSettings').find('SensorFPS').text,
+                                "IntFilter" : clip.find('CameraSettings').find('Filter').text,
+                                "Lens" : clip.find('CameraSettings').find('Lens').text,
+                                "DistanceToObject" : clip.find('CameraSettings').find('DistanceToObject').text
                             },
                             'Format' : {
                                 "Codec" : clip.find('Format').find('Codec').text,

@@ -5,7 +5,6 @@ from markupsafe import escape
 from pprint import pprint
 import json
 
-VERSION = 0.26
 
 
 from flask import (
@@ -42,18 +41,10 @@ def project(projectId):
     if 'username' in session:
         username = session['username']
         allowed = False
-        updateNotification = False
+
 
         if username == 'dit':
             allowed = True
-            if 'version' in session and VERSION > session["version"]:
-                updateNotification = True
-
-                session["version"] = VERSION
-
-            elif "version" not in session:
-                updateNotification = True
-                session["version"] = VERSION
         else:
             projects = session['projects'].split(';')
             if projectId in projects:
@@ -88,15 +79,15 @@ def project(projectId):
                 else:
                     letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
                     liveStreams[i] =  {
-                        "embedd": '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="auto"></video>',
+                        "embedd": '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="false" loop></video>',
                         "url": "https://stream.franconia-film.de:32774/live/",
-                        "service": "Inhouse",
+                        "service": 'Covideo - <span id="streamStatus' + letters[i] + '"></span>',
                         "streamKey": projectId + "-camera" + letters[i]
                     }
 
             if project != None:
                 session['current_project'] = projectId
-                return render_template('viewer/player.html', error=error, success=success, project = project, liveStreams = liveStreams, updateNotification = updateNotification)
+                return render_template('viewer/player.html', error=error, success=success, project = project, liveStreams = liveStreams)
             else:
                 return 'Project not found'
         else:
@@ -104,6 +95,69 @@ def project(projectId):
 
     else:
         return redirect(url_for('login.login', projectId = projectId))
+
+
+#ONLY TEMPORARY UNTIL NEW FRONT endif
+
+@bp.route('/<projectId>-theatre', methods=['GET'])
+def theatre(projectId):
+    if 'username' in session:
+        username = session['username']
+        allowed = False
+
+        if username == 'dit':
+            allowed = True
+        else:
+            projects = session['projects'].split(';')
+            if projectId in projects:
+                allowed = True
+
+        if allowed:
+            error = []
+            success = []
+            db = get_db()
+            project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
+
+            liveStreams =[project['cameraA'],project['cameraB'],project['cameraC'],project['cameraD']]
+            for i, stream in enumerate(liveStreams):
+                if (stream != "" and ":" in stream):
+                    service = stream.split(':',1)[0]
+                    url = stream.split(':',1)[1]
+                    if service == "youtube":
+                        liveStreams[i] = {
+                            "embedd": '<div class="youtube-player"><iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
+                            "url": url,
+                            "service": "Youtube",
+                            "streamKey": " - "
+                        }
+                    elif service == "dacast":
+                        liveStreams[i] = {
+                            "embedd": '<div class="dacast-player"><script src="https://player.dacast.com/js/player.js?contentId=' + url + '" id="' + url + '" width="100%" height="auto" class="dacast-video"></script></div>',
+                            "url": url,
+                            "service": Dacast,
+                            "streamKey": " - "
+                        }
+
+                else:
+                    letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
+                    liveStreams[i] =  {
+                        "embedd": '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="false" loop height="100%"></video>',
+                        "url": "https://stream.franconia-film.de:32774/live/",
+                        "service": 'Covideo',
+                        "streamKey": projectId + "-camera" + letters[i]
+                    }
+
+            if project != None:
+                session['current_project'] = projectId
+                return render_template('viewer/theatre.html', error=error, success=success, project = project, liveStreams = liveStreams)
+            else:
+                return 'Project not found'
+        else:
+            return redirect(url_for('login.login', projectId = projectId))
+
+    else:
+        return redirect(url_for('login.login', projectId = projectId))
+
 
 
 

@@ -23,7 +23,7 @@
       <div class="row" style="margin-bottom: 15px">
           <div class="col-12">
               <nav class="sticky-top navbar navbar-expand-md navbar-dark bg-primary">
-                  <h1 class="navbar-brand">Remote Set App</h1>
+                  <h1 class="navbar-brand">Covideo</h1>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -43,7 +43,7 @@
                       </li>
                     </ul>
                   </div>
-                  <div onclick="console.log(socket);" style="font-weight: light; text-align: right">
+                  <div style="font-weight: light; text-align: right">
                     You are logged in as <strong>{{ session['username']}}</strong>
                     {% if project is defined %}
                       <br> {{ project['name'] }}
@@ -86,7 +86,7 @@
             <p class="font-weight-light">Seen a bug or require a feature? Please get in touch with us!</p>
           </div>
           <div style="font-size: 12px" class="col-3">
-            <p class="font-weight-light">This is Covideo Dailies Server v0.3<br>&copy; Fabian Decker, 2020</p>
+            <p class="font-weight-light">This is Covideo Dailies Server v0.3<br>developed by <span class="font-weight-bold">Fabian Decker</span> and <span class="font-weight-bold">Vincent Zettl</span></p>
           </div>
         </div>
       </div>

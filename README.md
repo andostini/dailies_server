@@ -10,7 +10,9 @@ to send EMails from the contact form.
 ## Version History
 
 ### v0.3
-- Update Notification for DITs
+- Show live stream connection information to DIT
+- 4x4 theatre mode (only temporary until UI rework in angular)
+- VideoJS live player refresh and offline fallback video
 - Fixed Bug: Youtube and Inhouse Stream now possible on one page
 - Show stream settings to DIT
 - Import Metadata from Silverstack 7 via XML file upload. Labels can be mapped in the Project Manager
