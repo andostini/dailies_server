@@ -58,7 +58,7 @@ def create_app(test_config=None):
                     openProjects.append(project)
 
 
-        return render_template('website/index.html', error=error, success=success, openProjects=openProjects)
+        return render_template('base.html', error=error, success=success, openProjects=openProjects)
 
     @app.route('/contact', methods=('GET', 'POST'))
     def contact():

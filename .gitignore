@@ -6,6 +6,13 @@ venv/
 env/
 instance/
 Pipfile
-env/
 flaskr/__pycache__/
 __pycache__/
+flaskr/static/node_modules
+
+
+flaskr/.templates
+flaskr/.static
+
+run.sh
+run2.sh

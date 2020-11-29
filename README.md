@@ -3,8 +3,12 @@ This is the Server Application with is supposed to go with Viewer Apps und DIT D
 The server application is meant to be run with [tiangolo/meinheld-gunicorn-flask](https://hub.docker.com/r/tiangolo/meinheld-gunicorn-flask) Docker container. The main.py will return the necessary Flask instance.
 
 ENV Variables:
-MAIL_USERNAME
-MAIL_PASSWORD
+
+FLASK_APP=flaskr
+FLASK_ENV=development
+FLASK_DEBUG=True
+MAIL_USERNAME=sdff
+MAIL_PASSWORD=sdf
 to send EMails from the contact form.
 
 ## Version History
