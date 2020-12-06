@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --progress --config webpack.config.js",
     "dev-build": "webpack --progress -d --config webpack.config.js",
-    "watch": "webpack --progress --config webpack.config.js --watch"
+    "watch": "webpack --progress --mode=development --config webpack.config.js --watch"
   },
   "author": "Fabian Decker",
   "babel": {

@@ -1,0 +1,76 @@
+
+{% extends 'viewer/viewer.html' %}
+
+{% block header %}
+
+
+
+{% endblock %}
+
+{% block content %}
+
+<!-- CREATE NEW PROJECT WINDOW -->
+<div class="row content">
+<div class="col-12" >
+    <div class="card">
+      <div class="card-header">
+        <h2 class="h5">Metadata Editor</h2>
+        <span id="responseText" class="text-muted"></span>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Clipname</th>
+                    <th>Scene</th>
+                    <th>Shot</th>
+                    <th>Take</th>
+                    <th>Camera</th>
+                    <th>Reel</th>
+                    <th>Comment</th>
+                    <th>Label</th>
+                    <th>Extended Meta</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="metaeditor">
+            </tbody>
+        </table>
+        <hr>
+        <div class="card-header">
+          <h4 class="h5">New Entry</h4>
+        </div>
+        <table class="table table-sm">
+          <tbody>
+            <tr>
+              <td><input type="input" placeholder="clipname" id="new_clipname" class="covideo form-control form-control-sm"></td>
+              <td><input type="input" placeholder="scene" id="new_scene" class="covideo form-control form-control-sm"></td>
+              <td><input type="input" placeholder="shot" id="new_shot" class="covideo form-control form-control-sm"></td>
+              <td><input type="input" placeholder="take" id="new_take" class="covideo form-control form-control-sm"></td>
+              <td><input type="input" placeholder="camera" id="new_camera" class="covideo form-control form-control-sm"></td>
+              <td><input type="input" placeholder="reel" id="new_reel" class="covideo form-control form-control-sm"></td>
+              <td><textarea placeholder="comment"id="new_comment" class="form-control form-control-sm covideo" rows="1"></textarea>
+              <td>
+                <select id="new_label" class="custom-select custom-select-sm covideo">
+                  <option value="">No Label</option>
+                  <option value="waste_clip">Waste Clip</option>
+                  <option value="normal_take">Normal Take</option>
+                  <option value="good_take">Good Take</option>
+                  <option value="fav_take">Fav Take</option>
+                </select>
+              </td>
+              <td><button type="button" class="btn btn-primary" onclick="addEntry()">+</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="../../static/js/metaeditor.js"></script>
+<script type="text/javascript">
+  var projectId = {{ project['id'] }};
+  getmetaeditor();
+</script>
+
+{% endblock %}

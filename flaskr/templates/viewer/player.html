@@ -1,0 +1,19 @@
+
+{% extends 'viewer/viewer.html' %}
+
+{% block header %}
+<link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+<div id="player-page"></div>
+
+<script type="text/javascript">
+	var projectId = {{ project['id'] }};
+</script>
+
+<script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>
+
+{% endblock %}

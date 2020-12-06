@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import HelloWorld from "./HelloWorld";
+import PlayerPage from "./PlayerPage";
 
-ReactDOM.render(<HelloWorld />, document.getElementById("react-root"));
+ReactDOM.render(<PlayerPage />, document.getElementById("player-page"));

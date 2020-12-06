@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-rCA2D+D9QXuP2TomtQwd+uP50EHjpafN+wruul0sXZzX/Da7Txn4tB9aLMZV4DZm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/label.css') }}">
+
+
+
+    <title>COVIDEO - Viewer</title>
+    {% block header %}{% endblock %}
+  </head>
+  <body>
+    <nav class="sticky-top navbar navbar-expand-md navbar-dark bg-primary">
+        <h1 class="navbar-brand">Covideo</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/viewer">Viewer</a>
+            </li>
+            {% if session['username'] == 'dit'%}
+            <li class="nav-item">
+                <a class="nav-link" href="/viewer/projectmanager">Project Manager</a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <div style="font-weight: light; text-align: right">
+          You are logged in as <strong>{{ session['username']}}</strong>
+          {% if project is defined %}
+            <br> {{ project['name'] }}
+          {% endif %}
+        </div>
+    </nav>
+    <main class="container-fluid pt-3" style="min-height: 100vh">
+
+      <div class="row">
+        <div class="col-12">
+          {% for x in success %}
+          <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Well done!</strong>{{ x }}
+          </div>
+          {% endfor %}
+          {% for x in error %}
+            <div class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Oh snap!</strong>{{ x }}
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="mastfoot mt-auto footer sticky-bottom bg-dark">
+      <div class="container p-3">
+        <div class="row">
+          <div class="col-3">
+            <ul class="nav flex-column">
+              <li class="nav-item"><a href="/">Home</a></li>
+              <li class="nav-item"><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div style="font-size: 12px" class="col-3">
+            <p class="font-weight-light">Seen a bug or require a feature? Please get in touch with us!</p>
+          </div>
+          <div style="font-size: 12px" class="col-3">
+            <p class="font-weight-light">This is Covideo Dailies Server v0.3<br>developed by <span class="font-weight-bold">Fabian Decker</span> and <span class="font-weight-bold">Vincent Zettl</span></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/49c1984048.js" crossorigin="anonymous"></script>
+  </body>
+</html>
