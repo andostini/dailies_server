@@ -13,6 +13,3 @@ flaskr/static/node_modules
 
 flaskr/.templates
 flaskr/.static
-
-run.sh
-run2.sh
