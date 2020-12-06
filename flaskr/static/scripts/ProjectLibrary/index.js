@@ -27,6 +27,8 @@ export default class ProjectLibrary extends React.Component {
                         </tbody>
                     </table>
                 </div>
+                <a className="btn btn-link" href={"/viewer/" + window.projectId + "/upload"}><i id="filterList_icon" className="fas fa-caret-right" aria-hidden="true"></i> Upload</a><br></br>
+                <a className="btn btn-link" href={"/viewer/" + window.projectId + "/meta"}><i id="filterList_icon" className="fas fa-caret-right" aria-hidden="true"></i> Meta Editor</a>
             </div>
         );
     }
