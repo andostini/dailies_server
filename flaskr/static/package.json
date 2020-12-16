@@ -21,9 +21,15 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "babel-loader": "^8.2.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.12",
+    "@material-ui/data-grid": "^4.0.0-alpha.12",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/utils": "^4.11.2"
   }
 }

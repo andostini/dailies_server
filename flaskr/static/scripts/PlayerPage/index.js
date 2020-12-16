@@ -1,6 +1,10 @@
 import React from 'react';
 import ProjectLibrary from "../ProjectLibrary"
 import Player from "../Player"
+import { Grid, Container} from '@material-ui/core';
+import Navbar from "../Navbar";
+
+
 
 class PlayerPage extends React.Component {
     constructor() {
@@ -20,10 +24,19 @@ class PlayerPage extends React.Component {
     render() {
         
         return (
-            <div className="row content">
-                <ProjectLibrary PlayClip={this.PlayClip}></ProjectLibrary>
-                <Player clip={this.state.currentClip}></Player>
-            </div>
+            <React.Fragment>
+                <Navbar></Navbar>
+                <Container maxWidth={false} style={{padding: 0}}>
+                    <Grid container spacing={1}>
+                        <Grid item md={12} lg={6}>
+                            <Player clip={this.state.currentClip}></Player>
+                        </Grid>
+                        <Grid item md={12} lg={6}>
+                            <ProjectLibrary PlayClip={this.PlayClip}></ProjectLibrary>
+                        </Grid>
+                    </Grid>
+                </Container>
+           </React.Fragment>
         );
     }}
 export default PlayerPage;

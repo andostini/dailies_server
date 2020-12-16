@@ -7,7 +7,7 @@ export default class Live extends React.Component {
     }
     render() {
         return(
-            <div className="tab-pane fade CovideoPlayerTab" id={this.state.source} role="tabpanel" aria-labelledby={this.state.source + "-tab"}>
+            <div>
                 {this.state.source}
             </div>
         )

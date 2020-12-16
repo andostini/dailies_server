@@ -14,6 +14,7 @@ to send EMails from the contact form.
 ## Installing 
 - Open Terminal and cd to project root folder (flaskr must be imediate child)
 - run "python3 -m venv venv" to initiate virtual environment
+- run "source venv/bin/activate" 
 - run "pip install -r requirements.txt"
 - run "export FLASK_APP=flaskr"
 - run "flask init-db"

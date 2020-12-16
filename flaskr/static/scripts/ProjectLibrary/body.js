@@ -1,5 +1,5 @@
-import React from "react"
-import Playback from "../Player/playback.js"
+import React from "react";
+import { TableRow, TableCell } from "@material-ui/core";
 
 export default class Body extends React.Component {
     constructor(props) {
@@ -47,16 +47,16 @@ export default class Body extends React.Component {
         } else {
             return (
                 items.map(item => (
-                    <tr key={item.clipname} onClick={(e) => this.play(item, e)}>
-                        <td>{item.scene}</td>
-                        <td>{item.shot}</td>
-                        <td>{item.take}</td>
-                        <td>{item.clipname}</td>
-                        <td>{item.cam}</td>
-                        <td>{item.reel}</td>
-                        <td></td>
-                        <td>{item.label}</td>
-                    </tr>
+                    <TableRow key={item.clipname} onClick={(e) => this.play(item, e)}>
+                        <TableCell>{item.scene}</TableCell>
+                        <TableCell>{item.shot}</TableCell>
+                        <TableCell>{item.take}</TableCell>
+                        <TableCell>{item.clipname}</TableCell>
+                        <TableCell className={"camera" + item.camera}>{item.camera}</TableCell>
+                        <TableCell>{item.reel}</TableCell>
+                        <TableCell></TableCell>
+                        <TableCell><div className={"badge " + item.label}>{item.label}</div></TableCell>
+                    </TableRow>
                 ))
             )
         }

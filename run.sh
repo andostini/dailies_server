@@ -1,4 +1,4 @@
-cd <PATH TO dailies_server>
+cd dailies_server_react/
 . venv/bin/activate
 
 export FLASK_APP=flaskr

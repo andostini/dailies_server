@@ -1,6 +1,9 @@
-import React from "react"
+import React from 'react';
 import Header from "./header"
 import Body from "./body"
+import { Table, TableContainer, TableHead, TableBody, TableRow, TableCell, Box,Button, ButtonGroup} from "@material-ui/core";
+import BackupIcon from '@material-ui/icons/Backup';
+import EditIcon from '@material-ui/icons/Edit';
 
 export default class ProjectLibrary extends React.Component {
     constructor(props){
@@ -8,28 +11,33 @@ export default class ProjectLibrary extends React.Component {
     }
     render() {
         return (
-            <div className="col-md-6 col-sm-12 projectLibrary order-last order-md-first">
+            <React.Fragment>
                 <Header></Header>
                 <div className="table-responsive-sm">
-                    <table className="table table-sm table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col" colSpan="3">Scene</th>
-                                <th scope="col">Clipname</th>
-                                <th scope="col">Cam</th>
-                                <th scope="col">Reel</th>
-                                <th scope="col">Res</th>
-                                <th scope="col">Label</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <Body PlayClip={this.props.PlayClip}></Body>
-                        </tbody>
-                    </table>
+                    <TableContainer component={Box}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell colSpan="3">Scene</TableCell>
+                                    <TableCell>Clipname</TableCell>
+                                    <TableCell>Cam</TableCell>
+                                    <TableCell>Reel</TableCell>
+                                    <TableCell>Res</TableCell>
+                                    <TableCell>Label</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <Body PlayClip={this.props.PlayClip}></Body>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </div>
-                <a className="btn btn-link" href={"/viewer/" + window.projectId + "/upload"}><i id="filterList_icon" className="fas fa-caret-right" aria-hidden="true"></i> Upload</a><br></br>
-                <a className="btn btn-link" href={"/viewer/" + window.projectId + "/meta"}><i id="filterList_icon" className="fas fa-caret-right" aria-hidden="true"></i> Meta Editor</a>
-            </div>
+                <ButtonGroup mt={5} color="primary" variant="contained" aria-label="contained primary button group">
+                    <Button startIcon={<BackupIcon />} href={"/viewer/" + window.projectId + "/upload"}>Upload</Button>
+                    <Button startIcon={<EditIcon />} href={"/viewer/" + window.projectId + "/meta"}>Meta Editor</Button>
+                </ButtonGroup>
+
+            </React.Fragment>
         );
     }
 

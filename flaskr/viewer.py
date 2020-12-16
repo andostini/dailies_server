@@ -87,7 +87,7 @@ def project(projectId):
 
             if project != None:
                 session['current_project'] = projectId
-                return render_template('viewer/player.html', error=error, success=success, project = project, liveStreams = liveStreams)
+                return render_template('app/viewer.html', error=error, success=success, project = project, liveStreams = liveStreams)
             else:
                 return 'Project not found'
         else:
