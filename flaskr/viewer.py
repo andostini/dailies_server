@@ -56,6 +56,7 @@ def project(projectId):
             db = get_db()
             project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
 
+
             liveStreams =[project['cameraA'],project['cameraB'],project['cameraC'],project['cameraD']]
             for i, stream in enumerate(liveStreams):
                 if (stream != "" and ":" in stream):
@@ -87,6 +88,12 @@ def project(projectId):
 
             if project != None:
                 session['current_project'] = projectId
+                print(project)
+                project = {
+                    'id' : project['id'],
+                    'name': project['name'],
+                    'created' : project['created']
+                }   
                 return render_template('app/viewer.html', error=error, success=success, project = project, liveStreams = liveStreams)
             else:
                 return 'Project not found'

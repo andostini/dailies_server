@@ -33,8 +33,8 @@ export default class ProjectLibrary extends React.Component {
                     </TableContainer>
                 </div>
                 <ButtonGroup mt={5} color="primary" variant="contained" aria-label="contained primary button group">
-                    <Button startIcon={<BackupIcon />} href={"/viewer/" + window.projectId + "/upload"}>Upload</Button>
-                    <Button startIcon={<EditIcon />} href={"/viewer/" + window.projectId + "/meta"}>Meta Editor</Button>
+                    <Button startIcon={<BackupIcon />} href={"/viewer/" + window.project.id + "/upload"}>Upload</Button>
+                    <Button startIcon={<EditIcon />} href={"/viewer/" + window.project.id + "/meta"}>Meta Editor</Button>
                 </ButtonGroup>
 
             </React.Fragment>

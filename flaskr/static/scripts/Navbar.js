@@ -19,13 +19,13 @@ export default class Navbar extends React.Component {
                         <Typography variant="h6" >
                             <font style={{color: "#e91e63"}} >Covideo </font>
                         </Typography>
-                        <Typography variant="subtitle-1">
+                        <Typography variant="subtitle1">
                             Dailies & Livestream
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
-                        <Typography variant="subtitle-2" align="right">
-                            You are logged in as <strong>{window.userName} <br /> {window.projectName}</strong>
+                        <Typography variant="subtitle2" align="right">
+                            You are logged in as <strong>{window.userName} <br /> {window.project.name}</strong>
                         </Typography>
                     </Grid>
                     <Grid item xs={4}  align="right">

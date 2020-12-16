@@ -9,6 +9,7 @@ Pipfile
 flaskr/__pycache__/
 __pycache__/
 flaskr/static/node_modules
+flaskr/static/dist
 
 
 flaskr/.templates

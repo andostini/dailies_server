@@ -1,3 +1,3 @@
-cd dailies_server_react/flaSkr/static
+cd flaSkr/static
 
 npm run watch

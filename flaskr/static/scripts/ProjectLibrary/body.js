@@ -13,7 +13,7 @@ export default class Body extends React.Component {
     }
 
     componentDidMount() {
-        fetch("../api/get_CovideoLibrary/" + window.projectId, {
+        fetch("../api/get_CovideoLibrary/" + window.project.id, {
             method: "POST"
         })
             .then(res => res.json())
@@ -41,9 +41,21 @@ export default class Body extends React.Component {
     render() {
         const { error, isLoaded, items} = this.state;
         if (error) {
-            return <div>Error: {error.message}</div>;
+            return (
+                <TableRow>
+                    <TableCell colSpan={8} style={{backgroundColor: '#e57373'}}>
+                        <p>Error: {error.message}</p>
+                    </TableCell>
+                </TableRow>
+            );
         } else if (!isLoaded) {
-            return <div>Loading...</div>
+            return (                
+                <TableRow>
+                    <TableCell colSpan={8} style={{backgroundColor: '#7986cb'}}>
+                        <p>Loading...</p>
+                    </TableCell>
+                </TableRow>
+            );
         } else {
             return (
                 items.map(item => (

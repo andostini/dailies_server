@@ -10,9 +10,11 @@
     <div id="player-page"></div>
 
     <script type="text/javascript">
-        var projectId = {{ project['id'] }};
-        var projectName = "{{ project['name'] }}";
         var userName = "{{ session['username']}}"
+
+        var liveStreams = {{ liveStreams|tojson}};
+        var project = {{ project|tojson}};
+
     </script>
 
     <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>

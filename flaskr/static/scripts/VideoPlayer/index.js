@@ -12,7 +12,7 @@ export default class VideoPlayer extends React.Component {
         else {
             return (
                 <video style={{width: "100%"}} controls key={src}>               
-                <source src={"../static/projects/project-" + window.projectId + "/video/" + src} type="video/mp4"></source>             
+                <source src={"../static/projects/project-" + window.project.id + "/video/" + src} type="video/mp4"></source>             
                 </video>  
             )
         }
