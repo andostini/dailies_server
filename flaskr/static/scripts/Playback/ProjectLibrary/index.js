@@ -1,8 +1,8 @@
 import React from 'react';
 import { forwardRef } from 'react';
-import { Grid, Button, ButtonGroup} from "@material-ui/core";
+import { Grid, Button, ButtonGroup, Box} from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup} from "@material-ui/lab";
-import Tile from "./tile"; 
+import Tile, {Body} from "./tile"; 
 import BackupIcon from '@material-ui/icons/Backup';
 import EditIcon from '@material-ui/icons/Edit';
 import MaterialTable, { MTableBody } from 'material-table';
@@ -135,7 +135,8 @@ export default class ProjectLibrary extends React.Component {
         var components = {}
         if (layout == 'thumbnail') {
             components = {
-                Body: props => (<Grid container spacing={3}><MTableBody {...props}/></Grid>),
+                //Body: props => (<Box><MTableBody {...props} />{console.log('1')}{console.log(props)}</Box>),
+                Body: props => (<Body props={props}></Body>),
                 Row: props => (<Tile data={props.data} ></Tile>)
             };
         }
