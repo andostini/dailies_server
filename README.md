@@ -11,21 +11,17 @@ MAIL_USERNAME=sdff
 MAIL_PASSWORD=sdf
 to send EMails from the contact form.
 
-## Installing 
-- Open Terminal and cd to project root folder (flaskr must be imediate child)
-- run "python3 -m venv venv" to initiate virtual environment
-- run "source venv/bin/activate" 
-- run "pip install -r requirements.txt"
-- run "export FLASK_APP=flaskr"
-- run "flask init-db"
-- Exit virtual environment and cd to static folder
-- run "npm install"
-- Update run.sh and run2.sh and replace <PATH TO dailies_server> with your actual path to this project
+## First time running
+- Make sure Python 3.8 is installed on your system. (check with 'python3 -v' in Terminal)
+- Open Terminal and cd to project root folder. A folder named 'flaskr' must be the imediate child. 
+- run ". install.sh" to init the flask app
+- Open a second Terminal window and again cd to project root folder
+- run ". run2.sh"
 
 ## Running
-- Open Terminal and cd to project root folder (flaskr must be imediate child)
+- Open Terminal and cd to project root folder. A folder named 'flaskr' must be the imediate child. 
 - run ". run.sh"
-- Open new Terminal window and cd to project root folder (flaskr must be imediate child)
+- Open a second Terminal window and again cd to project root folder
 - run ". run2.sh"
 
 

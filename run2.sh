@@ -1,3 +1,3 @@
-cd flaSkr/static
+cd flaskr/static
 
 npm run watch
