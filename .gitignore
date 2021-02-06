@@ -1,6 +1,8 @@
 #Ignore Project Folder
 flaskr/static/projects/project-*
 
+.DS_Store
+
 .idea/
 venv/
 env/
