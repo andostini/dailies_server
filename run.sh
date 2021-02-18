@@ -7,4 +7,4 @@ export FLASK_DEBUG=True
 export MAIL_USERNAME=deckerfabian@ymail.com
 export MAIL_PASSWORD=haha
 
-flask run
+flask run -h 0.0.0.0

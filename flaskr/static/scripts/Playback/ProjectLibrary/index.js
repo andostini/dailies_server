@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { forwardRef } from 'react';
-import { Grid, Button, ButtonGroup, Box} from "@material-ui/core";
-import { ToggleButton, ToggleButtonGroup} from "@material-ui/lab";
-import Tile, {Body} from "./tile"; 
+import { Grid, Button, ButtonGroup } from "@material-ui/core";
+import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
+import Tile, { Body } from "./tile";
 import BackupIcon from '@material-ui/icons/Backup';
 import EditIcon from '@material-ui/icons/Edit';
 import MaterialTable, { MTableBody } from 'material-table';
@@ -31,6 +31,23 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
+
+// var tbodyClass = {
+//     display: flex;
+//     flex-wrap: wrap;
+//     width: 100%;
+// }
+// first tr of the FilterListflex: 9;
+// width: 100%;
+// flex-grow: 9;
+// flex-basis: 100%;
+
+// the othrer tr  
+// tbody tr {
+//     flex: 1;
+//     width: calc(100% / 9 );
+// }
+
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -49,26 +66,26 @@ const tableIcons = {
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-  };
+};
 
 // Icons end
 
 
 export default class ProjectLibrary extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
             items: [],
-            tableLayout: "list",
+            tableLayout: "thumbnail",
             filtering: false
         };
         this.playClip = this.playClip.bind(this);
         this.changeTableLayout = this.changeTableLayout.bind(this);
         this.toggleFiltering = this.toggleFiltering.bind(this);
     }
-    
+
     componentDidMount() {
         fetch("../api/get_CovideoLibrary/" + window.project.id, {
             method: "POST"
@@ -91,7 +108,8 @@ export default class ProjectLibrary extends React.Component {
             )
     }
 
-    playClip(e,item) {
+    playClip(e, item) {
+        window.location.href = '#player';
         this.props.PlayClip(item)
     }
 
@@ -105,9 +123,9 @@ export default class ProjectLibrary extends React.Component {
         this.setState({
             filtering: !this.state.filtering
         });
-        
+
     }
-     
+
 
     render() {
         const items = this.state.items;
@@ -135,75 +153,96 @@ export default class ProjectLibrary extends React.Component {
         var components = {}
         if (layout == 'thumbnail') {
             components = {
-                //Body: props => (<Box><MTableBody {...props} />{console.log('1')}{console.log(props)}</Box>),
-                Body: props => (<Body props={props}></Body>),
-                Row: props => (<Tile data={props.data} ></Tile>)
+                Body: props => (<Body isFullscreen={this.props.isFullscreen} {...props}></Body>),
+                Row: props => (<Tile {...props} ></Tile>)
             };
         }
-
-        
-
         return (
-            <React.Fragment>
-                <div style={{maxWidth: "100%"}}>
+            <Fragment>
+                <div style={{ maxWidth: "100%" }}>
                     <MaterialTable
                         style={{
                             backgroundColor: "transparent",
-                            boxShadow: "none"
+                            boxShadow: "none",
+                            display: "block"
                         }}
                         icons={tableIcons}
+                        size="small"
                         columns={[
-                            { title: 'Thumbnail', field: 'thumbnail', hidden: (layout == "list") , render: rowData =>  <div className="thumbnail-list" style={{backgroundImage: "url(" + rowData.thumbnail +")"}}></div> }, 
-                            { title: 'Scene', field: 'scene' }, 
+                            { title: 'Thumbnail', field: 'thumbnail', sorting: false, filtering: false, hidden: (layout != "thumbnail-list"), render: rowData => <div className="thumbnail-list" style={{ backgroundImage: "url(" + rowData.thumbnail + ")" }}></div> },
+                            { title: 'Scene', field: 'scene' },
                             { title: 'Shot', field: 'shot' },
                             { title: 'Take', field: 'take' },
                             { title: 'Clipname', field: 'clipname' },
-                            { title: 'Res.', field: 'resources' , filtering: false, render: rowData => <React.Fragment>{videoResource(rowData.playbackfile)}{stillsResource(rowData.stills)}</React.Fragment>},
+                            { title: 'Res.', field: 'resources', hidden: (layout == "thumbnail"), sorting: false, filtering: false, render: rowData => <Fragment>{videoResource(rowData.playbackfile)}{stillsResource(rowData.stills)}</Fragment> },
                             { title: 'Cam', field: 'camera', render: rowData => <span className={"camera" + rowData.camera}>{rowData.camera}</span> },
                             { title: 'Reel', field: 'reel' },
                             { title: 'Label', field: 'label', render: rowData => <div className={"badge " + rowData.label}>{rowData.label}</div> }
                         ]}
                         data={items}
-                        title = 
-                            <React.Fragment>
-                                <ToggleButtonGroup exclusive onChange={this.changeTableLayout} value={layout} size="small">
-                                    <ToggleButton value="thumbnail"><ViewModuleIcon /></ToggleButton>
-                                    <ToggleButton value="list"><ViewHeadlineIcon /></ToggleButton>
-                                    <ToggleButton value="thumbnail-list"><ViewListIcon /></ToggleButton>
+                        title={
+                            <Grid container alignItems='center' style={{ width: 'fit-content', border: '1px solid rgba(255, 255, 255, 0.12)', borderRadius: 4 }}>
+                                <ToggleButtonGroup exclusive onChange={this.changeTableLayout} value={layout} size="small" >
+                                    <ToggleButton style={{ border: 'none' }} value="thumbnail"><ViewModuleIcon /></ToggleButton>
+                                    <ToggleButton style={{ border: 'none' }} value="list"><ViewHeadlineIcon /></ToggleButton>
+                                    <ToggleButton style={{ border: 'none', borderRadius: 0 }} value="thumbnail-list"><ViewListIcon /></ToggleButton>
                                 </ToggleButtonGroup>
                                 <ToggleButton
                                     value="filtering"
                                     size="small"
+                                    style={{ border: 'none', borderRadius: 0 }}
                                     selected={filtering}
                                     onChange={() => {
                                         this.toggleFiltering();
                                     }}
-                                    >
+                                >
                                     Filtering <CheckIcon />
                                 </ToggleButton>
-                            </React.Fragment>
-                        
+                            </Grid>}
+
                         onRowClick={this.playClip}
                         options={{
-                            paging:true,
-                            pageSize:10,       // make initial page size
-                            emptyRowsWhenPaging: false,   //to make page size fix in case of less data rows
-                            pageSizeOptions:[10,20,50,100],    // rows selection options
-                            filtering: filtering
-                          }}
-                          components={components}
+                            paging: true,
+                            pageSize: 24,       // make initial page size
+                            emptyRowsWhenPaging: true,   //to make page size fix in case of less data rows
+                            pageSizeOptions: [12, 24, 48, 96],    // rows selection options
+                            filtering: filtering,
+                            filterRowStyle: {
+                                width: "100%",
+                                flexGrow: 9,
+                                flexBasis: "100%",
+                                width: "100%"
+                            },
+                            rowStyle: {
+                                flex: 1,
+                                width: "calc(100% / 9 )"
+                            },
+                            headerStyle: {
+                                backgroundColor: 'transparent',
+                                padding: 6
+                            },
+                            cellStyle: {
+                                padding: '6px',
+                            }
+
+                        }}
+                        components={components}
 
                     />
 
                 </div>
-                <ButtonGroup mt={5} color="primary" variant="contained" aria-label="contained primary button group">
-                    <Button startIcon={<BackupIcon />} href={"/viewer/" + window.project.id + "/upload"}>Upload</Button>
-                    <Button startIcon={<EditIcon />} href={"/viewer/" + window.project.id + "/meta"}>Meta Editor</Button>
-                </ButtonGroup>
 
-            </React.Fragment>
+                <div hidden={window.userName == 'viewer'}>
+                    <ButtonGroup mt={5} color="primary" variant="contained" aria-label="contained primary button group">
+                        <Button startIcon={<BackupIcon />} href={"/viewer/" + window.project.id + "/upload"}>Upload</Button>
+                        <Button startIcon={<EditIcon />} href={"/viewer/" + window.project.id + "/meta"} >Meta Editor</Button>
+                    </ButtonGroup>
+                </div>
+                
+
+            </Fragment>
         );
     }
 
-    
+
 }

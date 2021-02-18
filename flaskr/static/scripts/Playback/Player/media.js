@@ -51,24 +51,22 @@ export default class Media extends React.Component {
             tab = 0;
         }
 
-        console.log(clip);
-        console.log(video);
 
         return(
             <div>
-                <Paper>
+                <Paper id='player'>
                     <Tabs value={tab} onChange={this.handleChange}>
                         <Tab label="Video" disabled={!video} />
                         <Tab label="Stills"  disabled={!stills} />
                     </Tabs>
-                </Paper>
-                <Tabpanel tab={tab} index={0}>            
-                    <VideoPlayer src={clip.playbackfile}></VideoPlayer>     
-                </Tabpanel>
-                <Tabpanel tab={tab} index={1}>
-                    <StillsGallery src={clip.stills}></StillsGallery>
-                </Tabpanel>
+                    <Tabpanel tab={tab} index={0}>            
+                        <VideoPlayer src={clip.playbackfile}></VideoPlayer>     
+                    </Tabpanel>
+                    <Tabpanel tab={tab} index={1}>
+                        <StillsGallery src={clip.stills}></StillsGallery>
+                    </Tabpanel>
 
+                </Paper>
                 
             </div>
         )

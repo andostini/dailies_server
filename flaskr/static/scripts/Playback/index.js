@@ -39,8 +39,8 @@ export default class Playback extends React.Component {
             libMdSpan = 12;
         }
         return (
-            <Container maxWidth={false} style={{padding: 0}}>
-                <Grid container spacing={0} display="flex">
+            <Container maxWidth={false} style={{padding: 20}}>
+                <Grid container spacing={2} display="flex">
                     <Box  hidden={fullScreenLib} clone order={{xs: 1, md: 2}}>
                         <Grid item sm={12} md={6} >
                             <Player clip={this.state.currentClip} closePlayer={this.closePlayer}></Player>
@@ -48,7 +48,7 @@ export default class Playback extends React.Component {
                     </Box>
                     <Box clone order={{xs: 2, md: 1}}>
                         <Grid item sm={12} md={libMdSpan} >
-                            <ProjectLibrary PlayClip={this.PlayClip}></ProjectLibrary>
+                            <ProjectLibrary PlayClip={this.PlayClip} isFullscreen={fullScreenLib}></ProjectLibrary>
                         </Grid>
                     </Box>
                 </Grid>

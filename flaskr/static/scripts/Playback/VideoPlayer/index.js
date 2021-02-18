@@ -7,7 +7,7 @@ export default class VideoPlayer extends React.Component {
     render() {
         const src = this.props.src;
         if (src == "") {
-            return <p>No video file for this clip</p>
+            return <p style={{padding: 25, fontSize: 24}}>No video file for this clip</p>
         }
         else {
             return (
