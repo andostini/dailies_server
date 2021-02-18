@@ -32,6 +32,9 @@ Optionally you can install Sample Footage:
 
 ## Version History
 
+### v0.4
+- Completly rebuilt Viewer Page in ReactJS
+
 ### v0.3
 - Show live stream connection information to DIT
 - 4x4 theatre mode (only temporary until UI rework in angular)

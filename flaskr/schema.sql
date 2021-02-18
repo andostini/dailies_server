@@ -13,5 +13,7 @@ CREATE TABLE projects (
   cameraA TEXT,
   cameraB TEXT,
   cameraC TEXT,
-  cameraD TEXT
+  cameraD TEXT,
+  libraryPageVisible INTEGER,
+  livePageVisible INTEGER
 );

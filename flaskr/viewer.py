@@ -96,7 +96,9 @@ def project(projectId):
                 project = {
                     'id' : project['id'],
                     'name': project['name'],
-                    'created' : project['created']
+                    'created' : project['created'],
+                    'libraryPageVisible': project['libraryPageVisible'],
+                    'livePageVisible' : project['livePageVisible']
                 }   
                 return render_template('app/viewer.html', error=error, success=success, project = project, liveStreams = liveStreams)
             else:
@@ -230,12 +232,21 @@ def projectmanager():
                 cameraB=request.form['cameraB']
                 cameraC=request.form['cameraC']
                 cameraD=request.form['cameraD']
+                if 'libraryPageVisible' in request.form.keys():
+                    libraryPageVisible=request.form['libraryPageVisible']
+                else:
+                    libraryPageVisible=0
+                
+                if 'livePageVisible' in request.form.keys():
+                    livePageVisible=request.form['livePageVisible']
+                else:
+                    livePageVisible=0
 
                 if id == "New Project":
                     cursor = db.cursor()
                     cursor.execute(
-                        'INSERT INTO projects (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD)
+                        'INSERT INTO projects (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible)
                     ).fetchone()
                     db.commit()
                     newID = cursor.lastrowid
@@ -263,13 +274,14 @@ def projectmanager():
 
                 else:
                     db.execute(
-                        'UPDATE projects SET name = ?, password = ?, mapWaste_clip = ?,mapNormal_take = ?, mapGood_take = ?, mapFav_take = ?, cameraA = ?, cameraB = ?, cameraC = ?, cameraD = ? WHERE id=?',
-                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, id)
+                        'UPDATE projects SET name = ?, password = ?, mapWaste_clip = ?,mapNormal_take = ?, mapGood_take = ?, mapFav_take = ?, cameraA = ?, cameraB = ?, cameraC = ?, cameraD = ?, libraryPageVisible = ?, livePageVisible = ?  WHERE id=?',
+                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible, id)
                     )
                     db.commit()
                     success.append('Project updated')
 
             projects = db.execute('SELECT * FROM projects ORDER BY created DESC').fetchall()
+            print(projects[0]['livePageVisible'])
             return render_template('viewer/projectmanager.html', success=success, error=error, projects=projects, session = session)
 
         else:

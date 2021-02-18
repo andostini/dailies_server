@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from "./Navbar";
 import Playback from "../Playback";
 import Live from "../Live";
-import { AppBar, Tabs, Tab, Box, Button, Grid} from '@material-ui/core';
+import { AppBar, Tabs, Tab, Box, Button, Grid } from '@material-ui/core';
 import Footer from './Footer';
 
 
@@ -20,7 +20,7 @@ export default class ViewerPage extends React.Component {
     constructor() {
         super();
         this.state = {
-            page: 0,
+            page: (window.project.libraryPageVisible == 1) ? 0 : 1,
             cameraA: true,
             cameraB: true,
             cameraC: true,
@@ -52,6 +52,7 @@ export default class ViewerPage extends React.Component {
             padding: '5px',
             marginLeft: '5px'
         }
+
         return (
             <React.Fragment>
                 <Navbar></Navbar>
@@ -59,11 +60,15 @@ export default class ViewerPage extends React.Component {
                     <Grid container alignItems="center">
                         <Grid item xs={6}>
                             <Tabs value={page} onChange={this.handleChange}>
-                                <Tab label='Library' />
-                                <Tab label='Live' />
+                                {window.project.libraryPageVisible == 1 &&
+                                    <Tab label='Library' value={0}/>
+                                }
+                                {window.project.livePageVisible == 1 &&
+                                    <Tab label='Live' value={1} />
+                                }   
                             </Tabs>
                         </Grid>
-                        <Grid hidden={page == 0} item xs={6} style={{textAlign:'right', paddingRight: 10}}>
+                        <Grid hidden={page == 0} item xs={6} style={{ textAlign: 'right', paddingRight: 10 }}>
                             <Button style={buttonStyle} variant="outlined" color={cameraA ? 'secondary' : ''} value='cameraA' selected={cameraA} onClick={() => { this.toggleCam('cameraA'); }}>A</Button>
                             <Button style={buttonStyle} variant="outlined" color={cameraB ? 'secondary' : ''} value='cameraB' selected={cameraB} onClick={() => { this.toggleCam('cameraB'); }}>B</Button>
                             <Button style={buttonStyle} variant="outlined" color={cameraC ? 'secondary' : ''} value='cameraC' selected={cameraC} onClick={() => { this.toggleCam('cameraC'); }}>C</Button>
@@ -73,10 +78,14 @@ export default class ViewerPage extends React.Component {
 
                 </AppBar>
                 <Page page={page} index={0}>
-                    <Playback />
+                    {window.project.libraryPageVisible == 1 &&
+                        <Playback />
+                    }
                 </Page>
                 <Page page={page} index={1}>
-                    <Live cameraA={cameraA} cameraB={cameraB} cameraC={cameraC} cameraD={cameraD} />
+                    {window.project.livePageVisible == 1 &&
+                        <Live cameraA={cameraA} cameraB={cameraB} cameraC={cameraC} cameraD={cameraD} />
+                    }   
                 </Page>
                 <Footer />
             </React.Fragment>
