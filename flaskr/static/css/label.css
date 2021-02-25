@@ -33,19 +33,27 @@
 .thumbnail.fav_take {
   border: 1.5px solid #3498DB;
 }
+.badge {
+  padding: 3px;
+  border-radius: 6px;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 
 .cameraA {
-  color: #E74C3C;
+  color: #E74C3C!important;
 }
 
 .cameraB {
-  color: #3498DB;
+  color: #3498DB!important;
 }
 
 .cameraC {
-  color: #00bc8c;
+  color: #00bc8c!important;
 }
 
 .cameraD {
-  color: #F39C12;
+  color: #F39C12!important;
 }

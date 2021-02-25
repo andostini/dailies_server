@@ -1,11 +1,18 @@
 #Ignore Project Folder
 flaskr/static/projects/project-*
 
+.DS_Store
+
 .idea/
 venv/
 env/
 instance/
 Pipfile
-env/
 flaskr/__pycache__/
 __pycache__/
+flaskr/static/node_modules
+flaskr/static/dist
+
+
+flaskr/.templates
+flaskr/.static

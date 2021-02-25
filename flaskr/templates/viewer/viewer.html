@@ -19,39 +19,36 @@
     {% block header %}{% endblock %}
   </head>
   <body>
-    <main class="container-fluid" style="min-height: 100vh">
-      <div class="row" style="margin-bottom: 15px">
-          <div class="col-12">
-              <nav class="sticky-top navbar navbar-expand-md navbar-dark bg-primary">
-                  <h1 class="navbar-brand">Covideo</h1>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                      <li class="nav-item">
-                          <a class="nav-link" href="/viewer">Viewer</a>
-                      </li>
-                      {% if session['username'] == 'dit'%}
-                      <li class="nav-item">
-                          <a class="nav-link" href="/viewer/projectmanager">Project Manager</a>
-                      </li>
-                      {% endif %}
+    <nav class="sticky-top navbar navbar-expand-md navbar-dark bg-primary">
+        <h1 class="navbar-brand">Covideo</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/viewer">Viewer</a>
+            </li>
+            {% if session['username'] == 'dit'%}
+            <li class="nav-item">
+                <a class="nav-link" href="/viewer/projectmanager">Project Manager</a>
+            </li>
+            {% endif %}
 
-                      <li class="nav-item">
-                          <a class="nav-link" href="/logout">Logout</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div style="font-weight: light; text-align: right">
-                    You are logged in as <strong>{{ session['username']}}</strong>
-                    {% if project is defined %}
-                      <br> {{ project['name'] }}
-                    {% endif %}
-                  </div>
-              </nav>
-          </div>
-      </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <div style="font-weight: light; text-align: right">
+          You are logged in as <strong>{{ session['username']}}</strong>
+          {% if project is defined %}
+            <br> {{ project['name'] }}
+          {% endif %}
+        </div>
+    </nav>
+    <main class="container-fluid pt-3" style="min-height: 100vh">
+
       <div class="row">
         <div class="col-12">
           {% for x in success %}
@@ -69,9 +66,8 @@
         </div>
 
       </div>
-      <div class="row content">
+
         {% block content %}{% endblock %}
-      </div>
     </main>
     <footer class="mastfoot mt-auto footer sticky-bottom bg-dark">
       <div class="container p-3">
