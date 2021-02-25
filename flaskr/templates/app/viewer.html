@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+
+{% block header %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/video.js/dist/video-js.min.css') }}" />
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="player-page"></div>
+
+    <script type="text/javascript">
+        var userName = "{{ session['username']}}"
+
+        var liveStreams = {{ liveStreams| tojson}};
+        var project = {{ project| tojson}};
+
+    </script>
+
+
+    <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>
+
+{% endblock %}

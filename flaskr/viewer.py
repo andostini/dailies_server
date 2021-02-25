@@ -56,9 +56,11 @@ def project(projectId):
             db = get_db()
             project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
 
+
             liveStreams =[project['cameraA'],project['cameraB'],project['cameraC'],project['cameraD']]
             for i, stream in enumerate(liveStreams):
                 if (stream != "" and ":" in stream):
+                    print('YOUTUUTBE')
                     service = stream.split(':',1)[0]
                     url = stream.split(':',1)[1]
                     if service == "youtube":
@@ -66,90 +68,39 @@ def project(projectId):
                             "embedd": '<div class="youtube-player"><iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
                             "url": url,
                             "service": "Youtube",
-                            "streamKey": " - "
+                            "streamKey": " - " ,
+                            'camera' : letters[i]
                         }
-                    elif service == "dacast":
-                        liveStreams[i] = {
-                            "embedd": '<div class="dacast-player"><script src="https://player.dacast.com/js/player.js?contentId=' + url + '" id="' + url + '" width="100%" height="auto" class="dacast-video"></script></div>',
-                            "url": url,
-                            "service": Dacast,
-                            "streamKey": " - "
+                    else: 
+                        letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
+                        liveStreams[i] =  {
+                            "embedd": '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="false" loop></video>',
+                            "url": "rtmp://stream.franconia-film.de:32774/live/",
+                            "service": 'Covideo',
+                            "streamKey": projectId + "-camera" + letters[i],
+                            'camera' : letters[i]
                         }
 
                 else:
                     letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
                     liveStreams[i] =  {
                         "embedd": '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="false" loop></video>',
-                        "url": "https://stream.franconia-film.de:32774/live/",
-                        "service": 'Covideo - <span id="streamStatus' + letters[i] + '"></span>',
-                        "streamKey": projectId + "-camera" + letters[i]
-                    }
-
-            if project != None:
-                session['current_project'] = projectId
-                return render_template('viewer/player.html', error=error, success=success, project = project, liveStreams = liveStreams)
-            else:
-                return 'Project not found'
-        else:
-            return redirect(url_for('login.login', projectId = projectId))
-
-    else:
-        return redirect(url_for('login.login', projectId = projectId))
-
-
-#ONLY TEMPORARY UNTIL NEW FRONT endif
-
-@bp.route('/<projectId>-theatre', methods=['GET'])
-def theatre(projectId):
-    if 'username' in session:
-        username = session['username']
-        allowed = False
-
-        if username == 'dit':
-            allowed = True
-        else:
-            projects = session['projects'].split(';')
-            if projectId in projects:
-                allowed = True
-
-        if allowed:
-            error = []
-            success = []
-            db = get_db()
-            project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
-
-            liveStreams =[project['cameraA'],project['cameraB'],project['cameraC'],project['cameraD']]
-            for i, stream in enumerate(liveStreams):
-                if (stream != "" and ":" in stream):
-                    service = stream.split(':',1)[0]
-                    url = stream.split(':',1)[1]
-                    if service == "youtube":
-                        liveStreams[i] = {
-                            "embedd": '<div class="youtube-player"><iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',
-                            "url": url,
-                            "service": "Youtube",
-                            "streamKey": " - "
-                        }
-                    elif service == "dacast":
-                        liveStreams[i] = {
-                            "embedd": '<div class="dacast-player"><script src="https://player.dacast.com/js/player.js?contentId=' + url + '" id="' + url + '" width="100%" height="auto" class="dacast-video"></script></div>',
-                            "url": url,
-                            "service": Dacast,
-                            "streamKey": " - "
-                        }
-
-                else:
-                    letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
-                    liveStreams[i] =  {
-                        "embedd": '<video id="liveStream' + letters[i] + '" class="video-js vjs-default-skin vjs-16-9" controls preload="false" loop height="100%"></video>',
-                        "url": "https://stream.franconia-film.de:32774/live/",
+                        "url": "rtmp://stream.franconia-film.de:32774/live/",
                         "service": 'Covideo',
-                        "streamKey": projectId + "-camera" + letters[i]
+                        "streamKey": projectId + "-camera" + letters[i],
+                        'camera' : letters[i]
                     }
 
             if project != None:
                 session['current_project'] = projectId
-                return render_template('viewer/theatre.html', error=error, success=success, project = project, liveStreams = liveStreams)
+                project = {
+                    'id' : project['id'],
+                    'name': project['name'],
+                    'created' : project['created'],
+                    'libraryPageVisible': project['libraryPageVisible'],
+                    'livePageVisible' : project['livePageVisible']
+                }   
+                return render_template('app/viewer.html', error=error, success=success, project = project, liveStreams = liveStreams)
             else:
                 return 'Project not found'
         else:
@@ -157,7 +108,6 @@ def theatre(projectId):
 
     else:
         return redirect(url_for('login.login', projectId = projectId))
-
 
 
 
@@ -282,12 +232,21 @@ def projectmanager():
                 cameraB=request.form['cameraB']
                 cameraC=request.form['cameraC']
                 cameraD=request.form['cameraD']
+                if 'libraryPageVisible' in request.form.keys():
+                    libraryPageVisible=request.form['libraryPageVisible']
+                else:
+                    libraryPageVisible=0
+                
+                if 'livePageVisible' in request.form.keys():
+                    livePageVisible=request.form['livePageVisible']
+                else:
+                    livePageVisible=0
 
                 if id == "New Project":
                     cursor = db.cursor()
                     cursor.execute(
-                        'INSERT INTO projects (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD)
+                        'INSERT INTO projects (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible)
                     ).fetchone()
                     db.commit()
                     newID = cursor.lastrowid
@@ -315,13 +274,14 @@ def projectmanager():
 
                 else:
                     db.execute(
-                        'UPDATE projects SET name = ?, password = ?, mapWaste_clip = ?,mapNormal_take = ?, mapGood_take = ?, mapFav_take = ?, cameraA = ?, cameraB = ?, cameraC = ?, cameraD = ? WHERE id=?',
-                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, id)
+                        'UPDATE projects SET name = ?, password = ?, mapWaste_clip = ?,mapNormal_take = ?, mapGood_take = ?, mapFav_take = ?, cameraA = ?, cameraB = ?, cameraC = ?, cameraD = ?, libraryPageVisible = ?, livePageVisible = ?  WHERE id=?',
+                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible, id)
                     )
                     db.commit()
                     success.append('Project updated')
 
             projects = db.execute('SELECT * FROM projects ORDER BY created DESC').fetchall()
+            print(projects[0]['livePageVisible'])
             return render_template('viewer/projectmanager.html', success=success, error=error, projects=projects, session = session)
 
         else:

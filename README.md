@@ -3,11 +3,37 @@ This is the Server Application with is supposed to go with Viewer Apps und DIT D
 The server application is meant to be run with [tiangolo/meinheld-gunicorn-flask](https://hub.docker.com/r/tiangolo/meinheld-gunicorn-flask) Docker container. The main.py will return the necessary Flask instance.
 
 ENV Variables:
-MAIL_USERNAME
-MAIL_PASSWORD
+
+FLASK_APP=flaskr
+FLASK_ENV=development
+FLASK_DEBUG=True
+MAIL_USERNAME=sdff
+MAIL_PASSWORD=sdf
 to send EMails from the contact form.
 
+## First time running
+- Make sure Python 3.8 is installed on your system. (check with 'python3 -v' in Terminal)
+- Open Terminal and cd to project root folder. A folder named 'flaskr' must be the imediate child. 
+- run ". install.sh" to init the flask app
+- Open a second Terminal window and again cd to project root folder
+- run ". run2.sh"
+Optionally you can install Sample Footage:
+- Go to 127.0.0.1:5000 in Browser -> Login and Login with DIT and 'wurst'
+- Go to project and create a project with the settings of your choice. 
+- Click on view to open the projet and click on upload. 
+- Take all the contents from the SAMPLE FOOTAGE folder, found in the project root folder and drag them to the file upload. 
+
+## Running
+- Open Terminal and cd to project root folder. A folder named 'flaskr' must be the imediate child. 
+- run ". run.sh"
+- Open a second Terminal window and again cd to project root folder
+- run ". run2.sh"
+
+
 ## Version History
+
+### v0.4
+- Completly rebuilt Viewer Page in ReactJS
 
 ### v0.3
 - Show live stream connection information to DIT

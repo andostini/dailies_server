@@ -1,7 +1,6 @@
 
 
 function makeMetaEditorItem(entry){
-  console.log('make item');
 
   //Make Label List, with current Label selected
   var label = ['', 'waste_clip', 'normal_take', 'good_take', 'fav_take'];

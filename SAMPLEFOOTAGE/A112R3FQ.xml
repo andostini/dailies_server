@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClipReport creationDate="2020-12-02T20:04:12.669+0100" version="0.1">
+    <Project creationDate="2020-10-07T15:41:22.151+0200" publicUID="B0D4EDA5-4705-4646-8A6B-69FCDF29C3D4">
+        <Name>Der_Pass_S02.2</Name>
+        <Cinematographer>Philip Peschlow</Cinematographer>
+        <DataWrangler>Milan Hoppe</DataWrangler>
+        <DigitalImageTechnician>Fabian Decker</DigitalImageTechnician>
+        <Director>Cyrill Boss &amp; Philipp Stennert</Director>
+        <Location></Location>
+        <Producer></Producer>
+        <Production>W&amp;B Television GmbH &amp; Co. KG</Production>
+    </Project>
+    <Folder creationDate="2020-10-08T14:55:59.990+0200" publicUID="CC3AE646-2356-4C1A-9678-B136F46D97AE" folderType="MediaBin">
+        <Name>A112R3FQ</Name>
+        <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+        <Content>
+            <VideoClip creationDate="2020-10-08T14:56:00.097+0200" publicUID="07878774-6ECC-46F0-9BE3-BD3D798990D1">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/9C3CCB78-1BBC-4092-95B9-759B4FF7B63A.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C001_201008_R3FQ</Name>
+                    <Duration>1:45 min</Duration>
+                    <Frames>2628</Frames>
+                    <FileCreationDate>2020-10-08T15:08:02.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode></Episode>
+                    <Scene>1</Scene>
+                    <Shot>1</Shot>
+                    <Take>1</Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:08:02.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:10:55.03</StartTC>
+                    <EndTC>13:12:40.06</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>2628</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label>normal_take</Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 50 50 3205</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C001_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:08:02.000+0200</FileCreationDate>
+                        <FileSize>4603248640</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C001_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:02.000+0200</FileCreationDate>
+                        <FileSize>4603248640</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C001_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:02.000+0200</FileCreationDate>
+                        <FileSize>4603248640</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <VideoClip creationDate="2020-10-08T14:56:00.106+0200" publicUID="2996F7B5-644D-45A3-99FE-7AC0DDE1A58F">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/8DF296F9-60B2-4156-92F9-BCF972192B3A.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C009_201008_R3FQ</Name>
+                    <Duration>1:20 min</Duration>
+                    <Frames>2018</Frames>
+                    <FileCreationDate>2020-10-08T15:46:36.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode></Episode>
+                    <Scene>1</Scene>
+                    <Shot>1</Shot>
+                    <Take>2</Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:46:36.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:49:29.07</StartTC>
+                    <EndTC>13:50:50.00</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>2018</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label>good_take</Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 35 35 3303</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C009_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:46:36.000+0200</FileCreationDate>
+                        <FileSize>3502243840</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C009_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:41.000+0200</FileCreationDate>
+                        <FileSize>3502243840</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C009_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:02:07.000+0200</FileCreationDate>
+                        <FileSize>3502243840</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <VideoClip creationDate="2020-10-08T14:56:00.113+0200" publicUID="CE48F096-58FA-452D-B654-60FD31DDBF82">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/8CEE8EB8-CC77-4903-A038-79A7B42DC747.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C005_201008_R3FQ</Name>
+                    <Duration>2:07 min</Duration>
+                    <Frames>3197</Frames>
+                    <FileCreationDate>2020-10-08T15:24:56.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode></Episode>
+                    <Scene>1</Scene>
+                    <Shot>1</Shot>
+                    <Take>3</Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:24:56.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:27:49.10</StartTC>
+                    <EndTC>13:29:57.07</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>3197</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label>good_take</Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 50 50 3205</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C005_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:24:56.000+0200</FileCreationDate>
+                        <FileSize>5530189824</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C005_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:01:44.000+0200</FileCreationDate>
+                        <FileSize>5530189824</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C005_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:02:51.000+0200</FileCreationDate>
+                        <FileSize>5530189824</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <VideoClip creationDate="2020-10-08T14:56:00.120+0200" publicUID="B3AF37E5-E360-453F-A305-45AAFC4ED211">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/FA806E7F-6ECE-4911-8E79-3EAC4D7EEAEA.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C002_201008_R3FQ</Name>
+                    <Duration>1:45 min</Duration>
+                    <Frames>2644</Frames>
+                    <FileCreationDate>2020-10-08T15:12:37.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode></Episode>
+                    <Scene>1</Scene>
+                    <Shot>2</Shot>
+                    <Take>1</Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:12:37.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:15:30.12</StartTC>
+                    <EndTC>13:17:16.06</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>2644</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label>fav_take</Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 50 50 3205</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C002_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:12:37.000+0200</FileCreationDate>
+                        <FileSize>4399824896</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C002_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:04:04.000+0200</FileCreationDate>
+                        <FileSize>4399824896</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C002_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:04:04.000+0200</FileCreationDate>
+                        <FileSize>4399824896</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <VideoClip creationDate="2020-10-08T14:56:00.126+0200" publicUID="B21D3AEE-C756-4D2B-B083-DBD67903AAB5">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/F76F4814-288E-4B40-9216-DEE35A211BD2.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C006_201008_R3FQ</Name>
+                    <Duration>2:04 min</Duration>
+                    <Frames>3117</Frames>
+                    <FileCreationDate>2020-10-08T15:28:10.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode>1</Episode>
+                    <Scene>2</Scene>
+                    <Shot>2</Shot>
+                    <Take></Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:28:10.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:31:03.06</StartTC>
+                    <EndTC>13:33:07.23</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>3117</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label></Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 50 50 3205</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C006_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:28:10.000+0200</FileCreationDate>
+                        <FileSize>5408555008</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C006_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:01:44.000+0200</FileCreationDate>
+                        <FileSize>5408555008</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C006_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:01:44.000+0200</FileCreationDate>
+                        <FileSize>5408555008</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <VideoClip creationDate="2020-10-08T14:56:00.132+0200" publicUID="2FDFF111-A6B6-4F7F-BEE9-BA91074D4BC3">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/C6E230AD-74DD-4438-841E-7AB90524C56C.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C003_201008_R3FQ</Name>
+                    <Duration>2:26 min</Duration>
+                    <Frames>3650</Frames>
+                    <FileCreationDate>2020-10-08T15:16:56.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode></Episode>
+                    <Scene>1</Scene>
+                    <Shot>2</Shot>
+                    <Take>3</Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:16:56.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:19:49.23</StartTC>
+                    <EndTC>13:22:15.23</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>3650</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label>normal_take</Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 50 50 3205</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C003_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:16:56.000+0200</FileCreationDate>
+                        <FileSize>6301941760</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C003_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:41.000+0200</FileCreationDate>
+                        <FileSize>6301941760</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C003_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:41.000+0200</FileCreationDate>
+                        <FileSize>6301941760</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <VideoClip creationDate="2020-10-08T14:56:00.138+0200" publicUID="A0EE8F4D-056A-4112-BE6B-4228F05EF44E">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/8F54CDD4-15F5-4C13-B519-306EBFFA1D0E.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C007_201008_R3FQ</Name>
+                    <Duration>1:47 min</Duration>
+                    <Frames>2697</Frames>
+                    <FileCreationDate>2020-10-08T15:40:21.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode></Episode>
+                    <Scene>1</Scene>
+                    <Shot>2</Shot>
+                    <Take>4</Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:40:21.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:43:14.05</StartTC>
+                    <EndTC>13:45:02.02</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>2697</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label>normal_take</Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 35 35 3303</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C007_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:40:21.000+0200</FileCreationDate>
+                        <FileSize>4649385984</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C007_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:47.000+0200</FileCreationDate>
+                        <FileSize>4649385984</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C007_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:47.000+0200</FileCreationDate>
+                        <FileSize>4649385984</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <VideoClip creationDate="2020-10-08T14:56:00.144+0200" publicUID="E0ABFD78-BC0D-4272-998D-489E25DC10FD">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/46242BC2-B001-41C8-94BD-A16C82B6F57A.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C008_201008_R3FQ</Name>
+                    <Duration>2:06 min</Duration>
+                    <Frames>3161</Frames>
+                    <FileCreationDate>2020-10-08T15:44:05.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode></Episode>
+                    <Scene>1</Scene>
+                    <Shot>3</Shot>
+                    <Take>1</Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:44:05.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:46:59.01</StartTC>
+                    <EndTC>13:49:05.12</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>3161</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label>normal_take</Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 35 35 3303</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C008_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:44:05.000+0200</FileCreationDate>
+                        <FileSize>5486149632</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C008_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:47.000+0200</FileCreationDate>
+                        <FileSize>5486149632</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C008_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:47.000+0200</FileCreationDate>
+                        <FileSize>5486149632</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <VideoClip creationDate="2020-10-08T14:56:00.151+0200" publicUID="88191BF0-ADAF-4137-8A3F-9CC2D583D432">
+                <PosterPath>/Users/fabiandecker/Library/Application Support/Pomfort/Silverstack7/Project-1EFD4709F932/Thumbnails/2D38AC84-0654-4B57-8597-349EC171E873.jpg</PosterPath>
+                <ClipInfo>
+                    <Name>A112C004_201008_R3FQ</Name>
+                    <Duration>1:55 min</Duration>
+                    <Frames>2884</Frames>
+                    <FileCreationDate>2020-10-08T15:21:23.000+0200</FileCreationDate>
+                </ClipInfo>
+                <SlateInfo>
+                    <Episode></Episode>
+                    <Scene>1</Scene>
+                    <Shot>3</Shot>
+                    <Take>2</Take>
+                    <Camera>A</Camera>
+                    <ShotDescriptors></ShotDescriptors>
+                    <ShootingDate>2020-10-08T15:21:23.000+0200</ShootingDate>
+                </SlateInfo>
+                <Timecode>
+                    <StartTC>13:24:16.17</StartTC>
+                    <EndTC>13:26:12.01</EndTC>
+                    <FPSOfTC>25</FPSOfTC>
+                    <ReelTapeName>A112R3FQ</ReelTapeName>
+                </Timecode>
+                <EditUser>
+                    <InTC></InTC>
+                    <OutTC></OutTC>
+                    <InOutDuration>2884</InOutDuration>
+                    <Caption></Caption>
+                    <Custom1></Custom1>
+                    <Custom2></Custom2>
+                    <Custom3></Custom3>
+                    <Custom4></Custom4>
+                    <Custom5></Custom5>
+                    <Custom6></Custom6>
+                </EditUser>
+                <UserInfo>
+                    <Flagged>Not Flagged</Flagged>
+                    <Rating>Rating 0 of 5</Rating>
+                    <Comment></Comment>
+                    <Label>waste_clip</Label>
+                </UserInfo>
+                <CameraSettings>
+                    <EI_ISO_ASA>1600</EI_ISO_ASA>
+                    <WhiteBalance>3800K</WhiteBalance>
+                    <Tint>-2</Tint>
+                    <FStop></FStop>
+                    <TStop></TStop>
+                    <Shutter>1/50s (20.0ms, 180.0° @ 25fps)</Shutter>
+                    <SensorFPS>25.000000</SensorFPS>
+                    <Lens>Hawk 50 50 3205</Lens>
+                    <LookName>ARRI 709.AML</LookName>
+                    <Filter></Filter>
+                    <DistanceToObject></DistanceToObject>
+                    <GPSPosition></GPSPosition>
+                    <CameraOrientation></CameraOrientation>
+                </CameraSettings>
+                <Processing>
+                    <LookSource>From File</LookSource>
+                    <LookName>ARRI 709.AML</LookName>
+                    <CDLNodes>(1.0000 1.0000 1.0000) (0.0000 0.0000 0.0000) (1.0000 1.0000 1.0000)</CDLNodes>
+                    <SATNodes>1.0000</SATNodes>
+                    <LUTNodes>Custom LUT</LUTNodes>
+                    <Anamorphic>None</Anamorphic>
+                    <Flip>None</Flip>
+                </Processing>
+                <Production>
+                    <Director></Director>
+                    <Production></Production>
+                    <Producer></Producer>
+                    <Cinematographer></Cinematographer>
+                    <CameraAssistant></CameraAssistant>
+                    <CameraAssistant2nd></CameraAssistant2nd>
+                    <DigitalImageTechnician></DigitalImageTechnician>
+                    <DataManager></DataManager>
+                    <ScriptSupervisor></ScriptSupervisor>
+                    <SoundMixer></SoundMixer>
+                    <Location></Location>
+                    <CopyrightInformation></CopyrightInformation>
+                </Production>
+                <Recorder>
+                    <Manufacturer>ARRI</Manufacturer>
+                    <Model>ARRI ALEXA Mini</Model>
+                    <DeviceID>R3FQ</DeviceID>
+                    <SerialNumber>24454</SerialNumber>
+                    <FirmwareVersion>5.04.13</FirmwareVersion>
+                </Recorder>
+                <Format>
+                    <Codec>Apple ProRes 4444</Codec>
+                    <FileType>mov</FileType>
+                    <Resolution>2048x1152</Resolution>
+                    <FPS>25</FPS>
+                    <ColorSpace>LOG-C</ColorSpace>
+                    <ImportPlugin>ARRI Alexa Importer</ImportPlugin>
+                    <AudioCodec>5 ch, Linear PCM, 48000 Hz</AudioCodec>
+                    <AudioTracks>5 int.</AudioTracks>
+                </Format>
+                <Resources>
+                    <Resource type="Stream">
+                        <VolumeName>A112R3FQ</VolumeName>
+                        <RelativePath>/A112R3FQ/A112C004_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T15:21:23.000+0200</FileCreationDate>
+                        <FileSize>5052039168</FileSize>
+                        <SourceOfCopyTasks>YES</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>DerPassS2_2</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C004_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:47.000+0200</FileCreationDate>
+                        <FileSize>5052039168</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                    <Resource type="Stream">
+                        <VolumeName>Racko2_MasterBackup</VolumeName>
+                        <RelativePath>/Der_Pass_S02.2/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ/A112R3FQ/A112C004_201008_R3FQ.mov</RelativePath>
+                        <FileCreationDate>2020-10-08T14:56:47.000+0200</FileCreationDate>
+                        <FileSize>5052039168</FileSize>
+                        <SourceOfCopyTasks>NO</SourceOfCopyTasks>
+                    </Resource>
+                </Resources>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </VideoClip>
+            <Residual creationDate="2020-10-08T14:56:00.239+0200" publicUID="131C7F4B-E6A0-4395-A592-D05D7EED8566">
+                <Name>A112R3FQ_BIN.bin</Name>
+                <LibraryPath>Library/DT44_201008(_PART2)/Bild/A_Cam_Alexa/A112R3FQ</LibraryPath>
+            </Residual>
+        </Content>
+    </Folder>
+</ClipReport>

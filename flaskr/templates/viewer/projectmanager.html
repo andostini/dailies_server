@@ -10,6 +10,7 @@
 {% block content %}
 
 <!-- CREATE NEW PROJECT WINDOW -->
+<div class="row content">
   <div class="col-12" >
     <button type="button" class="btn btn-primary" onclick="document.getElementById('newProject').style.display='block'">New Project</button>
   </div>
@@ -78,6 +79,17 @@
               <label class="col-sm-2 col-form-label">Camera D:</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control" name="cameraD">
+              </div>
+            </div>
+            <h4>Viewer Settings</h4>
+            <div class="row">
+              <label class="col-sm-2 col-form-label">Show Library Page:</label>
+              <div class="col-sm-4">
+                <input type="checkbox" class="form-control" name="libraryPageVisible" value="1">
+              </div>
+              <label class="col-sm-2 col-form-label">Show Live Page:</label>
+              <div class="col-sm-4">
+                <input type="checkbox" class="form-control" name="livePageVisible" value='1'>
               </div>
             </div>
         </div>
@@ -167,8 +179,21 @@
               <input type="text" class="form-control" name="cameraD" placeholder="URL only" value="{{ project['cameraD']}}">
             </div>
           </div>
-        </div>
+
+          <h4>Viewer Settings</h4>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Show Library Page:</label>
+            <div class="col-sm-4">
+              <input type="checkbox" class="form-control" name="libraryPageVisible" value="1" {% if project['libraryPageVisible']==1 %} checked {% endif %}>
+            </div>
+            <label class="col-sm-2 col-form-label">Show Live Page:</label>
+            <div class="col-sm-4">
+              <input type="checkbox" class="form-control" name="livePageVisible" value='1' {% if project['livePageVisible']==1 %} checked {% endif %}>
+            </div>
+          </div>
+        </div>{{project['libraryPageVisible']}}{{project['livePageVisible']}}
         <span class="text-muted">
+           - 
           Add a live streams other then the default inhouse streaming by just entering the stream service and the URL / ID the following way: service:url. E.g. enter "youtube:https://www.youtube.com/embed/F4pcX_GMmuM". For Dacast please enter an ID instead of a URL<br>Currently supported: Youtube, Dacast (only one per page)
       
         </span>
@@ -190,6 +215,7 @@
 
     {% endfor %}
 
+  </div>
 
       <script type="text/javascript" src="../static/js/projectmanager.js"></script>
 
