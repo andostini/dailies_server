@@ -22,6 +22,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 const darkTheme = createMuiTheme({
+  
   palette: {
     type: 'dark',
     primary: {
@@ -31,12 +32,12 @@ const darkTheme = createMuiTheme({
       main: '#f44336',
     },
     background: {
-      default: '#141414',
-      paper: '#252525',
+      default: '#121212',
+      paper: '#202020',
     },
   },
   typography: {
-    fontSize: 12,
+    fontSize: 13,
     h1: {
       fontSize: '28pt',
       fontFamily: 'Raleway',
@@ -58,13 +59,16 @@ const darkTheme = createMuiTheme({
       fontWeight: 200,
       lineHeight: 1.2,
     },
-    fontFamily: 'Lato, Arial',
+    button: {
+      textTransform: "none"
+    },
+    fontFamily: 'Source Sans Pro, Arial',
   },
   props: {
     MuiAppBar: {
       color: 'transparent',
     },
-  },
+  }
 });
 
 ReactDOM.render(
