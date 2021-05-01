@@ -17,3 +17,22 @@ CREATE TABLE projects (
   libraryPageVisible INTEGER,
   livePageVisible INTEGER
 );
+
+
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  userName TEXT NOT NULL,
+  password TEXT NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  lastLogin TEXT,
+  userGroup INTEGER NOT NULL,
+  name TEXT,
+  eMail TEXT NOT NULL,
+  phone TEXT,
+  billing TEXT,
+  maxGB INT,
+  maxProjectNumber INT,
+  expirationDate TEXT,
+  liveStreamPlugin INT,
+  avatar BLOB
+)

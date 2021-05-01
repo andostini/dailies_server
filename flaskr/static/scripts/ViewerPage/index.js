@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from "./Navbar";
+import Navbar from "../Navbar";
 import Playback from "../Playback";
 import Live from "../Live";
-import { AppBar, Tabs, Tab, Box, Button, Grid } from '@material-ui/core';
-import Footer from './Footer';
+import { AppBar, Tabs, Tab, Box, Button, Grid, Typography } from '@material-ui/core';
+import Footer from '../Footer';
 
 
 function Page(props) {
@@ -55,7 +55,11 @@ export default class ViewerPage extends React.Component {
 
         return (
             <React.Fragment>
-                <Navbar></Navbar>
+                <Navbar>
+                    <Typography variant="subtitle2" align="right">
+                        You are logged in as <strong>{window.userName} <br /></strong>Project: <strong> {window.project.name}</strong>
+                    </Typography>
+                </Navbar>
                 <AppBar position='static' >
                     <Grid container alignItems="center">
                         <Grid item xs={6}>

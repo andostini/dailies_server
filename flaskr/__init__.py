@@ -91,16 +91,20 @@ def create_app(test_config=None):
     db.init_app(app)
 
 
-    from . import viewer
+    from .blueprints import viewer
     app.register_blueprint(viewer.bp)
 
 
-    from . import login
+    from .blueprints import login
     app.register_blueprint(login.bp)
 
 
-    from . import api
+    from .blueprints import api
     app.register_blueprint(api.bp)
+
+
+    from .blueprints import settings
+    app.register_blueprint(settings.bp)
 
 
 
@@ -110,7 +114,5 @@ def create_app(test_config=None):
         session.pop('projects', None)
         session.pop('current_project', None)
         return redirect(url_for('index'))
-
-
 
     return app

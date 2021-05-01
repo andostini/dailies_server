@@ -1,9 +1,12 @@
 const webpack = require('webpack');
 const config = {
-    entry:  __dirname + '/scripts/index.js',
+    entry: {
+        viewer: __dirname + '/scripts/viewer.js',
+        settings: __dirname + '/scripts/settings.js',
+    }, 
     output: {
         path: __dirname + '/dist',
-        filename: 'bundle.js',
+        filename: '[name].js',
     },
     resolve: {
         extensions: ['.js', '.jsx', '.css']
