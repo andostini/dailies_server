@@ -88,16 +88,31 @@ export default class ProjectLibrary extends React.Component {
 
     componentDidMount() {
         fetch("../api/get_CovideoLibrary/" + window.project.id, {
-            method: "POST"
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+                access_token: localStorage.getItem("access_token"),
+                project_token: localStorage.getItem("project_token")
+            })
         })
-            .then(res => res.json())
+            .then(
+                (res) => {
+                    if (res.status == 200) {
+                        return res.json();
+                    }
+                    else {
+                        window.location.replace('/auth/login/' + window.project.id)
+                    }
+                }
+            )
             .then(
                 (result) => {
+                    console.log(result);
                     this.setState({
                         isLoaded: true,
                         items: result
                     });
-                    console.log(result);
+
                 },
                 (error) => {
                     this.setState({
@@ -131,6 +146,8 @@ export default class ProjectLibrary extends React.Component {
         const items = this.state.items;
         const layout = this.state.tableLayout;
         const filtering = this.state.filtering;
+        const props = this.props;
+
         const videoResource = (playbackfile) => {
             if (playbackfile != "") {
                 return <PlayCircleOutlineIcon />
@@ -232,12 +249,12 @@ export default class ProjectLibrary extends React.Component {
 
                 </div>
 
-                <div hidden={window.userName == 'viewer'}>
+                {props.writePermission == true &&
                     <ButtonGroup mt={5} color="primary" variant="contained" aria-label="contained primary button group">
                         <Button startIcon={<BackupIcon />} href={"/viewer/" + window.project.id + "/upload"}>Upload</Button>
                         <Button startIcon={<EditIcon />} href={"/viewer/" + window.project.id + "/meta"} >Meta Editor</Button>
                     </ButtonGroup>
-                </div>
+                }
                 
 
             </Fragment>

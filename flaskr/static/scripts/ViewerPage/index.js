@@ -25,11 +25,94 @@ export default class ViewerPage extends React.Component {
             cameraB: true,
             cameraC: true,
             cameraD: true,
+            writePermission: false,
+            userInfo: null
         }
         this.toggleCam = this.toggleCam.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentDidMount() {
+        fetch("../api/getProjectInfo/" + window.project.id, {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+                access_token: localStorage.getItem("access_token"),
+                project_token: localStorage.getItem("project_token")
+            })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    window.project = result.project
+                    window.liveStreams = result.liveStreams
+                    this.setState({
+                        writePermission: result.project.writePermission
+                    })
+                },
+                (error) => {
+                    console.log(result);
+                    
+                    
+                }
+            )
+
+                fetch("../api/get_CovideoLibrary/" + window.project.id, {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+                access_token: localStorage.getItem("access_token"),
+                project_token: localStorage.getItem("project_token")
+            })
+        })
+            .then(
+                (res) => {
+                    if (res.status == 200) {
+                        return res.json();
+                    }
+                    else {
+                        window.location.replace('/auth/login/' + window.project.id)
+                    }
+                }
+            )
+            .then(
+                (result) => {
+                    console.log(result);
+                    this.setState({
+                        isLoaded: true,
+                        items: result
+                    });
+
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
+
+        fetch("../api/getUserInfo", {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+                access_token: localStorage.getItem("access_token")
+            })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    this.setState({
+                        userInfo: result
+                    });
+
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+    }
 
     handleChange(event, value) {
         event.preventDefault();
@@ -46,7 +129,8 @@ export default class ViewerPage extends React.Component {
 
     render() {
         const page = this.state.page;
-        const { cameraA, cameraB, cameraC, cameraD } = this.state;
+        const { cameraA, cameraB, cameraC, cameraD, writePermission, userInfo } = this.state;
+
 
         const buttonStyle = {
             padding: '5px',
@@ -57,7 +141,10 @@ export default class ViewerPage extends React.Component {
             <React.Fragment>
                 <Navbar>
                     <Typography variant="subtitle2" align="right">
-                        You are logged in as <strong>{window.userName} <br /></strong>Project: <strong> {window.project.name}</strong>
+                        {userInfo &&
+                            <span>You are logged in as <strong>{userInfo.userName} </strong><br /></span>
+                        }
+                        Project: <strong> {window.project.name}</strong>
                     </Typography>
                 </Navbar>
                 <AppBar position='static' >
@@ -83,12 +170,12 @@ export default class ViewerPage extends React.Component {
                 </AppBar>
                 <Page page={page} index={0}>
                     {window.project.libraryPageVisible == 1 &&
-                        <Playback />
+                        <Playback writePermission={writePermission} />
                     }
                 </Page>
                 <Page page={page} index={1}>
                     {window.project.livePageVisible == 1 &&
-                        <Live cameraA={cameraA} cameraB={cameraB} cameraC={cameraC} cameraD={cameraD} />
+                        <Live cameraA={cameraA} cameraB={cameraB} cameraC={cameraC} cameraD={cameraD}  writePermission={writePermission} />
                     }   
                 </Page>
                 <Footer />

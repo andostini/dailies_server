@@ -14,8 +14,10 @@ MarkupSafe==1.1.1
 moviepy==1.0.3
 netifaces==0.10.6
 numpy==1.18.4
+passlib==1.7.4
 Pillow==7.1.2
 proglog==0.1.9
+PyJWT==2.1.0
 requests==2.23.0
 six==1.14.0
 tqdm==4.46.0

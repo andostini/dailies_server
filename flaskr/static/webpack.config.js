@@ -3,6 +3,7 @@ const config = {
     entry: {
         viewer: __dirname + '/scripts/viewer.js',
         settings: __dirname + '/scripts/settings.js',
+        login: __dirname + '/scripts/login.js',
     }, 
     output: {
         path: __dirname + '/dist',

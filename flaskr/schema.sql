@@ -1,8 +1,10 @@
 
 DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE projects (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  owner INTEGER NOT NULL,
   name TEXT NOT NULL,
   password TEXT NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -15,7 +17,8 @@ CREATE TABLE projects (
   cameraC TEXT,
   cameraD TEXT,
   libraryPageVisible INTEGER,
-  livePageVisible INTEGER
+  livePageVisible INTEGER,
+  avatar BLOB
 );
 
 
@@ -35,4 +38,18 @@ CREATE TABLE users (
   expirationDate TEXT,
   liveStreamPlugin INT,
   avatar BLOB
-)
+);
+
+CREATE TABLE usedTokens (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  type TEXT NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  token TEXT NOT NULL
+);
+
+INSERT INTO users (userName, password, userGroup, liveStreamPlugin, eMail)
+VALUES ("fabian", "$5$rounds=535000$G0IQDc7262yQyK.S$rEJ0staMve0K3QCLRfQ.awXap1FGMwLOm/rlO26KMV8", 1, 1, "mail@fabian-decker.de");
+
+
+INSERT INTO projects (name, owner, password, libraryPageVisible, livePageVisible, cameraA, cameraB, cameraC, cameraD)
+VALUES ("Test", 1, "123viewer", 1, 1, "", "", "", "");

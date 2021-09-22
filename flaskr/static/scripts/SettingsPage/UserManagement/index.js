@@ -32,7 +32,7 @@ export default class UserManagement extends React.Component {
         return(
             <React.Fragment>
                 <UserTable changeUserInForm={this.changeUserInForm} ref={this.UserTableRef} />
-                <Form user='newUser' changeUserInForm={this.changeUserInForm} user={userInForm} updateUserTable={this.updateUserTable}/>
+                <Form changeUserInForm={this.changeUserInForm} user={userInForm} updateUserTable={this.updateUserTable}/>
             </React.Fragment>
         );
     }

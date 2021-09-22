@@ -20,18 +20,21 @@ export default class Form extends React.Component {
                 succeed: []
             },
             avatar: null,
-            billing: "",
-            eMail: "",
-            expirationDate: "",
-            id: 'newUser',
-            lastLogin: null,
-            liveStreamPlugin: false,
-            maxGB: 5,
-            phone: '',
-            maxProjectNumber: 5,
-            name: "",
-            userGroup: 5,
-            userName: ""
+            id: 'newProject',
+            name: '',
+            password: '',
+            owner: '',
+            mapWaste_clip: '',
+            mapNormal_take: '',
+            mapGood_take: '',
+            mapFav_take: '',
+            cameraA: '',
+            cameraB: '',
+            cameraC: '',
+            cameraD: '',
+            libraryPageVisible: 1,
+            livePageVisible: 1
+
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -53,26 +56,28 @@ export default class Form extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.user !== this.props.user) { //Will fire if user is selected from user table
-            if (this.props.user == 'newUser') {
+        if (prevProps.project !== this.props.project) { //Will fire if project is selected from project table
+            if (this.props.project == 'newProject') {
                 this.setState({
-                    avatar: "",
-                    billing: "",
-                    eMail: "",
-                    expirationDate: "",
-                    id: 'newUser',
-                    lastLogin: null,
-                    liveStreamPlugin: false,
-                    maxGB: 5,
-                    phone: '',
-                    maxProjectNumber: 5,
-                    name: "",
-                    userGroup: 5,
-                    userName: ""
+                    avatar: null,
+                    id: 'newProject',
+                    name: '',
+                    password: '',
+                    owner: '',
+                    mapWaste_clip: '',
+                    mapNormal_take: '',
+                    mapGood_take: '',
+                    mapFav_take: '',
+                    cameraA: '',
+                    cameraB: '',
+                    cameraC: '',
+                    cameraD: '',
+                    libraryPageVisible: 1,
+                    livePageVisible: 1
                 })
             }
             else {
-            this.setState(this.props.user)
+            this.setState(this.props.project)
             }
 
         }
@@ -80,7 +85,7 @@ export default class Form extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const form = document.forms.newUserForm;
+        const form = document.forms.newProjectForm;
         const formData = new FormData(form);
         let validated = true;
 
@@ -91,16 +96,18 @@ export default class Form extends React.Component {
 
         const requestData = {
             id: formData.get('id'),
-            userName: formData.get('userName'),
-            userGroup: formData.get('userGroup'),
             name: formData.get('name'),
-            eMail: formData.get('eMail'),
-            phone: formData.get('phone'),
-            billing: formData.get('billing'),
-            maxGB: formData.get('maxGB'),
-            maxProjectNumber: formData.get('maxProjectNumber'),
-            expirationDate: formData.get('expirationDate'),
-            liveStreamPlugin: formData.has('liveStreamPlugin'),
+            owner: formData.get('owner'),
+            mapWaste_clip: formData.get('mapWaste_clip'),
+            mapNormal_take: formData.get('mapNormal_take'),
+            mapGood_take: formData.get(' mapGood_take'),
+            mapFav_take: formData.get('mapFav_take'),
+            cameraA: formData.get('cameraA'),
+            cameraB: formData.get('cameraB'),
+            cameraC: formData.get('cameraC'),
+            cameraD: formData.get('cameraD'),
+            libraryPageVisible: formData.has('libraryPageVisible'),
+            livePageVisible: formData.has('livePageVisible'),
             avatar: this.state.avatar
         }
 
@@ -133,7 +140,7 @@ export default class Form extends React.Component {
             }
         }
 
-        const uri = (requestData.id == 'newUser') ? "/settings/newUser" : "/settings/updateUser"
+        const uri = (requestData.id == 'newProject') ? "/settings/newProject" : "/settings/updateProject"
         if (validated) {
             fetch(uri, {
                 method: "POST",
@@ -141,7 +148,7 @@ export default class Form extends React.Component {
             })
                 .then(response => response.json())
                 .then(data => {
-                    this.props.updateUserTable()
+                    this.props.updateProjectTable()
                     this.setState({
                         rspMsgs: data
                     })
@@ -160,17 +167,17 @@ export default class Form extends React.Component {
     handleDelete() {
         let requestData = {
             id: this.state.id,
-            userName: this.state.userName
+            name: this.state.name
         }
-        fetch('/settings/deleteUser', {
+        fetch('/settings/deleteProject', {
             method: "POST",
             headers: { "Content-type": "application/json; charset=UTF-8" },
             body: JSON.stringify(requestData),
         })
             .then(response => response.json())
             .then(data => {
-                this.props.updateUserTable()
-                this.props.changeUserInForm('','newUser')
+                this.props.updateProjectTable()
+                this.props.changeProjectInForm('','newProject')
                 this.setState({
                     rspMsgs: data
                 })
@@ -185,10 +192,11 @@ export default class Form extends React.Component {
         let rspsucceed = this.state.rspMsgs.succeed;
 
 
-        state.liveStreamPlugin = Boolean(state.liveStreamPlugin);
+        state.livePageVisible = Boolean(state.livePageVisible);
+        state.libraryPageVisible = Boolean(state.libraryPageVisible);
 
         return (
-            <form method="POST" action='/settings/' onSubmit={this.handleSubmit} id="newUserForm" >
+            <form method="POST" action='/settings/' onSubmit={this.handleSubmit} id="newProjectForm" >
                 <input type="hidden" name="id" value={state.id} />
                 <Grid container spacing={2} style={{ paddingTop: '30px' }}>
                     <Grid item xs={12}>
@@ -201,32 +209,14 @@ export default class Form extends React.Component {
                     </Grid>
                     <Grid item container sm={9} spacing={2}>
                         <Grid item xs={12}>
-                            <Typography variant='h3'>{(state.id == 'newUser') ? 'Create new user' : 'Editing ' + state.userName}</Typography>
+                            <Typography variant='h3'>{(state.id == 'newProject') ? 'Create new project' : 'Editing ' + state.name}</Typography>
                             <Typography variant='h4'>Basic Info</Typography>
                         </Grid>
                         <Grid item sm={6}>
-                            <TextField fullWidth id="outlined-basic" label="Username" variant="outlined" name="userName" required value={state.userName} onChange={(e, val) => this.handleChange('userName', val)} />
+                            <TextField fullWidth id="outlined-basic" label="Project Name" variant="outlined" name="name" required value={state.name} onChange={(e, val) => this.handleChange('name', val)} />
                         </Grid>
                         <Grid item sm={6}>
-                            <FormControl variant='outlined' fullWidth required>
-                                <InputLabel>User Group</InputLabel>
-                                <Select name="userGroup" label='User Group' value={state.userGroup} onChange={(e, val) => this.handleChange('userGroup', val.props.value)}>
-                                    <MenuItem value={0} >System Admin</MenuItem>
-                                    <MenuItem value={5} >Project Manager</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid item sm={6}>
-                            <TextField fullWidth id="outlined-basic" label="Email" variant="outlined" name="eMail" type="mail" required value={state.eMail} onChange={(e, val) => this.handleChange('eMail', val)} />
-                        </Grid>
-                        <Grid item sm={6}>
-                            <TextField fullWidth id="outlined-basic" label="Phone" variant="outlined" name="phone" required value={state.phone}  onChange={(e, val) => this.handleChange('phone', val)} />
-                        </Grid>
-                        <Grid item sm={6}>
-                            <TextField fullWidth id="outlined-basic" label="Name" variant="outlined" name="name" required value={state.name} onChange={(e, val) => this.handleChange('name', val)} />
-                        </Grid>
-                        <Grid item sm={6}>
-                            <TextField fullWidth id="outlined-basic" label="Billing Adress" variant="outlined" name="billing" multiline rows={4} rowsMax={6} value={state.billing} onChange={(e, val) => this.handleChange('billing', val)} />
+                            <Input type="number" fullWidth id="outlined-basic" label="Owner (ID)" variant="outlined" name="owner" required value={state.owner} onChange={(e, val) => this.handleChange('owner', val)} />
                         </Grid>
                         <Grid item sm={6}>
                             <FormControl variant='outlined' fullWidth error={errors.file != ''} >
@@ -234,59 +224,64 @@ export default class Form extends React.Component {
                                 <Typography color="error">{errors.file}</Typography>
                             </FormControl>
                         </Grid>
+                    
 
                         <Grid item xs={12}>
                             <Typography variant='h4'>Security</Typography>
                         </Grid>
                         <Grid item sm={6}>
-
-                            <TextField required={(state.id == 'newUser') ? true : false} fullWidth helperText={errors.password} error={errors.password != ''} id="outlined-basic" label="New Password" variant="outlined" type="password" name="password" />
+                            <TextField required={(state.id == 'newProject') ? true : false} fullWidth helperText={errors.password} error={errors.password != ''} id="outlined-basic" label="New Password" variant="outlined" type="password" name="password" />
                         </Grid>
                         <Grid item sm={6}>
-                            <TextField required={(state.id == 'newUser') ? true : false} fullWidth id="outlined-basic" label="Password repeat" variant="outlined" type="password" name="passwordrepeat" />
+                            <TextField required={(state.id == 'newProject') ? true : false} fullWidth id="outlined-basic" label="Password repeat" variant="outlined" type="password" name="passwordrepeat" />
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Typography variant='h4'>Plan</Typography>
+                            <Typography variant='h4'>Label Mapping</Typography>
                         </Grid>
                         <Grid item sm={6}>
-                            <Typography id="discrete-slider" name="maxStorage" gutterBottom>Available Storage</Typography>
-                            <Slider
-                                value={state.maxGB}
-                                step={1}
-                                marks
-                                min={1}
-                                max={30}
-                                name="maxGB"
-                                valueLabelDisplay="on"
-                                onChange={(e, val) => this.handleChange('maxGB', val)}
-                            />
+                            <TextField fullWidth id="outlined-basic" label="waste_clip" variant="outlined" name="mapWaste_clip" value={state.mapWaste_clip} onChange={(e, val) => this.handleChange('mapWaste_clip', val)} />
                         </Grid>
                         <Grid item sm={6}>
-                            <Typography id="discrete-slider" name="maxProjects" gutterBottom>Max. number of projects</Typography>
-                            <Slider
-                                value={state.maxProjectNumber}
-                                step={1}
-                                marks
-                                min={1}
-                                max={30}
-                                name="maxProjectNumber"
-                                valueLabelDisplay="on"
-                                onChange={(e, val) => this.handleChange('maxProjectNumber', val)}
-                            />
+                            <TextField fullWidth id="outlined-basic" label="normal_take" variant="outlined" name="mapNormal_take" value={state.mapNormal_take} onChange={(e, val) => this.handleChange('mapNormal_take', val)} />
                         </Grid>
                         <Grid item sm={6}>
-                            <TextField 
-                                fullWidth 
-                                label="Expiration Date" 
-                                variant="outlined" 
-                                type="date" 
-                                name="expirationDate" 
-                                value={state.expirationDate} 
-                                InputLabelProps={{
-                                  shrink: true,
-                                }}
-                                onChange={(e, val) => this.handleChange('expirationDate', val)}
+                            <TextField fullWidth id="outlined-basic" label="good_take" variant="outlined" name="mapGood_take" value={state.mapGood_take} onChange={(e, val) => this.handleChange('mapGood_take', val)} />
+                        </Grid>
+                        <Grid item sm={6}>
+                            <TextField fullWidth id="outlined-basic" label="fav_take" variant="outlined" name="mapFav_take" value={state.mapFav_take} onChange={(e, val) => this.handleChange('mapFav_take', val)} />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Typography variant='h4'>Live Stream Settings</Typography>
+                        </Grid>
+                        <Grid item sm={6}>
+                            <TextField fullWidth id="outlined-basic" label="Camera A" variant="outlined" name="cameraA" value={state.cameraA} onChange={(e, val) => this.handleChange('cameraA', val)} />
+                        </Grid>
+                        <Grid item sm={6}>
+                            <TextField fullWidth id="outlined-basic" label="Camera B" variant="outlined" name="cameraB" value={state.cameraB} onChange={(e, val) => this.handleChange('cameraB', val)} />
+                        </Grid>
+                        <Grid item sm={6}>
+                            <TextField fullWidth id="outlined-basic" label="Camera C" variant="outlined" name="cameraC" value={state.cameraC} onChange={(e, val) => this.handleChange('cameraC', val)} />
+                        </Grid>
+                        <Grid item sm={6}>
+                            <TextField fullWidth id="outlined-basic" label="Camera D" variant="outlined" name="cameraD" value={state.cameraD} onChange={(e, val) => this.handleChange('cameraD', val)} />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Typography variant='h4'>Viewer Settings</Typography>
+                        </Grid>
+                        <Grid item sm={6}>
+                            <FormControlLabel
+                                value="true"
+                                control={<Switch
+                                    color="primary"
+                                    checked={state.livePageVisible}
+                                    onChange={(e, val) => this.handleChange('livePageVisible', val)}
+                                />}
+                                label="Show Live Page"
+                                labelPlacement="top"
+                                name="livePageVisible"
                             />
                         </Grid>
                         <Grid item sm={6}>
@@ -294,29 +289,29 @@ export default class Form extends React.Component {
                                 value="true"
                                 control={<Switch
                                     color="primary"
-                                    checked={state.liveStreamPlugin}
-                                    onChange={(e, val) => this.handleChange('liveStreamPlugin', val)}
+                                    checked={state.libraryPageVisible}
+                                    onChange={(e, val) => this.handleChange('libraryPageVisible', val)}
                                 />}
-                                label="Live Streaming Plugin"
+                                label="Show Library Page"
                                 labelPlacement="top"
-                                name="liveStreamPlugin"
+                                name="libraryPageVisible"
                             />
                         </Grid>
 
                         <Grid item sm={12}>
                             <Button type="submit" variant="contained" color="primary" size="large" startIcon={<SaveIcon />} >Save</Button>
-                            <Button style={{ display: (state.id == 'newUser') ? 'none' : 'inline-flex' }} type="button" variant="contained" color="secondary" size="large" startIcon={<DeleteIcon />} onClick={this.handleDelete}>Delete</Button>
+                            <Button style={{ display: (state.id == 'newProject') ? 'none' : 'inline-flex' }} type="button" variant="contained" color="secondary" size="large" startIcon={<DeleteIcon />} onClick={this.handleDelete}>Delete</Button>
                         </Grid>
                     </Grid>
                     <Divider orientation="vertical" flexItem />
                     <Grid item sm style={{ padding: 4 }}>
-                        <Avatar src={"http://localhost:5000/api/images/users/" + state.id + ".png"} style={{ width: 120, height: 120, margin: 'auto' }}>{ (state.id == 'newUser') ? 'New User' : state.userName}</Avatar>
+                        <Avatar src={"http://localhost:5000/api/images/projects/" + state.id + ".png"} style={{ width: 120, height: 120, margin: 'auto' }}>{ (state.id == 'newProject') ? 'New Project' : state.name}</Avatar>
                         <TableContainer>
                             <Table size='small'>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell>User Id</TableCell>
-                                        <TableCell>New User</TableCell>
+                                        <TableCell>Project Id</TableCell>
+                                        <TableCell>-</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell>Last Login</TableCell>
@@ -327,7 +322,7 @@ export default class Form extends React.Component {
                                         <TableCell>-</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>Number of projects</TableCell>
+                                        <TableCell>Owner</TableCell>
                                         <TableCell>-</TableCell>
                                     </TableRow>
                                     <TableRow>

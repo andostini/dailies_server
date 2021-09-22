@@ -1,9 +1,6 @@
-import functools
 import os
 from shutil import rmtree
 from markupsafe import escape
-from pprint import pprint
-import json
 
 
 
@@ -15,8 +12,8 @@ from werkzeug.utils import secure_filename
 
 from flaskr.db import get_db
 
-from .. import Covideo_Library
-from .. import silverstack
+from flaskr.services import Covideo_Library
+from flaskr.services import Silverstack
 
 
 bp = Blueprint('viewer', __name__, url_prefix='/viewer')
@@ -35,110 +32,76 @@ def viewer():
 
 @bp.route('/<projectId>', methods=('GET', 'POST'))
 def project(projectId):
-    if projectId == "" and 'current_project' in session:
-        projectId = session['current_project']
-
-    if 'username' in session:
-        username = session['username']
-        allowed = False
+    error = []
+    success = []
+    db = get_db()
+    projectDB = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
 
 
-        if username == 'dit':
-            allowed = True
-        else:
-            projects = session['projects'].split(';')
-            if projectId in projects:
-                allowed = True
+    if projectDB != None:
+        session['current_project'] = projectId
 
-        if allowed:
-            error = []
-            success = []
-            db = get_db()
-            projectDB = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
+        ## WILL HAVE TO MOVE INTO API FOR AUTH REASONS
+        project = {
+            'id' : projectDB['id'],
+            'name': projectDB['name'],
+            'created' : projectDB['created'],
+            'libraryPageVisible': projectDB['libraryPageVisible'],
+            'livePageVisible' : projectDB['livePageVisible']
+        }   
 
+        ## MAKE LIVE STREAM OBJECT
+        ## WILL HAVE TO MOVE INTO API FOR AUTH REASONS
+        liveStreams =[projectDB['cameraA'],projectDB['cameraB'],projectDB['cameraC'],projectDB['cameraD']]
+        for i, stream in enumerate(liveStreams):
+            letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
+            if (stream != "" and ":" in stream):
+                service = stream.split(':',1)[0]
+                url = stream.split(':',1)[1]
+                if service == "youtube":
+                    liveStreams[i] = {
+                        "url": url,
+                        "service": "Youtube",
+                        "streamKey": " - " ,
+                        'camera' : letters[i]
+                    }
+                else: 
+                    
+                    liveStreams[i] =  {
+                        "url": "rtmp://stream.franconia-film.de:32774/live/",
+                        "service": 'Covideo',
+                        "streamKey": projectId + "-camera" + letters[i],
+                        'camera' : letters[i]
+                    }
 
-            if projectDB != None:
-                session['current_project'] = projectId
-                project = {
-                    'id' : projectDB['id'],
-                    'name': projectDB['name'],
-                    'created' : projectDB['created'],
-                    'libraryPageVisible': projectDB['libraryPageVisible'],
-                    'livePageVisible' : projectDB['livePageVisible']
-                }   
-
-                ## MAKE LIVE STREAM OBJECT
-                liveStreams =[projectDB['cameraA'],projectDB['cameraB'],projectDB['cameraC'],projectDB['cameraD']]
-                for i, stream in enumerate(liveStreams):
-                    letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
-                    if (stream != "" and ":" in stream):
-                        service = stream.split(':',1)[0]
-                        url = stream.split(':',1)[1]
-                        if service == "youtube":
-                            liveStreams[i] = {
-                                "url": url,
-                                "service": "Youtube",
-                                "streamKey": " - " ,
-                                'camera' : letters[i]
-                            }
-                        else: 
-                            
-                            liveStreams[i] =  {
-                                "url": "rtmp://stream.franconia-film.de:32774/live/",
-                                "service": 'Covideo',
-                                "streamKey": projectId + "-camera" + letters[i],
-                                'camera' : letters[i]
-                            }
-
-                    else:
-                        letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
-                        liveStreams[i] =  {
-                            "url": "rtmp://stream.franconia-film.de:32774/live/",
-                            "service": 'Covideo',
-                            "streamKey": projectId + "-camera" + letters[i],
-                            'camera' : letters[i]
-                        }
-                ## END OF LIVE STREAM OBJECT
-
-                return render_template('app/viewer.html', error=error, success=success, project = project, liveStreams = liveStreams)
             else:
-                return 'Project not found'
-        
-        #if !allowed
-        else:
-            return redirect(url_for('login.login', projectId = projectId))
-    
-    #if no username in session
-    else:
-        return redirect(url_for('login.login', projectId = projectId))
+                letters = ['A','B','C','D'] #To retranslate iterator "i" to the camera letter
+                liveStreams[i] =  {
+                    "url": "rtmp://stream.franconia-film.de:32774/live/",
+                    "service": 'Covideo',
+                    "streamKey": projectId + "-camera" + letters[i],
+                    'camera' : letters[i]
+                }
+        ## END OF LIVE STREAM OBJECT
 
+        return render_template('app/viewer.html', error=error, success=success, project = project, liveStreams = liveStreams)
+    else:
+        return 'Project not found'
 
 
 @bp.route('/<projectId>/upload', methods=('GET', 'POST'))
 def upload(projectId):
-    if 'username' in session:
-        username = session['username']
-        allowed = False
-
-        if username == 'dit':
-            allowed = True
-
-        if allowed:
-            error = []
-            success = []
-            db = get_db()
-            project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
+    error = []
+    success = []
+    db = get_db()
+    project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
 
 
-            if project != None:
-                return render_template('viewer/upload.html', error=error, success=success, project = project)
-            else:
-                return 'Project not found'
-        else:
-            return redirect(url_for('viewer.project', projectId = projectId))
-
+    if project != None:
+        return render_template('viewer/upload.html', error=error, success=success, project = project)
     else:
-        return redirect(url_for('index'))
+        return 'Project not found'
+
 
 
 @bp.route('/<projectId>/upload/files', methods=('GET','POST'))
@@ -187,7 +150,7 @@ def upload_files(projectId):
                 'good_take' : project['mapGood_take'],
                 'fav_take' : project['mapFav_take']
             }
-            metaData = silverstack.silverstack(file, labelMapping).getMetaObject() #also checks validaty and returns false if XML does not contain usable XML
+            metaData = Silverstack.silverstack(file, labelMapping).getMetaObject() #also checks validaty and returns false if XML does not contain usable XML
             if metaData:
 
                 for clip in metaData:
@@ -212,114 +175,12 @@ def upload_files(projectId):
 
 @bp.route('<projectId>/meta', methods=('GET', 'POST'))
 def meta(projectId):
+    error = []
+    success = []
 
-    if 'username' in session:
-        username = session['username']
-        allowed = False
+    db = get_db()
+    project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
 
-        if username == 'dit':
-            allowed = True
-
-        if allowed:
-            error = []
-            success = []
-
-            db = get_db()
-            project = db.execute('SELECT * FROM projects WHERE id = ?', (escape(projectId),)).fetchone()
-
-            return render_template('viewer/metaeditor.html', project=project, success=success, error=error, session = session)
-        else:
-            return redirect(url_for('viewer.project', projectId = session['current_project']))
-
-    else:
-        return redirect(url_for('index'))
+    return render_template('viewer/metaeditor.html', project=project, success=success, error=error, session = session)
 
 
-
-##
-##
-## WILL BE MOVED INTO ITS OWN BLUEPLRINT
-##
-##
-
-@bp.route('/projectmanager', methods=('GET', 'POST'))
-def projectmanager():
-    if 'username' in session:
-        username = session['username']
-        allowed = False
-
-        if username == 'dit':
-            allowed = True
-
-        if allowed:
-            error = []
-            success = []
-            db = get_db()
-            if request.method == 'POST':
-                name=request.form['name']
-                password=request.form['password']
-                id=request.form['id']
-                mapWaste_clip=request.form['waste_clip']
-                mapNormal_take=request.form['normal_take']
-                mapGood_take=request.form['good_take']
-                mapFav_take=request.form['fav_take']
-                cameraA=request.form['cameraA']
-                cameraB=request.form['cameraB']
-                cameraC=request.form['cameraC']
-                cameraD=request.form['cameraD']
-                if 'libraryPageVisible' in request.form.keys():
-                    libraryPageVisible=request.form['libraryPageVisible']
-                else:
-                    libraryPageVisible=0
-                
-                if 'livePageVisible' in request.form.keys():
-                    livePageVisible=request.form['livePageVisible']
-                else:
-                    livePageVisible=0
-
-                if id == "New Project":
-                    cursor = db.cursor()
-                    cursor.execute(
-                        'INSERT INTO projects (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible)
-                    ).fetchone()
-                    db.commit()
-                    newID = cursor.lastrowid
-                    os.mkdir('flaskr/static/projects/project-' + str(newID))
-                    os.mkdir('flaskr/static/projects/project-' + str(newID) + '/video')
-                    os.mkdir('flaskr/static/projects/project-' + str(newID) + '/thumbs')
-                    os.mkdir('flaskr/static/projects/project-' + str(newID) + '/stills')
-                    new_Covideo_library = open('flaskr/static/projects/project-' + str(newID) + '/.Covideo_library.json', 'w')
-                    init_Covideo_library =  open('flaskr/static/json/Covideo_library_init.json', 'r')
-                    new_Covideo_library.write(init_Covideo_library.read())
-
-                    init_Covideo_library.close()
-                    new_Covideo_library.close()
-
-
-
-                    success.append('Project created')
-                elif "DELETE" in request.form:
-                    db.execute(
-                        'DELETE FROM projects WHERE id = ?', (id,)
-                    )
-                    db.commit()
-                    rmtree('flaskr/static/projects/project-' + id)
-                    success.append('Project was deleted')
-
-                else:
-                    db.execute(
-                        'UPDATE projects SET name = ?, password = ?, mapWaste_clip = ?,mapNormal_take = ?, mapGood_take = ?, mapFav_take = ?, cameraA = ?, cameraB = ?, cameraC = ?, cameraD = ?, libraryPageVisible = ?, livePageVisible = ?  WHERE id=?',
-                        (name, password, mapWaste_clip,mapNormal_take, mapGood_take, mapFav_take, cameraA, cameraB, cameraC, cameraD, libraryPageVisible, livePageVisible, id)
-                    )
-                    db.commit()
-                    success.append('Project updated')
-
-            projects = db.execute('SELECT * FROM projects ORDER BY created DESC').fetchall()
-            return render_template('viewer/projectmanager.html', success=success, error=error, projects=projects, session = session)
-
-        else:
-            return redirect(url_for('viewer.project', projectId = session['current_project']))
-
-    else:
-        return redirect(url_for('index'))

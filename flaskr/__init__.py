@@ -10,12 +10,11 @@ from flask_mail import Message, Mail
 
 
 
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
-        SECRET_KEY='dev',
+        SECRET_KEY=os.environ["SECRET"],
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
 
         MAIL_SERVER="smtp.mail.yahoo.com",
@@ -83,9 +82,8 @@ def create_app(test_config=None):
     def features():
         error = []
         success = []
-        projects = session['projects']
 
-        return render_template('website/features.html', error=error, success=success, projects=projects)
+        return render_template('website/features.html', error=error, success=success)
 
     from . import db
     db.init_app(app)
@@ -95,8 +93,8 @@ def create_app(test_config=None):
     app.register_blueprint(viewer.bp)
 
 
-    from .blueprints import login
-    app.register_blueprint(login.bp)
+    from .blueprints import auth
+    app.register_blueprint(auth.bp)
 
 
     from .blueprints import api
@@ -106,13 +104,5 @@ def create_app(test_config=None):
     from .blueprints import settings
     app.register_blueprint(settings.bp)
 
-
-
-    @app.route('/logout')
-    def logout():
-        session.pop('username', None)
-        session.pop('projects', None)
-        session.pop('current_project', None)
-        return redirect(url_for('index'))
 
     return app

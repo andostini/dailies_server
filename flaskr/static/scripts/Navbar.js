@@ -15,13 +15,11 @@ export default class Navbar extends React.Component {
 
                         <Grid item xs={6}>
                             <Button href="/viewer" color="inherit">Viewer</Button>
-                            <Button href="/settings" color="inherit">Settings</Button>
-                            <span hidden={window.userName=='viewer'}><Button href="/viewer/projectmanager" color="inherit">Project Manager</Button></span>
-                            <Button href="/logout" color="inherit">Logout</Button>
+                            <span hidden={window.userName=='viewer'}><Button href="/settings" color="inherit">Settings</Button></span>
+                            <Button href="/auth/logout" color="inherit">Logout</Button>
                         </Grid>
                         <Grid item xs={6} >
                             { this.props.children }
-                           
                         </Grid>
                     </Grid>
 
