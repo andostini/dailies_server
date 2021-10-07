@@ -1,9 +1,10 @@
 import React from 'react';
-import {  Avatar, Table, TableRow, TableBody, TableCell, TableContainer, Grid, FormGroup, TextField, Typography, FormControl, Select, MenuItem, InputLabel, Input, Slider, FormControlLabel, Switch, Divider, Button } from '@material-ui/core';
+import {  Avatar, Modal, Paper,IconButton,Table, TableRow, TableBody, TableCell, TableContainer, Grid, FormGroup, TextField, Typography, FormControl, Select, MenuItem, InputLabel, Input, Slider, FormControlLabel, Switch, Divider, Button } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ClearIcon from '@material-ui/icons/Clear';
 
 
 
@@ -33,7 +34,11 @@ export default class Form extends React.Component {
             cameraC: '',
             cameraD: '',
             libraryPageVisible: 1,
-            livePageVisible: 1
+            livePageVisible: 1,
+            modalShow: {
+                deleteProject: false,
+                deleteAvatar: false
+            }
 
         }
 
@@ -41,6 +46,8 @@ export default class Form extends React.Component {
         this.handleAvatarChange = this.handleAvatarChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.deleteAvatar = this.deleteAvatar.bind(this);        this.handleModalChange = this.handleModalChange.bind(this);
+        this.handleModalChange = this.handleModalChange.bind(this);
     }
 
     handleChange(e, val) {
@@ -52,6 +59,14 @@ export default class Form extends React.Component {
     handleAvatarChange(e, val) {
         this.setState({
             avatar: e.target.files[0]
+        })
+    }
+
+    handleModalChange(modal, val) {
+        this.setState({
+            modalShow: {
+                [modal] : val
+            }
         })
     }
 
@@ -140,19 +155,33 @@ export default class Form extends React.Component {
             }
         }
 
+        formData.append("access_token", window.localStorage.getItem("access_token"))
+        formData.append("project_token", window.localStorage.getItem("project_token"))
+
         const uri = (requestData.id == 'newProject') ? "/settings/newProject" : "/settings/updateProject"
         if (validated) {
             fetch(uri, {
                 method: "POST",
                 body: formData,
             })
-                .then(response => response.json())
+                .then(
+                    (res) => {
+                        if (res.status == 200) {
+                            return res.json();
+                        }
+                        else {
+                            //window.location.replace('/auth/login')
+                        }
+                    }
+                )
                 .then(data => {
                     this.props.updateProjectTable()
                     this.setState({
                         rspMsgs: data
                     })
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    if (data.errors.length == 0) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
                 });
         }
 
@@ -167,7 +196,9 @@ export default class Form extends React.Component {
     handleDelete() {
         let requestData = {
             id: this.state.id,
-            name: this.state.name
+            name: this.state.name,
+            access_token: window.localStorage.getItem("access_token"),
+            project_token: window.localStorage.getItem("project_token")
         }
         fetch('/settings/deleteProject', {
             method: "POST",
@@ -181,7 +212,45 @@ export default class Form extends React.Component {
                 this.setState({
                     rspMsgs: data
                 })
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (data.errors.length == 0) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    this.handleModalChange("deleteProject", false);
+                    
+                }
+            });
+    }
+
+    deleteAvatar() {
+        console.log(this.state.id)
+        fetch("../settings/deleteAvatar", {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+                access_token: localStorage.getItem("access_token"),
+                id: this.state.id,
+                table: "projects"
+            })
+        })
+            .then(
+                (res) => {
+                    if (res.status == 200) {
+                        return res.json();
+                    }
+                    else {
+                        window.location.replace('/auth/login/' + window.project.id)
+                    }
+                }
+            )
+            .then(data => {
+                this.props.updateProjectTable()
+                data.succeed.push('Refresh page to see avatar changes.')
+                this.setState({
+                    rspMsgs: data
+                })
+                if (data.errors.length == 0) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    this.handleModalChange("deleteAvatar", false);
+                }
             });
     }
 
@@ -216,13 +285,11 @@ export default class Form extends React.Component {
                             <TextField fullWidth id="outlined-basic" label="Project Name" variant="outlined" name="name" required value={state.name} onChange={(e, val) => this.handleChange('name', val)} />
                         </Grid>
                         <Grid item sm={6}>
-                            <Input type="number" fullWidth id="outlined-basic" label="Owner (ID)" variant="outlined" name="owner" required value={state.owner} onChange={(e, val) => this.handleChange('owner', val)} />
-                        </Grid>
-                        <Grid item sm={6}>
                             <FormControl variant='outlined' fullWidth error={errors.file != ''} >
                                 <Input accept=".png" type="file" name="avatar" onChange={this.handleAvatarChange} ></Input>
                                 <Typography color="error">{errors.file}</Typography>
                             </FormControl>
+                            We recommend to use .png files with transparent background for optimal representation
                         </Grid>
                     
 
@@ -300,12 +367,15 @@ export default class Form extends React.Component {
 
                         <Grid item sm={12}>
                             <Button type="submit" variant="contained" color="primary" size="large" startIcon={<SaveIcon />} >Save</Button>
-                            <Button style={{ display: (state.id == 'newProject') ? 'none' : 'inline-flex' }} type="button" variant="contained" color="secondary" size="large" startIcon={<DeleteIcon />} onClick={this.handleDelete}>Delete</Button>
+                            <Button style={{ display: (state.id == 'newProject') ? 'none' : 'inline-flex' }} type="button" variant="contained" color="secondary" size="large" startIcon={<DeleteIcon />} onClick={() => this.handleModalChange("deleteProject", true)}>Delete</Button>
                         </Grid>
                     </Grid>
                     <Divider orientation="vertical" flexItem />
                     <Grid item sm style={{ padding: 4 }}>
-                        <Avatar src={"http://localhost:5000/api/images/projects/" + state.id + ".png"} style={{ width: 120, height: 120, margin: 'auto' }}>{ (state.id == 'newProject') ? 'New Project' : state.name}</Avatar>
+                        <Avatar key={Date.now()} src={"/api/images/projects/" + state.id + ".png"} style={{ width: 120, height: 120, margin: 'auto' }}>{ (state.id == 'newProject') ? 'New Project' : state.name}</Avatar>
+                        <IconButton onClick={() => this.handleModalChange("deleteAvatar", true)} >
+                            <DeleteIcon />
+                        </IconButton>
                         <TableContainer>
                             <Table size='small'>
                                 <TableBody>
@@ -335,6 +405,41 @@ export default class Form extends React.Component {
 
                     </Grid>
                 </Grid>
+
+                
+                <Modal
+                    open={state.modalShow.deleteProject}
+                    onClose={() => this.handleModalChange("deleteProject", false)}
+                >
+                    <Paper>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Delete User
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            Are you sure you want to delete this project?
+                        </Typography>
+                    
+                        <Button type="button" variant="contained" color="primary" size="large" onClick={() => this.handleModalChange("deleteProject", false)} startIcon={<ClearIcon />} >Cancel</Button>
+                        <Button style={{ display: (state.id == 'newUser') ? 'none' : 'inline-flex' }} type="button" variant="contained" color="secondary" size="large" startIcon={<DeleteIcon />} onClick={this.handleDelete}>Delete</Button>
+                    </Paper>
+                </Modal>
+
+                <Modal
+                    open={state.modalShow.deleteAvatar}
+                    onClose={() => this.handleModalChange("deleteAvatar", false)}
+                >
+                    <Paper>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Delete Avatar
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            Are you sure you want to delete this users avatar?
+                        </Typography>
+                        <Button type="button" variant="contained" color="primary" size="large" onClick={() => this.handleModalChange("deleteAvatar", false)} startIcon={<ClearIcon />} >Cancel</Button>
+                        <Button style={{ display: (state.id == 'newUser') ? 'none' : 'inline-flex' }} type="button" variant="contained" color="secondary" size="large" startIcon={<DeleteIcon />} onClick={this.deleteAvatar}>Delete</Button>
+                
+                    </Paper>
+                </Modal>
             </form>
         );
     }

@@ -22,7 +22,7 @@ export default class Navbar extends React.Component {
                         </Grid>
                         <Grid item xs={6} md={4}>
                             <p>Seen a bug or require a feature? Please get in touch with us!</p>
-                            <p>This is fade / dailies server v0.3 developed by Fabian Decker and Vincent Zettl</p>
+                            <p>This is fade / dailies server v0.4 developed by Fabian Decker and Vincent Zettl</p>
                         </Grid>
                         <Grid item xs={6} md={4} >
                             <ul style={{listStyle: 'none', fontSize: 16}}>

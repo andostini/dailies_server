@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { forwardRef } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Avatar} from '@material-ui/core';
 import Form from './form';
 
 import MaterialTable from 'material-table';
@@ -58,7 +58,11 @@ export default class UserTable extends React.Component {
 
     update() {
         fetch("/settings/getUsers", {
-            method: "POST"
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+                access_token: localStorage.getItem("access_token")
+            })
         })
             .then(res => res.json())
             .then(
@@ -94,14 +98,14 @@ export default class UserTable extends React.Component {
                             </Button>
                         }
                         columns={[
+                            { title: 'Avatar', field: 'id', render: rowData => <Avatar src={"/api/images/users/" + rowData.id + ".png"} ></Avatar> },
                             { title: 'ID', field: 'id' },
                             { title: 'Username', field: 'userName' },
                             { title: 'Name', field: 'name' },
                             { title: 'EMail', field: 'eMail' },
                             { title: 'User Group', field: 'userGroup' },
                             { title: 'Avail. Storage', field: 'maxGB' },
-                            { title: 'Avail. Projects', field: 'maxProjectNumber' },
-                            { title: 'EMail', field: 'eMail' }
+                            { title: 'Avail. Projects', field: 'maxProjectNumber' }
 
                         ]}
 

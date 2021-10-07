@@ -19,7 +19,7 @@ def validate(access_token, min_user_group=10, project_token=None, related_projec
     else:
         ## Working with the access_token for registered users
         if claimant["userGroup"] == 0:
-            return True  
+            return claimant  
             ##Super Admin authenticated
             
         if claimant["userGroup"] <= min_user_group:
@@ -29,15 +29,18 @@ def validate(access_token, min_user_group=10, project_token=None, related_projec
                     'SELECT Owner FROM projects WHERE id = ?', (related_project,)
                 ).fetchone()
                 if project["owner"] == claimant["id"]:
-                    return True
+                    return claimant
                     ## related project belongs to claimant
             elif related_user:
+                related_user = int(related_user)
+                claimant['id'] = int(claimant['id'])
+                print(related_user == claimant["id"])
                 if related_user == claimant["id"]:
-                    return True
+                    return claimant
                 ##related user is claimant
 
             elif related_project == None and related_user == None:
-                return True
+                return claimant
                 ## no related project or user given. Being in User Group is enough
 
         if project_token and min_user_group >= 10:
@@ -46,7 +49,7 @@ def validate(access_token, min_user_group=10, project_token=None, related_projec
             try:
                 claimant = jwt.decode(project_token, environ["SECRET"], algorithms=["HS256"])
                 if related_project in claimant["projects"]:
-                    return True
+                    return claimant
             except:
                 return False
     
@@ -61,14 +64,14 @@ def getUserInfo(token):
 
 
 def devalidate(type, token):
-    if type(token) == str:
+    if type(token) == "str":
         db = get_db()
         cursor = db.cursor()
-        cursor.execute(
-            'INSERT INTO usedTokens (type, token) VALUES (?,?)',
-            (type, token)
-        ).fetchone()
-        db.commit()
+        #cursor.execute(
+        #    'INSERT INTO usedTokens (type, token) VALUES (?,?)',
+        #    (type, token)
+        #).fetchone()
+        # db.commit()
 
     return True
     

@@ -15,7 +15,7 @@ export default class Sidebar extends React.Component {
     }
 
     render() {
-
+        const userGroup = this.props.userGroup;
         return(
             <Paper>
                 <MenuList>
@@ -31,19 +31,23 @@ export default class Sidebar extends React.Component {
                         </ListItemIcon>
                         <Typography variant="inherit">Projects</Typography>
                     </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={() => this.props.onChange(2)}>
-                        <ListItemIcon>
-                            <PeopleIcon />
-                        </ListItemIcon>
-                        <Typography variant="inherit">User Management</Typography>
-                    </MenuItem>
-                    <MenuItem onClick={() => this.props.onChange(3)}>
-                        <ListItemIcon>
-                            <SettingsIcon />
-                        </ListItemIcon>
-                        <Typography variant="inherit">System Management</Typography>
-                    </MenuItem>
+                    {userGroup == 0 &&
+                        <React.Fragment>
+                            <Divider />
+                            <MenuItem onClick={() => this.props.onChange(2)}>
+                                <ListItemIcon>
+                                    <PeopleIcon />
+                                </ListItemIcon>
+                                <Typography variant="inherit">User Management</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={() => this.props.onChange(3)}>
+                                <ListItemIcon>
+                                    <SettingsIcon />
+                                </ListItemIcon>
+                                <Typography variant="inherit">System Management</Typography>
+                            </MenuItem>
+                        </React.Fragment>
+                    }
                 </MenuList>
             </Paper>
         );

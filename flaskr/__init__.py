@@ -85,6 +85,15 @@ def create_app(test_config=None):
 
         return render_template('website/features.html', error=error, success=success)
 
+    @app.errorhandler(404)
+    def page_not_found(e):
+        # note that we set the 404 status explicitly
+        return render_template('404.html'), 404
+
+    @app.errorhandler(401)
+    def forbidden(e):
+        return redirect(url_for('auth.login'),401)
+
     from . import db
     db.init_app(app)
 

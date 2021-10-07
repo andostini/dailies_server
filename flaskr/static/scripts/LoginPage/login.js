@@ -1,8 +1,8 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
-import { Avatar, Container, Button , Typography, TextField } from '@material-ui/core';
+import { Link, Paper, Grid,Avatar, Container, Button , Typography, TextField } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import styles from '../styles/login.module.css'
 
 
 export default class Ulogin extends React.Component {
@@ -50,20 +50,37 @@ export default class Ulogin extends React.Component {
     render() {
         const state = this.state;
         return(
-            <Container component="main" maxWidth="xs" style={{textAlign: "center"}}>
-                <Avatar>
-                    <LockOutlinedIcon />
-                </Avatar>
-
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
-                <form method="POST" onSubmit={this.handleSubmit} id="loginForm" >
-                    <TextField variant="outlined" required fullWidth id="userName" label="Username" name="userName" autoComplete="userName" />
-                    <TextField variant="outlined" required fullWidth id="password" label="Password" name="password" autoComplete="password" type="password" />
-                    <Button type="submit" fullWidth variant="contained" color="primary">Sign In</Button>
-                </form>
-                <Alert severity="error" style={{display: state.Alert == true ? 'block' : 'none'}}>{state.AlertMsg}</Alert>
+            <Container component="main" maxWidth="xs" style={{minHeight: '100vh'}}>
+                <Grid
+                    container
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        minHeight: '100vh',
+                        textAlign: 'center'
+                    }}
+                >
+                    <Grid item >
+                        <img src="/static/img/twoLine-w.png" className={styles.logo} />
+                        <Paper style={{padding: '20px'}}>
+                            <Avatar style={{margin: 'auto'}}>
+                                <LockOutlinedIcon />
+                            </Avatar>
+                            <Typography component="h1" variant="h5" style={{margin: '10px'}}>
+                                Sign in
+                            </Typography>
+                            <form method="POST" onSubmit={this.handleSubmit} id="loginForm" >
+                                <TextField variant="standard" required fullWidth id="userName" label="Username" name="userName" autoComplete="userName" />
+                                <TextField variant="standard" required fullWidth id="password" label="Password" name="password" autoComplete="password" type="password" />
+                                <Button type="submit" fullWidth variant="contained" color="secondary" style={{marginTop: '20px'}}>Sign In</Button>
+                            </form>
+                            <Alert severity="error" style={{display: state.Alert == true ? 'block' : 'none'}}>{state.AlertMsg}</Alert>
+                        </Paper>
+                        <Typography variant="body2" component="p" className={styles.caption}>
+                            This login is for registered users only. <Link href="/auth/signup">Sign up</Link> if you want to create your own projects.
+                        </Typography>
+                    </Grid>
+                </Grid>
             </Container>
         )
     }

@@ -1,5 +1,5 @@
 from flask import (
-    send_file,Blueprint, flash, g, redirect, render_template, request, session, url_for
+    send_file,Blueprint, make_response, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -51,9 +51,9 @@ def get_CovideoLibrary(projectId):
 
 @bp.route('/getProjectInfo/<projectId>', methods=['POST'])
 def getProjectInfo(projectId):
+    data = request.json
     db = get_db()
     projectDB = db.execute('SELECT * FROM projects WHERE id = ?', (projectId,)).fetchone()
-    data = request.json
     if Auth.validate(data['access_token'], project_token=data['project_token'], min_user_group=10, related_project=projectId):
         project = {
             'id' : projectDB['id'],
@@ -61,7 +61,7 @@ def getProjectInfo(projectId):
             'created' : '',
             'libraryPageVisible': projectDB['libraryPageVisible'],
             'livePageVisible' : projectDB['livePageVisible'],
-            'writePermission': Auth.validate(data['access_token'], min_user_group=5, related_project=projectId),
+            'writePermission': bool(Auth.validate(data['access_token'], min_user_group=5, related_project=projectId)),
         }   
 
         ## MAKE LIVE STREAM OBJECT
@@ -167,22 +167,46 @@ def deleteEntry(projectId):
 @bp.route('/getUserInfo', methods=['POST'])
 def getUserInfo():
     data = request.json
-    if Auth.validate(data['access_token'], min_user_group=5):
-        res = Auth.getUserInfo(data["access_token"])
-        return json.dumps(res)
+    if "id" in data:
+        #Get info about someone else from db
+        if Auth.validate(data['access_token'], min_user_group=0):
+            db = get_db()
+            user = db.execute('SELECT * FROM users WHERE id = ?', (data["id"],)).fetchone()
+
+
+
+            return json.dumps(user)
+        else:
+            return "false", 401
     else:
-        return "false", 401
+        #Get info about yourself from token
+        if Auth.validate(data['access_token'], min_user_group=5):
+            res = Auth.getUserInfo(data["access_token"])
+            return json.dumps(res)
+        else:
+            return "false", 401
 
 
 
 @bp.route('/images/<string:table>/<int:id>.png')
 def get_image(table, id):
     db = get_db()
+    
     user = db.execute('SELECT avatar FROM ' + table + ' WHERE id = ?', (id,)).fetchone()
+    
 
-    return send_file(
-        io.BytesIO(user["avatar"]),
-        mimetype='image/png',
-        as_attachment=True,
-        attachment_filename='%s.png' % id)
+    try:
+        response = make_response(send_file(
+            io.BytesIO(user["avatar"]),
+            mimetype='image/png',
+            as_attachment=True,
+            attachment_filename='%s.png' % id))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        response.headers['Cache-Control'] = 'public, max-age=0'
+        return response
+    except Exception as e:
+        return "false", 404
+    
 

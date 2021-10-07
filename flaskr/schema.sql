@@ -48,8 +48,5 @@ CREATE TABLE usedTokens (
 );
 
 INSERT INTO users (userName, password, userGroup, liveStreamPlugin, eMail)
-VALUES ("fabian", "$5$rounds=535000$G0IQDc7262yQyK.S$rEJ0staMve0K3QCLRfQ.awXap1FGMwLOm/rlO26KMV8", 1, 1, "mail@fabian-decker.de");
+VALUES ("fabian", "$5$rounds=535000$G0IQDc7262yQyK.S$rEJ0staMve0K3QCLRfQ.awXap1FGMwLOm/rlO26KMV8", 0, 1, "mail@fabian-decker.de");
 
-
-INSERT INTO projects (name, owner, password, libraryPageVisible, livePageVisible, cameraA, cameraB, cameraC, cameraD)
-VALUES ("Test", 1, "123viewer", 1, 1, "", "", "", "");

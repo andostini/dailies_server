@@ -18,21 +18,33 @@ export default class UserManagement extends React.Component {
     }
 
     changeUserInForm(e, val) {
-        this.setState({
-            userInForm: val
-        })
+
+        if (val == "newUser") {
+            this.setState({
+                userInForm: val,
+                rowSelected: null
+            })
+        }
+        else {
+            this.setState({
+                userInForm: val,
+                rowSelected: e.target
+            })
+            console.log(val)
+        }
     }
+    
 
     updateUserTable() {
         this.UserTableRef.current.update();
     }
 
     render() {
-        const userInForm = this.state.userInForm;
+        const {userInForm} = this.state;
         return(
             <React.Fragment>
                 <UserTable changeUserInForm={this.changeUserInForm} ref={this.UserTableRef} />
-                <Form changeUserInForm={this.changeUserInForm} user={userInForm} updateUserTable={this.updateUserTable}/>
+                <Form changeUserInForm={this.changeUserInForm} user={userInForm} updateUserTable={this.updateUserTable} />
             </React.Fragment>
         );
     }

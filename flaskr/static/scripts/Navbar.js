@@ -8,6 +8,13 @@ export default class Navbar extends React.Component {
         super(props);
     }
     render() {
+        const userInfo = this.props.userInfo;
+        let showSettings = false
+        if (userInfo != undefined) {
+            if (userInfo.userGroup <= 6) {
+                showSettings = true
+            }
+        }
         return (
             <AppBar position="static" color="inherit">
                 <Toolbar>
@@ -15,7 +22,9 @@ export default class Navbar extends React.Component {
 
                         <Grid item xs={6}>
                             <Button href="/viewer" color="inherit">Viewer</Button>
-                            <span hidden={window.userName=='viewer'}><Button href="/settings" color="inherit">Settings</Button></span>
+                            {showSettings &&
+                                <Button href="/settings" color="inherit">Settings</Button>
+                            }
                             <Button href="/auth/logout" color="inherit">Logout</Button>
                         </Grid>
                         <Grid item xs={6} >

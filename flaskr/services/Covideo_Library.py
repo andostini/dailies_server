@@ -10,7 +10,12 @@ class Covideo_Library:
         self.Library = Library
 
     def get(self):
-        return self.Library
+        Library= self.Library
+        for i in range(len(Library)):
+            if Library[i]['clipname'] == "__init":
+                del Library[i]
+                break
+        return Library
 
     def addEntry(self, entry):
         #Add empty string value for not defined keys

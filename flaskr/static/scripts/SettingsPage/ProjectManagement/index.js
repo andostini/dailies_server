@@ -18,6 +18,7 @@ export default class ProjectManagement extends React.Component {
     }
 
     changeProjectInForm(e, val) {
+        console.log(e.type);
         this.setState({
             ProjectInForm: val
         })

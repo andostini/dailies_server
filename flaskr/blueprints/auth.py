@@ -9,6 +9,10 @@ from flask import (
     Blueprint, redirect, render_template, request, url_for, abort
 )
 
+
+
+from flaskr.services import Auth
+
 from flaskr.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')

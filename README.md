@@ -33,7 +33,12 @@ Optionally you can install Sample Footage:
 ## Version History
 
 ### v0.4
-- Completly rebuilt Viewer Page in ReactJS
+- Completly rebuilt Viewer Page in ReactJS and MUI
+- Implemented user management
+- Switched from Flask Session to JWTs stored in Local Storage
+- Rebuilt project manager in ReactJS and MUI
+- Enhanced Live Stream Page experience
+- Avatars for users and projects
 
 ### v0.3
 - Show live stream connection information to DIT

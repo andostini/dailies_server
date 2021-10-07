@@ -19,12 +19,30 @@ function Page(props) {
 export default class ViewerPage extends React.Component {
     constructor() {
         super();
+
+        // Retrieve Live View Settings from local Storage
+        let active_cams = window.localStorage.getItem('active_cams_' + window.project.id)
+        if (active_cams) {
+            active_cams = JSON.parse(active_cams);
+        }
+        else {
+            active_cams = {
+                cameraA: true,
+                cameraB: false,
+                cameraC: false,
+                cameraD: false            }
+        }
+
+
+        console.log(active_cams);
+        
+
         this.state = {
             page: (window.project.libraryPageVisible == 1) ? 0 : 1,
-            cameraA: true,
-            cameraB: true,
-            cameraC: true,
-            cameraD: true,
+            cameraA: active_cams.cameraA,
+            cameraB: active_cams.cameraB,
+            cameraC: active_cams.cameraC,
+            cameraD: active_cams.cameraD,
             writePermission: false,
             userInfo: null
         }
@@ -51,13 +69,13 @@ export default class ViewerPage extends React.Component {
                     })
                 },
                 (error) => {
-                    console.log(result);
+                    console.log(error);
                     
                     
                 }
             )
 
-                fetch("../api/get_CovideoLibrary/" + window.project.id, {
+        fetch("../api/get_CovideoLibrary/" + window.project.id, {
             method: "POST",
             headers: { "Content-type": "application/json; charset=UTF-8" },
             body: JSON.stringify({
@@ -102,7 +120,6 @@ export default class ViewerPage extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     this.setState({
                         userInfo: result
                     });
@@ -112,6 +129,18 @@ export default class ViewerPage extends React.Component {
                     console.log(error);
                 }
             )
+    }
+
+    componentDidUpdate() {
+        // Save Live View Settings to local Storage
+        let active_cams = {
+            cameraA: this.state.cameraA,
+            cameraB: this.state.cameraB,
+            cameraC: this.state.cameraC,
+            cameraD: this.state.cameraD,
+        }
+        
+        window.localStorage.setItem('active_cams_' + window.project.id, JSON.stringify(active_cams));
     }
 
     handleChange(event, value) {
@@ -125,6 +154,7 @@ export default class ViewerPage extends React.Component {
         this.setState({
             [camera]: !this.state.[camera]
         })
+        
     }
 
     render() {
@@ -139,7 +169,7 @@ export default class ViewerPage extends React.Component {
 
         return (
             <React.Fragment>
-                <Navbar>
+                <Navbar userInfo={userInfo}>
                     <Typography variant="subtitle2" align="right">
                         {userInfo &&
                             <span>You are logged in as <strong>{userInfo.userName} </strong><br /></span>
