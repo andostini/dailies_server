@@ -16,7 +16,7 @@ export default class Form extends React.Component {
                 password: '',
                 file: '',
             },
-            rspMsgs: {
+            rspMsgs: {   
                 errors: [],
                 succeed: []
             },
@@ -220,6 +220,8 @@ export default class Form extends React.Component {
                     })
                     if (data.errors.length == 0) {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                        this.props.updateUserTable()
                         
                         // This is just to update the avatar image in the form
                         this.setState({

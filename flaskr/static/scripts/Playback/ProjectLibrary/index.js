@@ -13,6 +13,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 // All Icons for Material Table
 import AddBox from '@material-ui/icons/AddBox';
@@ -84,9 +85,14 @@ export default class ProjectLibrary extends React.Component {
         this.playClip = this.playClip.bind(this);
         this.changeTableLayout = this.changeTableLayout.bind(this);
         this.toggleFiltering = this.toggleFiltering.bind(this);
+        this.updateProjectLibrary = this.updateProjectLibrary.bind(this);
     }
 
     componentDidMount() {
+        this.updateProjectLibrary()
+    }
+
+    updateProjectLibrary() {
         fetch("../api/get_CovideoLibrary/" + window.project.id, {
             method: "POST",
             headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -122,6 +128,8 @@ export default class ProjectLibrary extends React.Component {
                 }
             )
     }
+
+    
 
     playClip(e, item) {
         window.location.href = '#player';
@@ -215,13 +223,16 @@ export default class ProjectLibrary extends React.Component {
                                 >
                                     Filtering <CheckIcon />
                                 </ToggleButton>
+                                <ToggleButton onClick={this.updateProjectLibrary} size="small" style={{ border: 'none', borderRadius: 0 }}>
+                                    <RefreshIcon />
+                                </ToggleButton>
                             </Grid>}
 
                         onRowClick={this.playClip}
                         options={{
                             paging: true,
                             pageSize: 24,       // make initial page size
-                            emptyRowsWhenPaging: true,   //to make page size fix in case of less data rows
+                            emptyRowsWhenPaging: false,   //to make page size fix in case of less data rows
                             pageSizeOptions: [12, 24, 48, 96],    // rows selection options
                             filtering: filtering,
                             filterRowStyle: {

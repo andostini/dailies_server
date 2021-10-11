@@ -33,8 +33,6 @@ export default class ViewerPage extends React.Component {
                 cameraD: false            }
         }
 
-
-        console.log(active_cams);
         
 
         this.state = {
@@ -43,8 +41,9 @@ export default class ViewerPage extends React.Component {
             cameraB: active_cams.cameraB,
             cameraC: active_cams.cameraC,
             cameraD: active_cams.cameraD,
-            writePermission: false,
-            userInfo: null
+            writePermission: false,  
+            userInfo: null,
+            loaded: false
         }
         this.toggleCam = this.toggleCam.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -65,7 +64,8 @@ export default class ViewerPage extends React.Component {
                     window.project = result.project
                     window.liveStreams = result.liveStreams
                     this.setState({
-                        writePermission: result.project.writePermission
+                        writePermission: result.project.writePermission,
+                        loaded: true
                     })
                 },
                 (error) => {
@@ -159,6 +159,7 @@ export default class ViewerPage extends React.Component {
 
     render() {
         const page = this.state.page;
+        const loaded = this.state.loaded;
         const { cameraA, cameraB, cameraC, cameraD, writePermission, userInfo } = this.state;
 
 
@@ -167,50 +168,60 @@ export default class ViewerPage extends React.Component {
             marginLeft: '5px'
         }
 
-        return (
-            <React.Fragment>
-                <Navbar userInfo={userInfo}>
-                    <Typography variant="subtitle2" align="right">
-                        {userInfo &&
-                            <span>You are logged in as <strong>{userInfo.userName} </strong><br /></span>
+        if (loaded) {
+            return (
+                <React.Fragment>
+                    <Navbar userInfo={userInfo}>
+                        <Typography variant="subtitle2" align="right">
+                            {userInfo &&
+                                <span>You are logged in as <strong>{userInfo.userName} </strong><br /></span>
+                            }
+                            Project: <strong> {window.project.name}</strong>
+                        </Typography>
+                    </Navbar>
+                    <AppBar position='static' >
+                        <Grid container alignItems="center">
+                            <Grid item xs={6}>
+                                <Tabs value={page} onChange={this.handleChange}>
+                                    {window.project.libraryPageVisible == 1 &&
+                                        <Tab label='Library' value={0}/>
+                                    }
+                                    {window.project.livePageVisible == 1 &&
+                                        <Tab label='Live' value={1} />
+                                    }   
+                                </Tabs>
+                            </Grid>
+                            <Grid hidden={page == 0} item xs={6} style={{ textAlign: 'right', paddingRight: 10 }}>
+                                <Button style={buttonStyle} variant="outlined" color={cameraA ? 'secondary' : ''} value='cameraA' selected={cameraA} onClick={() => { this.toggleCam('cameraA'); }}>A</Button>
+                                <Button style={buttonStyle} variant="outlined" color={cameraB ? 'secondary' : ''} value='cameraB' selected={cameraB} onClick={() => { this.toggleCam('cameraB'); }}>B</Button>
+                                <Button style={buttonStyle} variant="outlined" color={cameraC ? 'secondary' : ''} value='cameraC' selected={cameraC} onClick={() => { this.toggleCam('cameraC'); }}>C</Button>
+                                <Button style={buttonStyle} variant="outlined" color={cameraD ? 'secondary' : ''} value='cameraD' selected={cameraD} onClick={() => { this.toggleCam('cameraD'); }}>D</Button>
+                            </Grid>
+                        </Grid>
+    
+                    </AppBar>
+                    <Page page={page} index={0}>
+                        {window.project.libraryPageVisible == 1 &&
+                            <Playback writePermission={writePermission} />
                         }
-                        Project: <strong> {window.project.name}</strong>
-                    </Typography>
-                </Navbar>
-                <AppBar position='static' >
-                    <Grid container alignItems="center">
-                        <Grid item xs={6}>
-                            <Tabs value={page} onChange={this.handleChange}>
-                                {window.project.libraryPageVisible == 1 &&
-                                    <Tab label='Library' value={0}/>
-                                }
-                                {window.project.livePageVisible == 1 &&
-                                    <Tab label='Live' value={1} />
-                                }   
-                            </Tabs>
-                        </Grid>
-                        <Grid hidden={page == 0} item xs={6} style={{ textAlign: 'right', paddingRight: 10 }}>
-                            <Button style={buttonStyle} variant="outlined" color={cameraA ? 'secondary' : ''} value='cameraA' selected={cameraA} onClick={() => { this.toggleCam('cameraA'); }}>A</Button>
-                            <Button style={buttonStyle} variant="outlined" color={cameraB ? 'secondary' : ''} value='cameraB' selected={cameraB} onClick={() => { this.toggleCam('cameraB'); }}>B</Button>
-                            <Button style={buttonStyle} variant="outlined" color={cameraC ? 'secondary' : ''} value='cameraC' selected={cameraC} onClick={() => { this.toggleCam('cameraC'); }}>C</Button>
-                            <Button style={buttonStyle} variant="outlined" color={cameraD ? 'secondary' : ''} value='cameraD' selected={cameraD} onClick={() => { this.toggleCam('cameraD'); }}>D</Button>
-                        </Grid>
-                    </Grid>
+                    </Page>
+                    <Page page={page} index={1}>
+                        {window.project.livePageVisible == 1 &&
+                            <Live cameraA={cameraA} cameraB={cameraB} cameraC={cameraC} cameraD={cameraD}  writePermission={writePermission} />
+                        }   
+                    </Page>
+                    <Footer />
+                </React.Fragment>
+            );
+        }
 
-                </AppBar>
-                <Page page={page} index={0}>
-                    {window.project.libraryPageVisible == 1 &&
-                        <Playback writePermission={writePermission} />
-                    }
-                </Page>
-                <Page page={page} index={1}>
-                    {window.project.livePageVisible == 1 &&
-                        <Live cameraA={cameraA} cameraB={cameraB} cameraC={cameraC} cameraD={cameraD}  writePermission={writePermission} />
-                    }   
-                </Page>
-                <Footer />
-            </React.Fragment>
-        );
+        else {
+            return(
+                <h1>Loading</h1>
+            )
+        }
+
+
     }
 }
 

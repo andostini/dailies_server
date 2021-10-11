@@ -187,10 +187,12 @@ def deleteUser():
 def getUser():
     if request.method == 'POST':
         data = request.json
-        id = Auth.getUserInfo(data['access_token'])["id"]
-        claimant = Auth.validate(data['access_token'], min_user_group=5, related_user=id)
+        try:
+            id = Auth.getUserInfo(data['access_token'])["id"]
+            claimant = Auth.validate(data['access_token'], min_user_group=5, related_user=id)
+        except:
+            return "false", 401
         if claimant:
-
             if id not in data:
                 data["id"] = claimant["id"]
                 
@@ -213,7 +215,7 @@ def getUser():
 
             return json.dumps(user)
         else:
-            abort(401)
+            return "false", 401
     else:
         abort(400)
 
