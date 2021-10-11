@@ -39,6 +39,7 @@ Optionally you can install Sample Footage:
 - Rebuilt project manager in ReactJS and MUI
 - Enhanced Live Stream Page experience
 - Avatars for users and projects
+- New login page
 
 ### v0.3
 - Show live stream connection information to DIT
