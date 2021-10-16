@@ -1,9 +1,13 @@
 const webpack = require('webpack');
 const config = {
-    entry:  __dirname + '/scripts/index.js',
+    entry: {
+        viewer: __dirname + '/scripts/viewer.js',
+        settings: __dirname + '/scripts/settings.js',
+        login: __dirname + '/scripts/login.js',
+    }, 
     output: {
         path: __dirname + '/dist',
-        filename: 'bundle.js',
+        filename: '[name].js',
     },
     resolve: {
         extensions: ['.js', '.jsx', '.css']
@@ -12,9 +16,13 @@ const config = {
     module: {
         rules: [
             {
-            test: /\.(js|jsx)?/,
+                test: /\.(js|jsx)?/,
                 exclude: /node_modules/,
                 use: 'babel-loader'
+            },   
+            {
+                test: /\.(css|less)$/,
+                use: ["style-loader", "css-loader"]
             }
         ]
     }

@@ -1,0 +1,30 @@
+{% extends 'app/base.html' %}
+
+{% block header %}
+
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="login"></div>
+
+    <script type="text/javascript">
+        fetch("/auth/logout", {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+                access_token: localStorage.getItem("access_token"),
+                project_token: localStorage.getItem("project_token")
+            })
+        })
+            .then(
+                (res) => {
+                    localStorage.removeItem("access_token");
+                    localStorage.removeItem("project_token");
+                    window.location.replace('/')
+                }
+            )
+    </script>
+
+{% endblock %}

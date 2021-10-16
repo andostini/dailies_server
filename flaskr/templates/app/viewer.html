@@ -8,10 +8,9 @@
 
 {% block content %}
 
-    <div id="player-page"></div>
+    <div id="viewer-page"></div>
 
     <script type="text/javascript">
-        var userName = "{{ session['username']}}"
 
         var liveStreams = {{ liveStreams| tojson}};
         var project = {{ project| tojson}};
@@ -19,6 +18,6 @@
     </script>
 
 
-    <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='dist/viewer.js') }}"></script>
 
 {% endblock %}

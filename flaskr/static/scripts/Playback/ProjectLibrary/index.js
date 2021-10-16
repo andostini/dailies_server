@@ -13,6 +13,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 // All Icons for Material Table
 import AddBox from '@material-ui/icons/AddBox';
@@ -84,20 +85,40 @@ export default class ProjectLibrary extends React.Component {
         this.playClip = this.playClip.bind(this);
         this.changeTableLayout = this.changeTableLayout.bind(this);
         this.toggleFiltering = this.toggleFiltering.bind(this);
+        this.updateProjectLibrary = this.updateProjectLibrary.bind(this);
     }
 
     componentDidMount() {
+        this.updateProjectLibrary()
+    }
+
+    updateProjectLibrary() {
         fetch("../api/get_CovideoLibrary/" + window.project.id, {
-            method: "POST"
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({
+                access_token: localStorage.getItem("access_token"),
+                project_token: localStorage.getItem("project_token")
+            })
         })
-            .then(res => res.json())
+            .then(
+                (res) => {
+                    if (res.status == 200) {
+                        return res.json();
+                    }
+                    else {
+                        window.location.replace('/auth/login/' + window.project.id)
+                    }
+                }
+            )
             .then(
                 (result) => {
+                    console.log(result);
                     this.setState({
                         isLoaded: true,
                         items: result
                     });
-                    console.log(result);
+
                 },
                 (error) => {
                     this.setState({
@@ -107,6 +128,8 @@ export default class ProjectLibrary extends React.Component {
                 }
             )
     }
+
+    
 
     playClip(e, item) {
         window.location.href = '#player';
@@ -131,6 +154,8 @@ export default class ProjectLibrary extends React.Component {
         const items = this.state.items;
         const layout = this.state.tableLayout;
         const filtering = this.state.filtering;
+        const props = this.props;
+
         const videoResource = (playbackfile) => {
             if (playbackfile != "") {
                 return <PlayCircleOutlineIcon />
@@ -198,13 +223,16 @@ export default class ProjectLibrary extends React.Component {
                                 >
                                     Filtering <CheckIcon />
                                 </ToggleButton>
+                                <ToggleButton onClick={this.updateProjectLibrary} size="small" style={{ border: 'none', borderRadius: 0 }}>
+                                    <RefreshIcon />
+                                </ToggleButton>
                             </Grid>}
 
                         onRowClick={this.playClip}
                         options={{
                             paging: true,
                             pageSize: 24,       // make initial page size
-                            emptyRowsWhenPaging: true,   //to make page size fix in case of less data rows
+                            emptyRowsWhenPaging: false,   //to make page size fix in case of less data rows
                             pageSizeOptions: [12, 24, 48, 96],    // rows selection options
                             filtering: filtering,
                             filterRowStyle: {
@@ -232,12 +260,12 @@ export default class ProjectLibrary extends React.Component {
 
                 </div>
 
-                <div hidden={window.userName == 'viewer'}>
+                {props.writePermission == true &&
                     <ButtonGroup mt={5} color="primary" variant="contained" aria-label="contained primary button group">
                         <Button startIcon={<BackupIcon />} href={"/viewer/" + window.project.id + "/upload"}>Upload</Button>
                         <Button startIcon={<EditIcon />} href={"/viewer/" + window.project.id + "/meta"} >Meta Editor</Button>
                     </ButtonGroup>
-                </div>
+                }
                 
 
             </Fragment>

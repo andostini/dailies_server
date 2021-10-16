@@ -52,7 +52,7 @@ export default class Live extends React.Component {
 
     render() {
         const liveStreams = window.liveStreams;
-        const { cameraA, cameraB, cameraC, cameraD } = this.props;
+        const { cameraA, cameraB, cameraC, cameraD, writePermission } = this.props;
         let numberOfActiveViews = 0;
         let gridWidth = 12;
         if (cameraA) { numberOfActiveViews = numberOfActiveViews + 1 }
@@ -89,19 +89,21 @@ export default class Live extends React.Component {
                     <Grid item xs={gridWidth} hidden={!cameraD}>
                         <Player {...liveStreams[3]} />
                     </Grid>
-                    <Grid item xs={12} container justify="center" alignItems="stretch" >
-                        {liveStreams.map((liveStream, i) =>
-                             <Grid item xs={6} md={3} style={{padding: 10}} hidden={window.userName == 'viewer'} key={'streamInfo-' + liveStream.camera}>
-                                <Paper style={{padding: 20}}>
-                                    <Typography variant='h5'><InfoIcon /> Stream Info</Typography>
-                                    Camera: <span className={'camera' + liveStream.camera}>{liveStream.camera}</span><br />
-                                    Service: {liveStream.service}<br />
-                                    <span style={{lineBreak: 'anywhere'}}> URL: {liveStream.url}</span><br />
-                                    Stream Key: {liveStream.streamKey}
-                                </Paper>
-                            </Grid>
-                        )}
-                    </Grid>
+                  {writePermission == true &&
+                        <Grid item xs={12} container justify="center" alignItems="stretch">
+                            {liveStreams.map((liveStream, i) =>
+                                <Grid item xs={6} md={3} style={{padding: 10}} hidden={window.userName == 'viewer'} key={'streamInfo-' + liveStream.camera}>
+                                    <Paper style={{padding: 20}}>
+                                        <Typography variant='h5'><InfoIcon /> Stream Info</Typography>
+                                        Camera: <span className={'camera' + liveStream.camera}>{liveStream.camera}</span><br />
+                                        Service: {liveStream.service}<br />
+                                        <span style={{lineBreak: 'anywhere'}}> URL: {liveStream.url}</span><br />
+                                        Stream Key: {liveStream.streamKey}
+                                    </Paper>
+                                </Grid>
+                            )}
+                        </Grid>
+                    }
                 </Grid>
 
             </Container >

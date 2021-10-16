@@ -34,6 +34,7 @@ export default class Playback extends React.Component {
 
     render() {
         const fullScreenLib = this.state.fullScreenLib;
+        const writePermission = this.props.writePermission;
         var libMdSpan = 6;
         if (fullScreenLib) {
             libMdSpan = 12;
@@ -48,7 +49,7 @@ export default class Playback extends React.Component {
                     </Box>
                     <Box clone order={{xs: 2, md: 1}}>
                         <Grid item sm={12} md={libMdSpan} >
-                            <ProjectLibrary PlayClip={this.PlayClip} isFullscreen={fullScreenLib}></ProjectLibrary>
+                            <ProjectLibrary PlayClip={this.PlayClip} isFullscreen={fullScreenLib} writePermission={writePermission}></ProjectLibrary>
                         </Grid>
                     </Box>
                 </Grid>

@@ -36,6 +36,7 @@ export default class Playback extends React.Component {
 
             }
             const clip = this.props.clip;
+            const props = this.props;
             const showExtendedMeta = this.state.showExtendedMeta;
             return (
 

@@ -10,12 +10,11 @@ from flask_mail import Message, Mail
 
 
 
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
-        SECRET_KEY='dev',
+        SECRET_KEY=os.environ["SECRET"],
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
 
         MAIL_SERVER="smtp.mail.yahoo.com",
@@ -83,34 +82,36 @@ def create_app(test_config=None):
     def features():
         error = []
         success = []
-        projects = session['projects']
 
-        return render_template('website/features.html', error=error, success=success, projects=projects)
+        return render_template('website/features.html', error=error, success=success)
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        # note that we set the 404 status explicitly
+        return render_template('404.html'), 404
+
+    @app.errorhandler(401)
+    def forbidden(e):
+        return redirect(url_for('auth.login'),401)
 
     from . import db
     db.init_app(app)
 
 
-    from . import viewer
+    from .blueprints import viewer
     app.register_blueprint(viewer.bp)
 
 
-    from . import login
-    app.register_blueprint(login.bp)
+    from .blueprints import auth
+    app.register_blueprint(auth.bp)
 
 
-    from . import api
+    from .blueprints import api
     app.register_blueprint(api.bp)
 
 
-
-    @app.route('/logout')
-    def logout():
-        session.pop('username', None)
-        session.pop('projects', None)
-        session.pop('current_project', None)
-        return redirect(url_for('index'))
-
+    from .blueprints import settings
+    app.register_blueprint(settings.bp)
 
 
     return app
