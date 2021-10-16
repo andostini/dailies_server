@@ -1,5 +1,6 @@
 import json
 from moviepy.editor import *
+from natsort import humansorted
 
 class Covideo_Library:
     def __init__(self, projectId):
@@ -15,6 +16,15 @@ class Covideo_Library:
             if Library[i]['clipname'] == "__init":
                 del Library[i]
                 break
+
+        ## Lets sort the lib by scene, shot, take (SST) and assign SortBySSTIndex
+        
+        Library = humansorted(Library, key = lambda i: (i['scene'],i['shot'],i['take'],))
+        
+        for i in range(len(Library)):
+            Library[i]['SortBySSTIndex'] = i
+            
+
         return Library
 
     def addEntry(self, entry):

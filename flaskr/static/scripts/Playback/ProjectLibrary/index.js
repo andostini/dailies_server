@@ -31,6 +31,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { sort_and_filter } from '../../services/sort_and_filter';
 
 
 // var tbodyClass = {
@@ -113,7 +114,7 @@ export default class ProjectLibrary extends React.Component {
             )
             .then(
                 (result) => {
-                    console.log(result);
+                    result = sort_and_filter(result , 'scene', '');
                     this.setState({
                         isLoaded: true,
                         items: result
@@ -195,7 +196,7 @@ export default class ProjectLibrary extends React.Component {
                         size="small"
                         columns={[
                             { title: 'Thumbnail', field: 'thumbnail', sorting: false, filtering: false, hidden: (layout != "thumbnail-list"), render: rowData => <div className="thumbnail-list" style={{ backgroundImage: "url(" + rowData.thumbnail + ")" }}></div> },
-                            { title: 'Scene', field: 'scene' },
+                            { title: 'Scene', field: 'scene', customSort: (a) => a.SortBySSTIndex},
                             { title: 'Shot', field: 'shot' },
                             { title: 'Take', field: 'take' },
                             { title: 'Clipname', field: 'clipname' },
