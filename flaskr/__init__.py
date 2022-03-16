@@ -63,10 +63,9 @@ def create_app(test_config=None):
     def contact():
         error = []
         success = []
-        projects = session['projects']
 
         if request.method == "GET":
-            return render_template('website/contact.html', error=error, success=success, projects=projects)
+            return render_template('website/contact.html', error=error, success=success)
         elif request.method == "POST":
             msg = Message("Message from COVIDEO Contact Form", sender=('deckerfabian@ymail.com'), recipients=['covideo@franconia-film.de'])
             msg.html = "First Name: " + escape(request.form['firstName']) + "<br>"\
@@ -76,7 +75,7 @@ def create_app(test_config=None):
 
             mail.send(msg)
             success.append("Thank you. Your message has been received")
-            return render_template('website/contact.html', error=error, success=success, projects=projects)
+            return render_template('website/contact.html', error=error, success=success)
 
     @app.route('/features')
     def features():

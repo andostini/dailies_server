@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v3.8.6">
-  <title>COVIDEO - Welcome</title>
+  <title>FADE - Dailies & Livestream</title>
  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/sign-in/">
 
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-rCA2D+D9QXuP2TomtQwd+uP50EHjpafN+wruul0sXZzX/Da7Txn4tB9aLMZV4DZm" crossorigin="anonymous">
   <link rel="stylesheet" href="../static/css/main.css">
-  <link rel="stylesheet" href="../static/css/login.css">
+  <link rel="icon" href="/static/img/favicon.ico" sizes="32x32" type="image/ico">
   <!-- Favicons -->
 
 
@@ -30,26 +30,17 @@
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
       <div class="inner">
-        <h3 class="masthead-brand">Covideo</h3>
+        <h3 class="masthead-brand"><img src="/static/img/twoLine-w.png" class="t2meiYRslOYrv_OJkIXb"></h3>
         <nav class="nav nav-masthead justify-content-center">
           <a class="nav-link" href="/">Home</a>
           <a class="nav-link" href="/features">Features</a>
           <a class="nav-link" href="/contact">Contact</a>
           <a class="nav-link" href="/settings">Login</a>
+          <a class="nav-link" href="/auth/logout">Logout</a>
           
         </nav>
       </div>
     </header>
-    {% for x in openProjects %}
-    <div class="toast show position-absolute bg-secondary" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header bg-dark">
-        <strong class="mr-auto">{{ x['name']}}</strong>
-      </div>
-      <div class="toast-body">
-        You have previously logged into {{ x['name']}} . <a href="/viewer/{{ x['id']}}" >View project</a>
-      </div>
-    </div>
-    {% endfor %}
 
 
 

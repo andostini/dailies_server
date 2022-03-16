@@ -1,9 +1,53 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 html, body {
   height: 100%;
   margin: 0;
+  background-color: #121212;
+  color: #FFFFFF;    
+  font-size: 16px;
+  font-family: Source Sans Pro, Arial;
+  font-weight: 200;
+  line-height: 1.43;
 }
+
+* a {
+  color: #f44336;
+}
+
+* a:hover {
+  color: rgb(170, 46, 37);
+}
+
+* .btn-primary{
+  background-color: #f44336;
+  font-size: 13px;
+  color: #FFFFFF
+  radi
+}
+
+* .btn-primary:hover {
+  background-color: rgb(170, 46, 37);
+
+}
+
+* .cover-heading {
+  font-weight:200;
+  font-size: 74px;
+}
+
+
+
+* .lead {
+  font-weight:100;
+}
+
+.nav a {
+  font-weight: 400;
+}
+
+
+
+
 
 .thumbnail {
   width: 100%;

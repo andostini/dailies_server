@@ -12,6 +12,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 moviepy==1.0.3
+natsort==8.1.0
 netifaces==0.10.6
 numpy==1.18.4
 passlib==1.7.4

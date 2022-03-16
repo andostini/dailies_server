@@ -47,7 +47,10 @@ def plogin(projectId):  #This Login is for single project
                     "projects": []
                 }
                 if data["project_token"] != None:
-                    tokenData = jwt.decode(data["project_token"], environ["SECRET"], algorithms=["HS256"])
+                    try:
+                        tokenData = jwt.decode(data["project_token"], environ["SECRET"], algorithms=["HS256"])
+                    except:
+                        pass
                 
                 tokenData['projects'].append(projectId)
                 response['project_token'] = jwt.encode(tokenData, environ["SECRET"], algorithm='HS256')
@@ -117,4 +120,12 @@ def logout():
         Auth.devalidate("project_token", data["project_token"])
         
         return "Good"
+
+
+@bp.route('/signup', methods=('GET', 'POST'))
+def signup():  
+    if request.method == "GET":
+        return render_template('website/signup.html')
+    else:
+        return 'Bad request'
 
